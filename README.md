@@ -1,85 +1,67 @@
-# OnlineJudge 2.0
+简体中文 | [English](https://github.com/QingdaoU/OnlineJudgeDeploy/blob/2.0/README.en.md)
 
-[![Python](https://img.shields.io/badge/python-3.6.2-blue.svg?style=flat-square)](https://www.python.org/downloads/release/python-362/)
-[![Django](https://img.shields.io/badge/django-1.11.4-blue.svg?style=flat-square)](https://www.djangoproject.com/)
-[![Django Rest Framework](https://img.shields.io/badge/django_rest_framework-3.4.0-blue.svg?style=flat-square)](http://www.django-rest-framework.org/)
-[![Build Status](https://travis-ci.org/QingdaoU/OnlineJudge.svg?branch=master)](https://travis-ci.org/QingdaoU/OnlineJudge)
+## 环境准备
 
-> #### An onlinejudge system based on Python and Vue. [Demo](https://qduoj.com)
+### Linux 环境
 
-[中文文档](README-CN.md)
+1. 安装必要的依赖
 
-## Overview
+    ```bash
+    sudo apt-get update && sudo apt-get install -y vim python3-pip curl git
+    pip3 install --upgrade pip
+    pip install docker-compose
+    ```
 
-+ Based on Docker; One-click deployment
-+ Separated backend and frontend; Modular programming; Micro service
-+ ACM/OI rule support; realtime/non-realtime rank support
-+ Amazing charting and visualization
-+ Template-problem support
-+ More reasonable permission control
-+ Multi-language support: `C`, `C++`, `Java`, `Python2`, `Python3`
-+ Markdown & MathJax support
-+ Contest participants IP limit(CIDR)
+2. 安装 Docker 
 
-Main modules are available below:
+    国内用户使用脚本一键安装: `sudo curl -sSL https://get.daocloud.io/docker | sh`  
+    国外用户使用脚本一键安装: `sudo curl -sSL get.docker.com | sh`
+    
+    详细步骤参照： [https://docs.docker.com/install/](https://docs.docker.com/install/)
 
-+ Backend(Django): [https://github.com/QingdaoU/OnlineJudge](https://github.com/QingdaoU/OnlineJudge)
-+ Frontend(Vue): [https://github.com/QingdaoU/OnlineJudgeFE](https://github.com/QingdaoU/OnlineJudgeFE)
-+ Judger Sandbox(Seccomp): [https://github.com/QingdaoU/Judger](https://github.com/QingdaoU/Judger)
-+ JudgeServer(A wrapper for Judger): [https://github.com/QingdaoU/JudgeServer](https://github.com/QingdaoU/JudgeServer)
+### Windows 环境
 
-## Installation
 
-Follow me:  [https://github.com/QingdaoU/OnlineJudgeDeploy/tree/2.0](https://github.com/QingdaoU/OnlineJudgeDeploy/tree/2.0)
+Windows 下的安装仅供体验，勿在生产环境使用。如有必要，请使用虚拟机安装 Linux 并将 OJ 安装在其中。
 
-## Documents
+以下教程仅适用于 Win10 x64 下的 `PowerShell`
 
-[https://docs.onlinejudge.me/](https://docs.onlinejudge.me/)
+1. 安装 Windows 的 Docker 工具
+2. 右击右下角 Docker 图标，选择 Settings 进行设置
+3. 选择 `Shared Drives` 菜单，之后勾选你想安装 OJ 的盘符位置（例如勾选D盘），点击 `Apply`
+4. 输入 Windows 的账号密码进行文件共享
+5. 安装 `Python`、`pip`、`git`、`docker-compose`，安装方法自行搜索。
 
-## Screenshots
+## 开始安装
 
-### Frontend:
+1. 请选择磁盘空间富余的位置，运行下面的命令
 
-![problem-list](https://user-images.githubusercontent.com/20637881/33372506-402022e4-d539-11e7-8e64-6656f8ceb75a.png)
+    ```bash
+    git clone -b 2.0 https://github.com/QingdaoU/OnlineJudgeDeploy.git && cd OnlineJudgeDeploy
+    ```
 
-![problem-details](https://user-images.githubusercontent.com/20637881/33372507-4061a782-d539-11e7-8835-076ddae6b529.png)
+2. 启动服务
 
-![statistic-info](https://user-images.githubusercontent.com/20637881/33372508-40a0c6ce-d539-11e7-8d5e-024541b76750.png)
+    ```bash
+    docker-compose up -d
+    ```
 
-![contest-list](https://user-images.githubusercontent.com/20637881/33372509-40d880dc-d539-11e7-9eba-1f08dcb6b9a0.png)
+根据网速情况，大约5到30分钟就可以自动搭建完成，全程无需人工干预。
 
-You can control the menu and chart status in rankings.
+等命令执行完成，然后运行 `docker ps -a`，当看到所有的容器的状态没有 `unhealthy` 或 `Exited (x) xxx` 就代表 OJ 已经启动成功。
 
-![acm-rankings](https://user-images.githubusercontent.com/20637881/33372510-41117f68-d539-11e7-9947-70e60bad3cf2.png)
+## 尽情享用吧
 
-![oi-rankings](https://user-images.githubusercontent.com/20637881/33372511-41d406fa-d539-11e7-9947-7a2a088785b0.png)
+通过浏览器访问服务器的 HTTP 80 端口或者 HTTPS 443 端口，就可以开始使用了。后台管理路径为`/admin`, 安装过程中自动添加的超级管理员用户名为 `root`，密码为 `rootroot`， **请务必及时修改密码**。
 
-![status](https://user-images.githubusercontent.com/20637881/33372512-420ba240-d539-11e7-8645-594cac4a0b78.png)
+不要忘记阅读文档 http://docs.onlinejudge.me/
 
-![status-details](https://user-images.githubusercontent.com/20637881/33365523-787bd0ea-d523-11e7-953f-dacbf7a506df.png)
+## 定制
 
-![user-home](https://user-images.githubusercontent.com/20637881/33365521-7842d808-d523-11e7-84c1-2e2aa0079f32.png)
+2.0 版将一些常用设置放到了后台管理中，您可以直接登录管理后台对系统进行配置，而无需进行代码改动。
 
-### Admin: 
+若需要对系统进行修改或二次开发，请参照各模块的**README**，修改完成后需自行构建Docker镜像并修改`docker-compose.yml`
 
-![admin-users](https://user-images.githubusercontent.com/20637881/33372516-42c34fda-d539-11e7-9f4e-5109477f83be.png)
+## 遇到了问题？
 
-![judge-server](https://user-images.githubusercontent.com/20637881/33372517-42faef9e-d539-11e7-9f17-df9be3583900.png)
-
-![create-problem](https://user-images.githubusercontent.com/20637881/33372513-42472162-d539-11e7-8659-5497bf52dbea.png)
-
-![create-contest](https://user-images.githubusercontent.com/20637881/33372514-428ab922-d539-11e7-8f68-da55dedf3ad3.png)
-
-## Browser Support
-
-Modern browsers(chrome, firefox) and Internet Explorer 10+.
-
-## Thanks
-
-+ I'd appreciate a star if you find this helpful.
-+ Thanks to everyone that contributes to this project.
-+ Special thanks to [heb1c](https://github.com/hebicheng), who has given us a lot of suggestions.
-
-## License
-
-[MIT](http://opensource.org/licenses/MIT)
+请参照: [http://docs.onlinejudge.me/](http://docs.onlinejudge.me/#/onlinejudge/faq) ，如有其他问题请入群讨论或提issue。

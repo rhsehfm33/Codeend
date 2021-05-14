@@ -97,7 +97,6 @@ class UserProfile(models.Model):
     language = models.TextField(null=True)
     # for ACM
     accepted_number = models.IntegerField(default=0)
-    experience = models.IntegerField(default=0)
     # for OI
     total_score = models.BigIntegerField(default=0)
     submission_number = models.IntegerField(default=0)

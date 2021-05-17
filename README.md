@@ -1,13 +1,55 @@
-### How to build
+## How to set development enviornment
 
-1. 우선 docker를 실행해주세요
-2. git을 늘 최신으로 유지해 주세요.
-3. .git 폴더가 있는 곳에서, 다음의 명령어를 입력시켜 주세요.
+### Windows 10 개발 환경 세팅
+1. CRLF off
     ```bash
-    docker-compose up
+    git config --global core.autocrlf input
+    ```  
+2. docker 실행  
+3. git 최신 소스 코드 업데이트  
+    * 코드 없을 시
+    ```bash
+        git clone https://github.com/rhsehfm33/Codeend.git
     ```
-4. 로컬 작업 폴더에서 백엔드 코드의 변경이 있을 경우, 해당 container를 재실행 시켜주세요.
+    * 코드 이미 있다면
+    ```bash
+        git pull
+    ```
+4. git 최상위로 이동 (ex. c:/dev/Codeend/)
+5. docker 서버 구동
+    ```bash
+        docker-compose up
+    ```
+6. 로컬 작업 폴더에서 백엔드 코드의 변경이 있을 경우, 해당 container를 재실행 시켜주세요.
    그래야 코드 변경 내역이 적용됩니다.
 
+
+-----------------
+
+
+### MAC OS 개발 환경 세팅
+1. docker 실행
+2. git 최신 소스 코드 업데이트
+    * 코드 없을 시
+    ```bash
+        git clone https://github.com/rhsehfm33/Codeend.git
+    ```
+    * 코드 이미 있다면
+    ```bash
+        git pull
+    ```
+3. git 최상위로 이동 (ex. /your_path/Codeend/)
+4. 모든 권한을 허용하도록 설정
+    ```bash
+        sudo chmod -R 777 ./
+    ```
+5. docker 서버 구동
+    ```bash
+        docker-compose up
+    ```
+6. 로컬 작업 폴더에서 백엔드 코드의 변경이 있을 경우, 해당 container를 재실행 시켜주세요. 
+그래야 코드 변경 내역이 적용됩니다.
+
+-----------------
 ### License
-MIT
+[MIT](https://opensource.org/licenses/MIT)

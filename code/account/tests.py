@@ -176,22 +176,22 @@ class UserRegisterAPITest(CaptchaTest):
         self.captcha = rand_str(4)
 
         self.data = {"username": "test_user", "password": "testuserpassword",
-                     "real_name": "real_name", "email": "test@qduoj.com",
-                     "captcha": self._set_captcha(self.client.session)}
+                     "real_name": "real_name", "email": "test@qduoj.com"}
 
     def test_website_config_limit(self):
         SysOptions.allow_register = False
         resp = self.client.post(self.register_url, data=self.data)
         self.assertDictEqual(resp.data, {"error": "error", "data": "Register function has been disabled by admin"})
+   
+    # captcha 기능 보류 
+    # def test_invalid_captcha(self):
+    #     self.data["captcha"] = "****"
+    #     response = self.client.post(self.register_url, data=self.data)
+    #     self.assertDictEqual(response.data, {"error": "error", "data": "Invalid captcha"})
 
-    def test_invalid_captcha(self):
-        self.data["captcha"] = "****"
-        response = self.client.post(self.register_url, data=self.data)
-        self.assertDictEqual(response.data, {"error": "error", "data": "Invalid captcha"})
-
-        self.data.pop("captcha")
-        response = self.client.post(self.register_url, data=self.data)
-        self.assertTrue(response.data["error"] is not None)
+    #     self.data.pop("captcha")
+    #     response = self.client.post(self.register_url, data=self.data)
+    #     self.assertTrue(response.data["error"] is not None) 
 
     def test_register_with_correct_info(self):
         response = self.client.post(self.register_url, data=self.data)

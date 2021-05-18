@@ -39,9 +39,9 @@
         git pull
     ```
 3. git 최상위로 이동 (ex. /your_path/Codeend/)
-4. 모든 권한을 허용하도록 설정
+4. workdir의 모든 권한을 허용하도록 설정
     ```bash
-        sudo chmod -R 777 ./
+        sudo chmod -R 777 ./code
     ```
 5. docker 서버 구동
     ```bash

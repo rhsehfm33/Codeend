@@ -1,9 +1,11 @@
-"use strict";
-const merge = require("webpack-merge");
-const prodEnv = require("./prod.env");
+let date = require('moment')().format('YYYYMMDD')
+let commit = require('child_process').execSync('git rev-parse HEAD').toString().slice(0, 5)
+let version = `"${date}-${commit}"`
 
-module.exports = merge(prodEnv, {
+console.log(`current version is ${version}`)
+
+module.exports = {
   NODE_ENV: '"development"',
-  // 에러 추적 : 유저가 어느때에 정확히 어떤 에러가 난건지 서술
-  USE_SENTRY: "0"
-});
+  VERSION: version,
+  USE_SENTRY: '0'
+}

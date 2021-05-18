@@ -20,7 +20,7 @@ class UserRegisterSerializer(serializers.Serializer):
     username = serializers.CharField(max_length=32)
     password = serializers.CharField(min_length=6)
     email = serializers.EmailField(max_length=64)
-    captcha = serializers.CharField()
+    # captcha = serializers.CharField()
 
 
 class UserChangePasswordSerializer(serializers.Serializer):
@@ -110,13 +110,13 @@ class EditUserProfileSerializer(serializers.Serializer):
 
 class ApplyResetPasswordSerializer(serializers.Serializer):
     email = serializers.EmailField()
-    captcha = serializers.CharField()
+    # captcha = serializers.CharField()
 
 
 class ResetPasswordSerializer(serializers.Serializer):
     token = serializers.CharField()
     password = serializers.CharField(min_length=6)
-    captcha = serializers.CharField()
+    # captcha = serializers.CharField()
 
 
 class SSOSerializer(serializers.Serializer):

@@ -1,26 +1,18 @@
 <template>
   <div id="header">
     <Menu theme="light" mode="horizontal" @on-select="handleRoute" :active-name="activeMenu" class="oj-menu">
-      <div class="logo"><span>{{website.website_name}}</span></div>
-      <Menu-item name="/">
-        <Icon type="home"></Icon>
-        {{$t('m.Home')}}
-      </Menu-item>
+      <div class="logo" ><span>{{website.website_name}}</span></div>
       <Menu-item name="/problem">
-        <Icon type="ios-keypad"></Icon>
         {{$t('m.NavProblems')}}
       </Menu-item>
       <Menu-item name="/contest">
-        <Icon type="trophy"></Icon>
         {{$t('m.Contests')}}
       </Menu-item>
       <Menu-item name="/status">
-        <Icon type="ios-pulse-strong"></Icon>
         {{$t('m.NavStatus')}}
       </Menu-item>
       <Submenu name="rank">
         <template slot="title">
-          <Icon type="podium"></Icon>
           {{$t('m.Rank')}}
         </template>
         <Menu-item name="/acm-rank">
@@ -30,9 +22,22 @@
           {{$t('m.OI_Rank')}}
         </Menu-item>
       </Submenu>
+      <Submenu name="community">
+        <template slot="title">
+          {{$t('m.Community')}}
+        </template>
+        <Menu-item name="/announcements">
+          공지 게시판
+        </Menu-item>
+        <Menu-item name="/general-forum">
+          자유 게시판
+        </Menu-item>
+        <Menu-item name="/question">
+         질문 게시판
+        </Menu-item>
+      </Submenu>
       <Submenu name="about">
         <template slot="title">
-          <Icon type="information-circled"></Icon>
           {{$t('m.About')}}
         </template>
         <Menu-item name="/about">
@@ -42,6 +47,12 @@
           {{$t('m.FAQ')}}
         </Menu-item>
       </Submenu>
+      <Menu-item name="/recruit">
+        {{$t('m.Recruit')}}
+      </Menu-item>
+      <Menu-item name="/lecture">
+        {{$t('m.Lecture')}}
+      </Menu-item>
       <template v-if="!isAuthenticated">
         <div class="btn-menu">
           <Button type="ghost"
@@ -140,6 +151,7 @@
     box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.1);
     .oj-menu {
       background: #fdfdfd;
+
     }
 
     .logo {

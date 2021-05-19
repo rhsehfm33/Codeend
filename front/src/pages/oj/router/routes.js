@@ -14,7 +14,8 @@ import {
   ResetPassword,
   SubmissionDetails,
   SubmissionList,
-  UserHome
+  UserHome,
+  CommunityList
 } from '../views'
 
 import * as Contest from '@oj/views/contest'
@@ -160,6 +161,18 @@ export default [
         component: Setting.SecuritySetting
       }
     ]
+  },
+  {
+    name: 'community-list',
+    path: '/community',
+    meta: {title: 'Community List'},
+    component: CommunityList
+  },
+  {
+    name: 'announcements',
+    path: '/announcements',
+    meta: {title: 'Announcements'},
+    component: Home
   },
   {
     path: '/about',

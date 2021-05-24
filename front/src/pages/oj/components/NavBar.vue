@@ -1,7 +1,8 @@
 <template>
   <div id="header">
     <Menu theme="light" mode="horizontal" @on-select="handleRoute" :active-name="activeMenu" class="oj-menu">
-      <div class="logo" ><span>{{website.website_name}}</span></div>
+      <!-- logo 클릭하면 index 페이지로 이동  -->
+       <router-link to="/" tag="div" class="logo"><span>{{website.website_name}}</span></router-link>
       <Menu-item name="/problem">
         {{$t('m.NavProblems')}}
       </Menu-item>
@@ -53,6 +54,7 @@
       <Menu-item name="/lecture">
         {{$t('m.Lecture')}}
       </Menu-item>
+      <!-- 로그인 인증일 경우 -->
       <template v-if="!isAuthenticated">
         <div class="btn-menu">
           <Button type="ghost"
@@ -64,7 +66,7 @@
                   type="ghost"
                   shape="circle"
                   @click="handleBtnClick('register')"
-                  style="margin-left: 5px;">{{$t('m.Register')}}
+                  style="color: white; background-color: #2db7f5;">{{$t('m.Register')}}
           </Button>
         </div>
       </template>
@@ -122,7 +124,7 @@
     },
     computed: {
       ...mapGetters(['website', 'modalStatus', 'user', 'isAuthenticated', 'isAdminRole']),
-      // 跟随路由变化
+
       activeMenu () {
         return '/' + this.$route.path.split('/')[1]
       },
@@ -140,7 +142,7 @@
 
 <style lang="less" scoped>
   #header {
-    min-width: 300px;
+    min-width: 280px;
     position: fixed;
     top: 0;
     left: 0;
@@ -155,9 +157,10 @@
     }
 
     .logo {
+      font-weight: bold;
       margin-left: 2%;
       margin-right: 2%;
-      font-size: 20px;
+      font-size: 16px;
       float: left;
       line-height: 60px;
     }
@@ -175,6 +178,7 @@
       font-size: 16px;
       float: right;
       margin-right: 10px;
+
     }
   }
 

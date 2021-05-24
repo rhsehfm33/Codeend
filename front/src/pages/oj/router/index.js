@@ -6,9 +6,11 @@ import {STORAGE_KEY} from '@/utils/constants'
 import {sync} from 'vuex-router-sync'
 import {types, default as store} from '../../../store'
 
+// vueRouter 미들웨어 사용
 Vue.use(VueRouter)
 
 const router = new VueRouter({
+  // url 해시 사용 안함
   mode: 'history',
   scrollBehavior (to, from, savedPosition) {
     if (savedPosition) {

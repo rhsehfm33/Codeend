@@ -3,6 +3,7 @@
     <NavBar></NavBar>
     <div class="content-app">
       <transition name="fadeInUp" mode="out-in">
+        <!-- vue router에 의해 라우팅 되는 컴포넌트들이 대체되는 부분 -->
         <router-view></router-view>
       </transition>
       <div class="footer">
@@ -88,7 +89,7 @@
     margin-top: 20px;
     margin-bottom: 10px;
     text-align: center;
-    font-size: small;
+    font-size: 16px;
   }
 
   .fadeInUp-enter-active {

@@ -13,6 +13,7 @@ function resolve (dir) {
 
 function getEntries () {
   const base = {
+    // 시작 페이지
     'oj': ['./src/pages/oj/index.js'],
     'admin': ['./src/pages/admin/index.js']
   }

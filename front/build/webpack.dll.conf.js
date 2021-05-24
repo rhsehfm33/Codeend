@@ -15,6 +15,7 @@ const NODE_ENV = utils.getNodeEnv()
 const vendors = [
   'vue/dist/vue.esm.js',
   'vue-router',
+  
   'vuex',
   'axios',
   'moment',

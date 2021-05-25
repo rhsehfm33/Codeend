@@ -40,7 +40,7 @@ npm run build:dll
 
 # 백앤드 프록시 테이블 셋팅 
 # 기본적으로 localhost
-$env:TARGET="localhost"
+$env:TARGET="http://localhost"
 
 # localhost:8080에서 핫 리로드
 npm run dev

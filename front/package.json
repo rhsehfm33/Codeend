@@ -1,8 +1,8 @@
 {
-  "name": "onlinejudge",
+  "name": "codeend",
   "version": "2.0.0",
-  "description": "onlinejudge front end",
-  "author": "zemal <rawidn@163.com>",
+  "description": "Codeend front end",
+  "author": "timfive",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",

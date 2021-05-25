@@ -33,15 +33,6 @@ const hotMiddleware = require('webpack-hot-middleware')(compiler, {
   log: false,
   heartbeat: 2000
 })
-// force page reload when html-webpack-plugin template changes
-// currently disabled until this is resolved:
-// https://github.com/jantimon/html-webpack-plugin/issues/680
-// compiler.plugin('compilation', function (compilation) {
-//   compilation.plugin('html-webpack-plugin-after-emit', function (data, cb) {
-//     hotMiddleware.publish({ action: 'reload' })
-//     cb()
-//   })
-// })
 
 // enable hot-reload and state-preserving
 // compilation error display
@@ -59,8 +50,8 @@ Object.keys(proxyTable).forEach(function (context) {
 // handle fallback for HTML5 history API
 const rewrites = {
   rewrites: [{
-    from: '/admin/', // 正则或者字符串
-    to: '/admin/index.html', // 字符串或者函数
+    from: '/admin/', // 일반과 문자열
+    to: '/admin/index.html', // 문자열과 숫자 
   }]
 }
 const historyMiddleware = require('connect-history-api-fallback')(rewrites);
@@ -72,8 +63,6 @@ app.use(devMiddleware)
 // serve pure static assets
 const staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory)
 app.use(staticPath, express.static('./static'))
-
-const uri = 'http://localhost:' + port
 
 var _resolve
 var _reject

@@ -7,6 +7,7 @@
         <router-view></router-view>
       </transition>
       <div class="footer">
+        
         <p v-html="website.website_footer"></p>
       </div>
     </div>
@@ -95,6 +96,5 @@
   .fadeInUp-enter-active {
     animation: fadeInUp .8s;
   }
-
 
 </style>

@@ -45,7 +45,7 @@
     ```
 5. docker 서버 구동
     ```bash
-        docker-compose up
+        docker compose up
     ```
 6. 로컬 작업 폴더에서 백엔드 코드의 변경이 있을 경우, 해당 container를 재실행 시켜주세요. 
 그래야 코드 변경 내역이 적용됩니다.

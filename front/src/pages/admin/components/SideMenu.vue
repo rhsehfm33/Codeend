@@ -4,9 +4,9 @@
     <div class="logo">
       <img src="../../../assets/logo.svg" alt="codeend admin"/>
     </div>
+ 
     <el-menu-item index="/"><i class="el-icon-fa-dashboard"></i>{{$t('m.Dashboard')}}</el-menu-item>
 
-    <!-- 일반 관리 -->
     <!-- <el-submenu v-if="isSuperAdmin" index="general">
       <template slot="title"><i class="el-icon-menu"></i>{{$t('m.General')}}</template>
       <el-menu-item index="/user">{{$t('m.User')}}</el-menu-item>
@@ -23,25 +23,46 @@
       <el-menu-item index="/problem/create">{{$t('m.Create_Problem')}}</el-menu-item>
       <el-menu-item index="/problem/batch_ops">{{$t('m.Export_Import_Problem')}}</el-menu-item>
     </el-submenu>
-
     <!-- 컨테스트 관리 -->
     <!-- <el-submenu index="contest">
       <template slot="title"><i class="el-icon-fa-trophy"></i>{{$t('m.Contest')}}</template>
       <el-menu-item index="/contest">{{$t('m.Contest_List')}}</el-menu-item>
       <el-menu-item index="/contest/create">{{$t('m.Create_Contest')}}</el-menu-item>
     </el-submenu> -->
-
   </el-menu>
 </template>
 
 <script>
+  import { types } from '@/store'
   import {mapGetters} from 'vuex'
+  import api from '../api'
 
   export default {
     name: 'SideMenu',
     data () {
       return {
         currentPath: ''
+      }
+    },
+    beforeRouteEnter (to, from, next) {
+      api.getProfile().then(res => {
+        if (!res.data.data) {
+          // not login
+          next({name: 'login'})
+        } else {
+          next(vm => {
+            vm.$store.commit(types.CHANGE_PROFILE, {profile: res.data.data})
+          })
+        }
+      })
+    },
+    methods: {
+      handleCommand (command) {
+        if (command === 'logout') {
+          api.logout().then(() => {
+            this.$router.push({name: 'login'})
+          })
+        }
       }
     },
     mounted () {

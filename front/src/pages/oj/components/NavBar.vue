@@ -192,7 +192,6 @@
     .btn-menu {
       margin-right: 2%;
       font-size: @font-size;
-
     }
   }
   .modal {

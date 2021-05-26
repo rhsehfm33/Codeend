@@ -31,6 +31,21 @@
           </el-form>
         </div>
       </el-card>
+      
+    </el-col>
+
+    <el-col :md="14" :lg="16" v-if="isSuperAdmin">
+      <div class="info-container">
+        <info-card color="#909399" icon="el-icon-fa-users" message="Total Users" iconSize="30px" class="info-item"
+                   :value="infoData.user_count"></info-card>
+        <info-card color="#67C23A" icon="el-icon-fa-list" message="Today Submissions" class="info-item"
+                   :value="infoData.today_submission_count"></info-card>
+
+        <!-- <info-card color="#409EFF" icon="el-icon-fa-trophy" message="Recent Contests" class="info-item"
+                   :value="infoData.recent_contest_count"></info-card> -->
+
+      </div>
+      <!-- 시스템 개요 패널 시작-->
       <panel :title="$t('m.System_Overview')" v-if="isSuperAdmin">
         <p>{{$t('m.DashBoardJudge_Server')}}:  {{infoData.judge_server_count}}</p>
         <p>{{$t('m.HTTPS_Status')}}:
@@ -49,18 +64,9 @@
           </el-tag>
         </p>
       </panel>
-    </el-col>
+        <!-- 시스템 개요 패널 끝 -->
 
-    <el-col :md="14" :lg="16" v-if="isSuperAdmin">
-      <div class="info-container">
-        <info-card color="#909399" icon="el-icon-fa-users" message="Total Users" iconSize="30px" class="info-item"
-                   :value="infoData.user_count"></info-card>
-        <info-card color="#67C23A" icon="el-icon-fa-list" message="Today Submissions" class="info-item"
-                   :value="infoData.today_submission_count"></info-card>
-        <info-card color="#409EFF" icon="el-icon-fa-trophy" message="Recent Contests" class="info-item"
-                   :value="infoData.recent_contest_count"></info-card>
-      </div>
-      <panel style="margin-top: 5px">
+        <!-- <panel style="margin-top: 5px"> 
         <span slot="title" v-loading="loadingReleases">Release Notes
         <el-popover placement="right" trigger="hover">
           <i slot="reference" class="el-icon-fa-question-circle import-user-icon"></i>
@@ -87,8 +93,7 @@
               </ul>
             </div>
           </el-collapse-item>
-        </el-collapse>
-      </panel>
+        </el-collapse>  -->
     </el-col>
   </el-row>
 </template>

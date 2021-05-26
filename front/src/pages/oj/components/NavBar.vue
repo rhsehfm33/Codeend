@@ -187,7 +187,7 @@
     .btn-menu {
       font-size: 16px;
       float: right;
-      margin-right: 10px;
+      margin-right: 30px;
 
     }
   }

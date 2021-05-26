@@ -4,10 +4,10 @@
       <SideMenu></SideMenu>
     </div>
     <div id="header">
-      <i class="el-icon-fa-font katex-editor" @click="katexVisible=true" ></i>
+      <em> class="el-icon-fa-font katex-editor" @click="katexVisible=true" ></em>
       <screen-full :width="14" :height="14" class="screen-full"></screen-full>
       <el-dropdown @command="handleCommand">
-        <span>{{user.username}}<i class="el-icon-caret-bottom el-icon--right"></i></span>
+        <span>{{user.username}}<em class="el-icon-caret-bottom el-icon--right"></em></span>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item command="logout">Logout</el-dropdown-item>
         </el-dropdown-menu>

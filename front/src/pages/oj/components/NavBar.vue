@@ -3,18 +3,22 @@
     <Menu theme="light" mode="horizontal" @on-select="handleRoute" :active-name="activeMenu" class="oj-menu">
       <!-- logo 클릭하면 index 페이지로 이동  -->
        <router-link to="/" tag="div" class="logo"><span>{{website.website_name}}</span></router-link>
+
       <Menu-item name="/problem">
-        {{$t('m.NavProblems')}}
+        문제
       </Menu-item>
+
       <Menu-item name="/contest">
-        {{$t('m.Contests')}}
+        대회
       </Menu-item>
-      <Menu-item name="/status">
+
+      <!-- <Menu-item name="/status">
         {{$t('m.NavStatus')}}
-      </Menu-item>
-      <Submenu name="rank">
+      </Menu-item> -->
+      
+      <!-- <Submenu name="rank">
         <template slot="title">
-          {{$t('m.Rank')}}
+          랭크
         </template>
         <Menu-item name="/acm-rank">
           {{$t('m.ACM_Rank')}}
@@ -22,10 +26,11 @@
         <Menu-item name="/oi-rank">
           {{$t('m.OI_Rank')}}
         </Menu-item>
-      </Submenu>
+      </Submenu> -->
+
       <Submenu name="community">
         <template slot="title">
-          {{$t('m.Community')}}
+          커뮤니티
         </template>
         <Menu-item name="/announcements">
           공지 게시판
@@ -37,7 +42,8 @@
          질문 게시판
         </Menu-item>
       </Submenu>
-      <Submenu name="about">
+
+      <!-- <Submenu name="about">
         <template slot="title">
           {{$t('m.About')}}
         </template>
@@ -47,13 +53,16 @@
         <Menu-item name="/FAQ">
           {{$t('m.FAQ')}}
         </Menu-item>
-      </Submenu>
+      </Submenu> -->
+
       <Menu-item name="/recruit">
-        {{$t('m.Recruit')}}
+        채용공고
       </Menu-item>
+
       <Menu-item name="/lecture">
-        {{$t('m.Lecture')}}
+        학습강의
       </Menu-item>
+
       <!-- 로그인 인증일 경우 -->
       <template v-if="!isAuthenticated">
         <div class="btn-menu">
@@ -153,6 +162,7 @@
     box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.1);
     .oj-menu {
       background: #fdfdfd;
+      
 
     }
 
@@ -160,7 +170,7 @@
       font-weight: bold;
       margin-left: 2%;
       margin-right: 2%;
-      font-size: 16px;
+      font-size: 20px;
       float: left;
       line-height: 60px;
     }

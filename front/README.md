@@ -1,5 +1,7 @@
 # Codeend Front End
 
+test
+
 ## Reference
 [dllreferenceplugin 설명](https://webpack.js.org/plugins/dll-plugin/#dllreferenceplugin)
 
@@ -7,32 +9,33 @@
 
 ## Get Started
 
-Install nodejs **v8.12.0** first
+Install nodejs **v8.12.0** 
 
 ### Linux
 
 ```bash
 # 패키지 설치
 cd front 
-npm install
+npm ci 
 
 # 패키지 설치 후 한번만 실행
 export NODE_ENV=development 
 npm run build:dll
 
 # 백앤드 프록시 테이블 셋팅 
-# 기본적으로 localhost
-export TARGET=http://Your-backend
+# 기본적으로 http://localhost
+export TARGET=http://[Your-backend]
 
 # localhost:8080에서 핫 리로드
 npm run dev
 ```
+
 ### Windows
 
 ```bash
 # 패키지 설치
 cd front 
-npm install
+npm ci 
 
 # 패키지 설치 후 한번만 실행
 $env:NODE_ENV="development"

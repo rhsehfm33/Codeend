@@ -118,7 +118,7 @@ export const m = {
   CDN_HOST: 'CDN HOST',
   // Login.vue
   Welcome_to_Login: 'Welcome to Login',
-  Go: 'Login',
+  GO: 'GO',
   username: 'username',
   password: 'password'
 }

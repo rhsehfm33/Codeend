@@ -3,19 +3,18 @@ import VueI18n from 'vue-i18n'
 // ivew UI
 import ivenUS from 'iview/dist/locale/en-US'
 import ivzhCN from 'iview/dist/locale/zh-CN'
-import ivKo from 'iview/dist/locale/ko-KR'
-
+import ivzhTW from 'iview/dist/locale/zh-TW'
 // element UI
 import elenUS from 'element-ui/lib/locale/lang/en'
 import elzhCN from 'element-ui/lib/locale/lang/zh-CN'
-import elko from 'element-ui/lib/locale/lang/ko'
+import elzhTW from 'element-ui/lib/locale/lang/zh-TW'
 
 Vue.use(VueI18n)
 
 const languages = [
   {value: 'en-US', label: 'English', iv: ivenUS, el: elenUS},
   {value: 'zh-CN', label: '简体中文', iv: ivzhCN, el: elzhCN},
-  {value: 'ko-KO', label: '한국어', iv: ivKo, el: elko}
+  {value: 'zh-TW', label: '繁體中文', iv: ivzhTW, el: elzhTW}
 ]
 const messages = {}
 
@@ -29,7 +28,7 @@ for (let lang of languages) {
 }
 // load language packages
 export default new VueI18n({
-  locale: 'ko-KO',
+  locale: 'en-US',
   messages: messages
 })
 

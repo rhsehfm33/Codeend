@@ -3,12 +3,12 @@
     <Menu theme="light" mode="horizontal" @on-select="handleRoute" :active-name="activeMenu" class="oj-menu">
       <!-- logo 클릭하면 index 페이지로 이동  -->
        <router-link to="/" tag="div" class="logo"><span>{{website.website_name}}</span></router-link>
-
-      <Menu-item name="/problem">
+    <div class="category-div"> 
+      <Menu-item name="/problem" class="oj-menu-item">
         문제
       </Menu-item>
 
-      <Menu-item name="/contest">
+      <Menu-item name="/contest" class="oj-menu-item">
         대회
       </Menu-item>
 
@@ -28,17 +28,17 @@
         </Menu-item>
       </Submenu> -->
 
-      <Submenu name="community">
+      <Submenu name="community" class="oj-menu-item">
         <template slot="title">
           커뮤니티
         </template>
-        <Menu-item name="/announcements">
+        <Menu-item name="/announcements" class="oj-menu-item">
           공지 게시판
         </Menu-item>
-        <Menu-item name="/general-forum">
+        <Menu-item name="/general-forum" class="oj-menu-item">
           자유 게시판
         </Menu-item>
-        <Menu-item name="/question">
+        <Menu-item name="/question" class="oj-menu-item">
          질문 게시판
         </Menu-item>
       </Submenu>
@@ -55,13 +55,14 @@
         </Menu-item>
       </Submenu> -->
 
-      <Menu-item name="/recruit">
+      <Menu-item name="/recruit" class="oj-menu-item">
         채용공고
       </Menu-item>
 
-      <Menu-item name="/lecture">
+      <Menu-item name="/lecture" class="oj-menu-item">
         학습강의
       </Menu-item>
+    </div>
 
       <!-- 로그인 인증일 경우 -->
       <template v-if="!isAuthenticated">
@@ -71,15 +72,15 @@
                   shape="circle"
                   @click="handleBtnClick('login')">{{$t('m.Login')}}
           </Button>
-          <!-- <Button v-if="website.allow_register"
+          <Button v-if="website.allow_register"
                   type="ghost"
                   shape="circle"
                   @click="handleBtnClick('register')"
                   style="color: white; background-color: #2db7f5;">{{$t('m.Register')}}
-          </Button> -->
+          </Button>
         </div>
-      </template>
-      <template v-else>
+      </template>  
+      <template v-else class="display">
         <Dropdown class="drop-menu" @on-click="handleRoute" placement="bottom" trigger="click">
           <Button type="text" class="drop-menu-title">{{ user.username }}
             <Icon type="arrow-down-b"></Icon>
@@ -100,6 +101,8 @@
       <div slot="footer" style="display: none"></div>
     </Modal>
   </div>
+
+  
 </template>
 
 <script>
@@ -150,7 +153,10 @@
 </script>
 
 <style lang="less" scoped>
+@font-size: 1.1rem;
+
   #header {
+    display: inline-block;
     min-width: 280px;
     position: fixed;
     top: 0;
@@ -158,43 +164,41 @@
     height: auto;
     width: 100%;
     z-index: 1000;
-    background-color: #fff;
+    background-color: white;
     box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.1);
     .oj-menu {
-      background: #fdfdfd;
-      
+      text-align: center;
+      font-size: @font-size;
+      display: flex;
+      justify-content: space-between;
 
     }
-
     .logo {
       font-weight: bold;
+      font-size: @font-size;
       margin-left: 2%;
-      margin-right: 2%;
-      font-size: 20px;
-      float: left;
       line-height: 60px;
     }
-
+    .oj-menu-item {
+      font-size: @font-size;
+    }
     .drop-menu {
-      float: right;
-      margin-right: 30px;
-      position: absolute;
+      margin-right: 2%;
       right: 10px;
       &-title {
-        font-size: 18px;
+        font-size: @font-size;
       }
     }
     .btn-menu {
-      font-size: 16px;
-      float: right;
-      margin-right: 30px;
+      margin-right: 2%;
+      font-size: @font-size;
 
     }
   }
-
   .modal {
     &-title {
-      font-size: 18px;
+      margin-right: 1%;
+      font-size: 2rem;
       font-weight: 600;
     }
   }

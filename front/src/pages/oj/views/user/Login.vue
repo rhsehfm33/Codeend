@@ -1,22 +1,21 @@
 <template>
+
   <div>
     <Form ref="formLogin" :model="formLogin" :rules="ruleLogin">
       <FormItem prop="username">
-        <Input type="text" v-model="formLogin.username" :placeholder="$t('m.LoginUsername')" size="large" @on-enter="handleLogin">
-        <Icon type="ios-person-outline" slot="prepend"></Icon>
+        이메일<Input type="text" v-model="formLogin.username" :placeholder="$t('m.LoginUsername')" size="large" @on-enter="handleLogin">
         </Input>
       </FormItem>
       <FormItem prop="password">
-        <Input type="password" v-model="formLogin.password" :placeholder="$t('m.LoginPassword')" size="large" @on-enter="handleLogin">
-        <Icon type="ios-locked-outline" slot="prepend"></Icon>
+        비밀번호<Input type="password" v-model="formLogin.password" :placeholder="$t('m.LoginPassword')" size="large" @on-enter="handleLogin">
         </Input>
       </FormItem>
       <FormItem prop="tfa_code" v-if="tfaRequired">
         <Input v-model="formLogin.tfa_code" :placeholder="$t('m.TFA_Code')">
-        <Icon type="ios-lightbulb-outline" slot="prepend"></Icon>
         </Input>
       </FormItem>
     </Form>
+
     <div class="footer">
       <Button
         type="primary"
@@ -24,6 +23,7 @@
         class="btn" long
         :loading="btnLoginLoading">
         {{$t('m.UserLogin')}}
+        
       </Button>
       <a v-if="website.allow_register" @click.stop="handleBtnClick('register')">{{$t('m.No_Account')}}</a>
       <a @click.stop="goResetPassword" style="float: right">{{$t('m.Forget_Password')}}</a>

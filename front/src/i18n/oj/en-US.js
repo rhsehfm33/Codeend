@@ -59,7 +59,7 @@ export const m = {
   AC_Time: 'AC Time',
   ProblemID: 'ProblemID',
   First_Blood: 'First Blood',
-  Username: 'Username',
+  Username: 'user',
   Checked: 'Checked',
   Not_Checked: 'Not Checked',
   Check_It: 'Check It',
@@ -71,10 +71,12 @@ export const m = {
   // Announcements.vue
   Contest_Announcements: 'Contest Announcements',
   By: 'By',
+
   // ApplyResetPassword.vue
   The_email_doesnt_exist: 'The email doesn\'t exist',
   Success: 'Success',
   Password_reset_mail_sent: 'Password reset mail has been sent to your email，',
+
   // FAQ.vue
   Frequently_Asked_Questions: 'Frequently Asked Questions',
   Where_is_the_input_and_the_output: 'Where is the input and the output?',
@@ -157,14 +159,14 @@ export const m = {
   FAQ: 'FAQ',
   Recruit: 'Recruit',
   Lecture: 'Lecture',
-  Login: 'Login',
+  Login: '로그인',
   Register: 'Register',
   MyHome: 'Home',
   MySubmissions: 'Submissions',
   Settings: 'Settings',
   Management: 'Management',
   Logout: 'Logout',
-  Welcome_to: 'Welcome to',
+  Welcome_to: '로그인',
   // announcements.vue
   Refresh: 'Refresh',
   Back: 'Back',
@@ -183,14 +185,16 @@ export const m = {
   // SecuritySettig
   Sessions: 'Sessions',
   Two_Factor_Authentication: 'Two Factor Authentication',
+
   // Login.vue
-  LoginUsername: 'Username',
-  LoginPassword: 'Password',
+  LoginUsername: '이메일',
+  LoginPassword: '비밀번호',
   TFA_Code: 'Code from your TFA app',
-  No_Account: 'No account? Register now!',
-  Forget_Password: 'Forget Password',
-  UserLogin: 'Login',
+  No_Account: '아직 계정이 없으신가요?',
+  Forget_Password: '비밀번호 재설정',
+  UserLogin: '로그인하기',
   Welcome_back: 'Welcome back to OJ',
+
   // OIRank.vue
   OI_Ranklist: 'OI Ranklist',
   // OIContestRank.vue
@@ -206,26 +210,28 @@ export const m = {
   Difficulty: 'Difficulty',
   Total: 'Total',
   AC_Rate: 'AC Rate',
+
   // Register.vue
-  RegisterUsername: 'Username',
-  Email_Address: 'Email Address',
-  RegisterPassword: 'Password',
-  Password_Again: 'Password Again',
+  RegisterUsername: '이름',
+  Email_Address: '이메일',
+  RegisterPassword: '비밀번호',
+  Password_Again: '비밀번호 확인',
   Captcha: 'Captcha',
-  UserRegister: 'Register',
-  Already_Registed: 'Already registed? Login now!',
+  UserRegister: '계정 만들기',
+  Already_Registed: '이미 계정이 있으신가요?',
   The_username_already_exists: 'The username already exists.',
   The_email_already_exists: 'The email already exists',
   password_does_not_match: 'password does not match',
   Thanks_for_registering: 'Thanks for your registering, you can login now',
+
   // ResetPassword.vue and ApplyResetPassword.vue
-  Reset_Password: 'Lost Password',
+  Reset_Password: '비밀번호 찾기',
   RPassword: 'Password',
   RPassword_Again: 'Password Again',
-  RCaptcha: 'Captcha',
-  ApplyEmail: 'Your Email Address',
-  Send_Password_Reset_Email: 'Send Password Reset Email',
+  ApplyEmail: '이메일',
+  Send_Password_Reset_Email: '비밀번호 재설정 메일 보내기',
   Your_password_has_been_reset: 'Your password has been reset.',
+
   // Save.vue
   Save: 'Save',
   // Simditor.vue

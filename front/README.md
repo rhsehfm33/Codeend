@@ -1,7 +1,5 @@
 # Codeend Front End
 
-test
-
 ## Reference
 [dllreferenceplugin 설명](https://webpack.js.org/plugins/dll-plugin/#dllreferenceplugin)
 

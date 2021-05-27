@@ -159,14 +159,14 @@ export const m = {
   FAQ: 'FAQ',
   Recruit: 'Recruit',
   Lecture: 'Lecture',
-  Login: '로그인',
+  Login: 'Login',
   Register: 'Register',
   MyHome: 'Home',
   MySubmissions: 'Submissions',
   Settings: 'Settings',
   Management: 'Management',
   Logout: 'Logout',
-  Welcome_to: '로그인',
+  Welcome_to: 'Welcome to',
   // announcements.vue
   Refresh: 'Refresh',
   Back: 'Back',
@@ -187,13 +187,13 @@ export const m = {
   Two_Factor_Authentication: 'Two Factor Authentication',
 
   // Login.vue
-  LoginUsername: '이메일',
-  LoginPassword: '비밀번호',
+  LoginUsername: 'LoginUsername',
+  LoginPassword: 'LoginPassword',
   TFA_Code: 'Code from your TFA app',
-  No_Account: '아직 계정이 없으신가요?',
-  Forget_Password: '비밀번호 재설정',
-  UserLogin: '로그인하기',
-  Welcome_back: 'Welcome back to OJ',
+  No_Account: 'No Account?',
+  Forget_Password: 'Forget Password',
+  UserLogin: 'UserLogin',
+  Welcome_back: 'Welcome back to Codeend',
 
   // OIRank.vue
   OI_Ranklist: 'OI Ranklist',
@@ -212,24 +212,25 @@ export const m = {
   AC_Rate: 'AC Rate',
 
   // Register.vue
-  RegisterUsername: '이름',
-  Email_Address: '이메일',
-  RegisterPassword: '비밀번호',
-  Password_Again: '비밀번호 확인',
+  Home_Start: 'Go to Start',
+  RegisterUsername: 'Username',
+  Email_Address: 'E-mail',
+  RegisterPassword: 'Password',
+  Password_Again: 'Password Again',
   Captcha: 'Captcha',
-  UserRegister: '계정 만들기',
-  Already_Registed: '이미 계정이 있으신가요?',
+  UserRegister: 'Register',
+  Already_Registed: 'Already Registed?',
   The_username_already_exists: 'The username already exists.',
   The_email_already_exists: 'The email already exists',
   password_does_not_match: 'password does not match',
   Thanks_for_registering: 'Thanks for your registering, you can login now',
 
   // ResetPassword.vue and ApplyResetPassword.vue
-  Reset_Password: '비밀번호 찾기',
+  Reset_Password: 'Reset Password',
   RPassword: 'Password',
   RPassword_Again: 'Password Again',
-  ApplyEmail: '이메일',
-  Send_Password_Reset_Email: '비밀번호 재설정 메일 보내기',
+  ApplyEmail: 'ApplyEmail',
+  Send_Password_Reset_Email: 'Send Password Reset Email기',
   Your_password_has_been_reset: 'Your password has been reset.',
 
   // Save.vue

@@ -207,6 +207,7 @@ export const m = {
   Total: '',
   AC_Rate: 'AC Rate',
   // Register.vue
+  Home_Start: '시작하기',
   RegisterUsername: '사용자 이름',
   Email_Address: 'E-mail',
   RegisterPassword: '비밀번호',

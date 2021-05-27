@@ -200,10 +200,11 @@ export const m = {
   All: '全部',
   Reset: '重置',
   Pick_One: '选择',
-  Difficulty: 'Difficulty',
+  Difficulty: '困难',
   Total: '总数',
   AC_Rate: '通过率',
   // Register.vue
+  Home_Start: '入门',
   RegisterUsername: '用户名',
   Email_Address: '电子邮箱',
   RegisterPassword: '密码',

@@ -12,22 +12,6 @@
         {{$t('m.Contests')}}
       </Menu-item>
 
-      <!-- <Menu-item name="/status">
-        {{$t('m.NavStatus')}}
-      </Menu-item> -->
-      
-      <!-- <Submenu name="rank">
-        <template slot="title">
-          랭크
-        </template>
-        <Menu-item name="/acm-rank">
-          {{$t('m.ACM_Rank')}}
-        </Menu-item>
-        <Menu-item name="/oi-rank">
-          {{$t('m.OI_Rank')}}
-        </Menu-item>
-      </Submenu> -->
-
       <Submenu name="community" class="oj-menu-item">
         <template slot="title">
           {{$t('m.Community')}}
@@ -43,6 +27,30 @@
         </Menu-item>
       </Submenu>
 
+      <Menu-item name="/recruit" class="oj-menu-item">
+        {{$t('m.Recruit')}}
+      </Menu-item>
+      <Menu-item name="/lecture" class="oj-menu-item">
+        {{$t('m.Lecture')}}
+      </Menu-item>
+    </div>      
+
+     <!-- <Menu-item name="/status">
+        {{$t('m.NavStatus')}}
+      </Menu-item> -->
+      
+      <!-- <Submenu name="rank">
+        <template slot="title">
+          랭크
+        </template>
+        <Menu-item name="/acm-rank">
+          {{$t('m.ACM_Rank')}}
+        </Menu-item>
+        <Menu-item name="/oi-rank">
+          {{$t('m.OI_Rank')}}
+        </Menu-item>
+      </Submenu> -->
+
       <!-- <Submenu name="about">
         <template slot="title">
           {{$t('m.About')}}
@@ -54,14 +62,6 @@
           {{$t('m.FAQ')}}
         </Menu-item>
       </Submenu> -->
-
-      <Menu-item name="/recruit" class="oj-menu-item">
-        {{$t('m.Recruit')}}
-      </Menu-item>
-      <Menu-item name="/lecture" class="oj-menu-item">
-        {{$t('m.Lecture')}}
-      </Menu-item>
-    </div>
 
       <!-- 로그인 인증일 경우 -->
       <template v-if="!isAuthenticated">

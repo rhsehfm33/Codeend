@@ -193,14 +193,14 @@ export const m = {
   // OIContestRank.vue
   Total_Score: '总分',
   // ProblemList.vue
-  Problem_List: '问题列表',
+  Problem_List: '문제 목록',
   High: '高',
   Mid: '中',
   Low: '低',
   All: '全部',
   Reset: '重置',
   Pick_One: '选择',
-  Difficulty: '难度',
+  Difficulty: 'Difficulty',
   Total: '总数',
   AC_Rate: '通过率',
   // Register.vue

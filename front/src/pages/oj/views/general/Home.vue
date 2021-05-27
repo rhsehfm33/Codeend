@@ -26,13 +26,13 @@
         </CarouselItem>
       </Carousel>
     </panel>
-    <HomeAccount class="homeaccout"></HomeAccount>
+    <Announcements class="announcement"></Announcements>
     </Col>
   </Row>
 </template>
 
 <script>
-  import HomeAccount from './HomeAccount.vue'
+  import Announcements from './Announcements.vue'
   import api from '@oj/api'
   import time from '@/utils/time'
   import { CONTEST_STATUS } from '@/utils/constants'
@@ -40,7 +40,7 @@
   export default {
     name: 'home',
     components: {
-      HomeAccount
+      Announcements
     },
     data () {
       return {
@@ -82,4 +82,7 @@
     }
   }
 
+  .announcement {
+    margin-top: 20px;
+  }
 </style>

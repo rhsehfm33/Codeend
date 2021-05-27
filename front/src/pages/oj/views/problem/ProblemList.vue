@@ -2,12 +2,13 @@
   <Row type="flex" :gutter="18">
     <Col :span=19>
     <Panel shadow>
+      <!-- 왜 안 먹지?? -->
       <div slot="title">{{$t('m.Problem_List')}}</div>
       <div slot="extra">
         <ul class="filter">
           <li>
             <Dropdown @on-click="filterByDifficulty">
-              <span>{{query.difficulty === '' ? this.$i18n.t('m.Difficulty') : this.$i18n.t('m.' + query.difficulty)}}
+              <span>{{$t('m.Difficulty')}}
                 <Icon type="arrow-down-b"></Icon>
               </span>
               <Dropdown-menu slot="list">

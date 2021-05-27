@@ -266,8 +266,5 @@ export const m = {
   UserHomeserSubmissions: 'Submissions',
   UserHomeScore: 'Score',
   List_Solved_Problems: 'List of solved problems',
-  UserHomeIntro: 'The guy is so lazy that has not solved any problem yet.',
-
-  // HomeAccount.vue
-  Start: '시작하기'
+  UserHomeIntro: 'The guy is so lazy that has not solved any problem yet.'
 }

@@ -5,11 +5,11 @@
        <router-link to="/" tag="div" class="logo"><span>{{website.website_name}}</span></router-link>
     <div class="category-div"> 
       <Menu-item name="/problem" class="oj-menu-item">
-        문제
+        {{$t('m.NavProblems')}}
       </Menu-item>
 
       <Menu-item name="/contest" class="oj-menu-item">
-        대회
+        {{$t('m.Contests')}}
       </Menu-item>
 
       <!-- <Menu-item name="/status">
@@ -30,7 +30,7 @@
 
       <Submenu name="community" class="oj-menu-item">
         <template slot="title">
-          커뮤니티
+          {{$t('m.Community')}}
         </template>
         <Menu-item name="/announcements" class="oj-menu-item">
           공지 게시판
@@ -56,11 +56,10 @@
       </Submenu> -->
 
       <Menu-item name="/recruit" class="oj-menu-item">
-        채용공고
+        {{$t('m.Recruit')}}
       </Menu-item>
-
       <Menu-item name="/lecture" class="oj-menu-item">
-        학습강의
+        {{$t('m.Lecture')}}
       </Menu-item>
     </div>
 
@@ -72,14 +71,14 @@
                   shape="circle"
                   @click="handleBtnClick('login')">{{$t('m.Login')}}
           </Button>
-          <!-- <Button v-if="website.allow_register"
+          <Button v-if="website.allow_register"
                   type="ghost"
                   shape="circle"
                   @click="handleBtnClick('register')"
                   style="color: white; background-color: #2db7f5;">{{$t('m.Register')}}
-          </Button> -->
+          </Button>
         </div>
-      </template>
+      </template>  
       <template v-else class="display">
         <Dropdown class="drop-menu" @on-click="handleRoute" placement="bottom" trigger="click">
           <Button type="text" class="drop-menu-title">{{ user.username }}
@@ -101,6 +100,7 @@
       <div slot="footer" style="display: none"></div>
     </Modal>
   </div>
+
   
 </template>
 
@@ -152,8 +152,10 @@
 </script>
 
 <style lang="less" scoped>
+@font-size: 1.1rem;
+
   #header {
-    display: block;
+    display: inline-block;
     min-width: 280px;
     position: fixed;
     top: 0;
@@ -161,43 +163,40 @@
     height: auto;
     width: 100%;
     z-index: 1000;
-    background-color: rgb(255, 255, 255);
+    background-color: white;
     box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.1);
+    .oj-menu {
+      text-align: center;
+      font-size: @font-size;
+      display: flex;
+      justify-content: space-between;
+
+    }
     .logo {
       font-weight: bold;
+      font-size: @font-size;
       margin-left: 2%;
-      margin-right: 2%;
-      float: left;
-      font-size: 1.2rem;
       line-height: 60px;
     }
     .oj-menu-item {
-      font-size: 1.1rem;
-    }
-    .oj-menu {
-      display: flex;
-      justify-content: space-between;
-      font-size: 1.1rem;
+      font-size: @font-size;
     }
     .drop-menu {
-      float: right;
-      margin-right: 30px;
-      position: absolute;
+      margin-right: 2%;
       right: 10px;
       &-title {
-        font-size: 1.1rem;
+        font-size: @font-size;
       }
     }
     .btn-menu {
-      font-size: 1.1rem;
-      float: right;
-      margin-right: 90px;
-
+      margin-right: 2%;
+      font-size: @font-size;
     }
   }
   .modal {
     &-title {
-      font-size: 1.1rem;
+      margin-right: 1%;
+      font-size: 2rem;
       font-weight: 600;
     }
   }

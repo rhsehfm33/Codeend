@@ -1,13 +1,12 @@
 <template>
-
   <div>
     <Form ref="formLogin" :model="formLogin" :rules="ruleLogin">
-      <FormItem prop="username">
-        사용자 이름<Input type="text" v-model="formLogin.username" :placeholder="$t('m.LoginUsername')" size="large" @on-enter="handleLogin">
+      <FormItem prop="c">
+        {{$t('m.LoginUser')}}<Input type="text" v-model="formLogin.username" :placeholder="$t('m.LoginUsername')" size="large" @on-enter="handleLogin">
         </Input>
       </FormItem>
-      <FormItem prop="password">
-        비밀번호<Input type="password" v-model="formLogin.password" :placeholder="$t('m.LoginPassword')" size="large" @on-enter="handleLogin">
+      <FormItem prop="password"> {{$t('m.LoginPwd')}}
+        <Input type="password" v-model="formLogin.password" :placeholder="$t('m.LoginPassword')" size="large" @on-enter="handleLogin">
         </Input>
       </FormItem>
       <FormItem prop="tfa_code" v-if="tfaRequired">

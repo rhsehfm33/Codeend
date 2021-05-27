@@ -1,11 +1,12 @@
 <template>
   <Panel :padding="30" class="container">
     <div slot="title" class="center">{{$t('m.Reset_Password')}}</div>
-    비밀번호를 재설정 할 이메일을 입력하세요. 자세한 안내가 담긴 메일을 보내드리겠습니다.
+    <p class="center">비밀번호를 재설정 할 이메일을 입력하세요.</p>
+    <p class="center">자세한 안내가 담긴 메일을 보내드리겠습니다.</p>
     <template v-if="!successApply">
       <Form :rules="ruleResetPassword" :model=formResetPassword ref="formResetPassword">
         <Form-item prop="email">
-          <Input v-model="formResetPassword.email" :placeholder="$t('m.ApplyEmail')" size="large">
+          <Input class="input" v-model="formResetPassword.email" :placeholder="$t('m.ApplyEmail')" size="large">
           </Input>
         </Form-item>
         <!-- <Form-item prop="captcha" style="margin-bottom:10px">
@@ -102,15 +103,18 @@
 
 <style scoped lang="less">
   .container {
+    border-radius: 1rem;
     width: 450px;
     margin: auto;
     .center {
       text-align: center;
+      margin-bottom: 2%;
     }
     .btn {
-      margin-top: 18px;
       text-align: center;
     }
-    
+    .input {
+      margin-top: 5%;
+    }
   }
 </style>

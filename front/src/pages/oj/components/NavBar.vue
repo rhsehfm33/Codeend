@@ -95,7 +95,7 @@
       </template>
     </Menu>
     <Modal v-model="modalVisible" :width="400">
-      <div slot="header" class="modal-title">{{$t('m.Welcome_to')}} {{website.website_name_shortcut}}</div>
+      <div slot="header" class="modal-title">{{website.website_name}} {{$t('m.Welcome_to')}}</div>
       <component :is="modalStatus.mode" v-if="modalVisible"></component>
       <div slot="footer" style="display: none"></div>
     </Modal>
@@ -195,9 +195,10 @@
   }
   .modal {
     &-title {
+      text-align: center;
       margin-right: 1%;
-      font-size: 2rem;
-      font-weight: 600;
+      font-size: 1.2rem;
+      font-weight: 450;
     }
   }
 </style>

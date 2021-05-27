@@ -164,7 +164,7 @@ export const m = {
   Settings: '환경설정',
   Management: '관리',
   Logout: '로그아웃',
-  Welcome_to: '어서오세요!',
+  Welcome_to: '에 오신 것을 환영합니다.',
   // announcements.vue
   Refresh: 'Refresh',
   Back: '뒤로 가기',
@@ -184,6 +184,8 @@ export const m = {
   Sessions: 'Sessions',
   Two_Factor_Authentication: '2단계 인증',
   // Login.vue
+  LoginUser: '사용자 이름',
+  LoginPwd: '비밀번호',
   LoginUsername: '사용자 이름을 적어주세요.',
   LoginPassword: '비밀번호를 적어주세요.',
   TFA_Code: '2단계 인증 코드',
@@ -214,7 +216,7 @@ export const m = {
   Password_Again: '비밀번호 확인',
   Captcha: 'Captcha',
   UserRegister: '회원가입',
-  Already_Registed: '이미 가입하셨나요? 로그인하러 가요!',
+  Already_Registed: '이미 가입하셨나요? 로그인',
   The_username_already_exists: '다른 사용자 이름을 적어주세요.',
   The_email_already_exists: '다른 이메일 주소를 적어주세요',
   password_does_not_match: '비밀번호가 다릅니다.',

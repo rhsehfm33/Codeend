@@ -11,7 +11,7 @@ export default {
       return new Promise((resolve, reject) => {
         this.$refs[formName].validate(valid => {
           if (!valid) {
-            this.$error('please validate the error fields')
+            this.$error('오류를 확인해주세요.')
           } else {
             resolve(valid)
           }

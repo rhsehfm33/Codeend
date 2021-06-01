@@ -97,7 +97,7 @@
         </el-pagination>
       </div>
     </Panel>
-    <el-dialog title="Sure to update the problem? "
+    <el-dialog title="문제를 업데이트하시나요? "
                width="20%"
                :visible.sync="InlineEditDialogVisible"
                @close-on-click-modal="false">
@@ -197,7 +197,7 @@
         })
       },
       deleteProblem (id) {
-        this.$confirm('Sure to delete this problem? The associated submissions will be deleted as well.', 'Delete Problem', {
+        this.$confirm('문제를 삭제하시나요? 관련 제출 기록도 삭제됩니다.', '문제 삭제', {
           type: 'warning'
         }).then(() => {
           let funcName = this.routeName === 'problem-list' ? 'deleteProblem' : 'deleteContestProblem'
@@ -209,7 +209,7 @@
         })
       },
       makeContestProblemPublic (problemID) {
-        this.$prompt('Please input display id for the public problem', 'confirm').then(({value}) => {
+        this.$prompt('공개 문제에 대한 display ID를 입력하세요.', 'confirm').then(({value}) => {
           api.makeContestProblemPublic({id: problemID, display_id: value}).catch()
         }, () => {
         })

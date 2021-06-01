@@ -15,30 +15,30 @@
           </el-table-column>
           <el-table-column
             prop="title"
-            label="Title">
+            label="제목">
           </el-table-column>
           <el-table-column
             prop="create_time"
-            label="CreateTime">
+            label="생성 시간">
             <template slot-scope="scope">
               {{ scope.row.create_time | localtime }}
             </template>
           </el-table-column>
           <el-table-column
             prop="last_update_time"
-            label="LastUpdateTime">
+            label="마지막 수정시간">
             <template slot-scope="scope">
               {{scope.row.last_update_time | localtime }}
             </template>
           </el-table-column>
           <el-table-column
             prop="created_by.username"
-            label="Author">
+            label="작성자">
           </el-table-column>
           <el-table-column
             width="100"
             prop="visible"
-            label="Visible">
+            label="공개 여부">
             <template slot-scope="scope">
               <el-switch v-model="scope.row.visible"
                          active-text=""
@@ -49,7 +49,7 @@
           </el-table-column>
           <el-table-column
             fixed="right"
-            label="Option"
+            label="수정 / 삭제"
             width="200">
             <div slot-scope="scope">
               <icon-btn name="Edit" icon="edit" @click.native="openAnnouncementDialog(scope.row.id)"></icon-btn>
@@ -58,7 +58,7 @@
           </el-table-column>
         </el-table>
         <div class="panel-options">
-          <el-button type="primary" size="small" @click="openAnnouncementDialog(null)" icon="el-icon-plus">Create</el-button>
+          <el-button type="primary" size="small" @click="openAnnouncementDialog(null)" icon="el-icon-plus">생성</el-button>
           <el-pagination
             v-if="!contestID"
             class="page"
@@ -212,9 +212,9 @@
       },
       // 删除公告
       deleteAnnouncement (announcementId) {
-        this.$confirm('Are you sure you want to delete this announcement?', 'Warning', {
-          confirmButtonText: 'Delete',
-          cancelButtonText: 'Cancel',
+        this.$confirm('공지 사항을 삭제하시나요?', '경고', {
+          confirmButtonText: '삭제',
+          cancelButtonText: '취소',
           type: 'warning'
         }).then(() => {
           // then 为确定
@@ -225,7 +225,6 @@
             this.init()
           })
         }).catch(() => {
-          // catch 为取消
           this.loading = false
         })
       },

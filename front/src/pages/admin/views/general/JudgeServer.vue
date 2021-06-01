@@ -96,7 +96,7 @@
         })
       },
       deleteJudgeServer (hostname) {
-        this.$confirm('If you delete this judge server, it can\'t be used until next heartbeat', 'Warning', {
+        this.$confirm('채점 서버를 삭제하면 다음 시간까지 사용할 수 없습니다.', 'Warning', {
           confirmButtonText: 'Delete',
           cancelButtonText: 'Cancel',
           type: 'warning'

@@ -21,7 +21,7 @@
       <template slot="title"><em class="el-icon-fa-bars"></em>{{$t('m.Problem')}}</template>
       <el-menu-item index="/problems">{{$t('m.Problem_List')}}</el-menu-item>
       <el-menu-item index="/problem/create">{{$t('m.Create_Problem')}}</el-menu-item>
-      <el-menu-item index="/problem/batch_ops">{{$t('m.Export_Import_Problem')}}</el-menu-item>
+      <!-- <el-menu-item index="/problem/batch_ops">{{$t('m.Export_Import_Problem')}}</el-menu-item> -->
     </el-submenu>
     <!-- 컨테스트 관리 -->
     <!-- <el-submenu index="contest">

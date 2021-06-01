@@ -259,7 +259,7 @@
         <el-form-item :label="$t('m.Source')">
           <el-input :placeholder="$t('m.Source')" v-model="problem.source"></el-input>
         </el-form-item>
-        <save @click.native="submit()">Save</save>
+        <save @click.native="submit()">저장</save>
       </el-form>
     </Panel>
   </div>
@@ -281,10 +281,10 @@
     data () {
       return {
         rules: {
-          _id: {required: true, message: 'Display ID is required', trigger: 'blur'},
-          title: {required: true, message: 'Title is required', trigger: 'blur'},
-          input_description: {required: true, message: 'Input Description is required', trigger: 'blur'},
-          output_description: {required: true, message: 'Output Description is required', trigger: 'blur'}
+          _id: {required: true, message: 'Display ID가 필요합니다.', trigger: 'blur'},
+          title: {required: true, message: '제목이 필요합니다.', trigger: 'blur'},
+          input_description: {required: true, message: 'Input 설명이 필요합니다.', trigger: 'blur'},
+          output_description: {required: true, message: 'Output 설명이 필요합니다.', trigger: 'blur'}
         },
         loadingCompile: false,
         mode: '',
@@ -330,7 +330,7 @@
           output_description: '',
           time_limit: 1000,
           memory_limit: 256,
-          difficulty: 'Low',
+          difficulty: '쉬움',
           visible: true,
           share_submission: false,
           tags: [],
@@ -418,9 +418,9 @@
     methods: {
       switchSpj () {
         if (this.testCaseUploaded) {
-          this.$confirm('If you change problem judge method, you need to re-upload test cases', 'Warning', {
-            confirmButtonText: 'Yes',
-            cancelButtonText: 'Cancel',
+          this.$confirm('문제 채점 방식을 변경할 경우, test case를 다시 업로드해야 합니다.', '경고', {
+            confirmButtonText: '네',
+            cancelButtonText: '취소',
             type: 'warning'
           }).then(() => {
             this.problem.spj = !this.problem.spj
@@ -480,7 +480,7 @@
         this.problem.test_case_id = response.data.id
       },
       uploadFailed () {
-        this.$error('Upload failed')
+        this.$error('업로드 실패')
       },
       compileSPJ () {
         let data = {
@@ -498,7 +498,7 @@
           this.problem.spj_compile_ok = false
           const h = this.$createElement
           this.$msgbox({
-            title: 'Compile Error',
+            title: '컴파일 에러',
             type: 'error',
             message: h('pre', err.data.data),
             showCancelButton: false,
@@ -509,26 +509,26 @@
       },
       submit () {
         if (!this.problem.samples.length) {
-          this.$error('Sample is required')
+          this.$error('샘플이 필요합니다.')
           return
         }
         for (let sample of this.problem.samples) {
           if (!sample.input || !sample.output) {
-            this.$error('Sample input and output is required')
+            this.$error('샘플 input과 output이 필요합니다.')
             return
           }
         }
         if (!this.problem.tags.length) {
-          this.error.tags = 'Please add at least one tag'
+          this.error.tags = '최소한 하나의 태그가 필요합니다.'
           this.$error(this.error.tags)
           return
         }
         if (this.problem.spj) {
           if (!this.problem.spj_code) {
-            this.error.spj = 'Spj code is required'
+            this.error.spj = 'Special Judge 코드가 필요합니다.'
             this.$error(this.error.spj)
           } else if (!this.problem.spj_compile_ok) {
-            this.error.spj = 'SPJ code has not been successfully compiled'
+            this.error.spj = 'Special Judge 코드가 성공적으로 컴파일되지 않았습니다.'
           }
           if (this.error.spj) {
             this.$error(this.error.spj)
@@ -536,12 +536,12 @@
           }
         }
         if (!this.problem.languages.length) {
-          this.error.languages = 'Please choose at least one language for problem'
+          this.error.languages = '하나 이상의 언어를 선택하세요.'
           this.$error(this.error.languages)
           return
         }
         if (!this.testCaseUploaded) {
-          this.error.testCase = 'Test case is not uploaded yet'
+          this.error.testCase = 'Test case가 업로드되지 않았습니다.'
           this.$error(this.error.testCase)
           return
         }
@@ -549,11 +549,11 @@
           for (let item of this.problem.test_case_score) {
             try {
               if (parseInt(item.score) <= 0) {
-                this.$error('Invalid test case score')
+                this.$error('잘못된 test case 점수')
                 return
               }
             } catch (e) {
-              this.$error('Test case score must be an integer')
+              this.$error('test case 점수는 정수여야합니다.')
               return
             }
           }
@@ -571,7 +571,7 @@
           'create-contest-problem': 'createContestProblem',
           'edit-contest-problem': 'editContestProblem'
         }[this.routeName]
-        // edit contest problem 时, contest_id会被后来的请求覆盖掉
+        // edit contest problem 전에, contest_id가 덮어쓰기 됨.
         if (funcName === 'editContestProblem') {
           this.problem.contest_id = this.contest.id
         }

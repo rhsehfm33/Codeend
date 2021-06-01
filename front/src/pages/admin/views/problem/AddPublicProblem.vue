@@ -82,7 +82,7 @@
         })
       },
       handleAddProblem (problemID) {
-        this.$prompt('Please input display id for the contest problem', 'confirm').then(({value}) => {
+        this.$prompt('대회 문제 display ID를 입력하십시오', 'confirm').then(({value}) => {
           let data = {
             problem_id: problemID,
             contest_id: this.contestID,

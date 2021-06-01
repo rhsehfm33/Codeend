@@ -154,12 +154,12 @@
         if (response.error) {
           this.$error(response.data)
         } else {
-          this.$success('Successfully imported ' + response.data.import_count + ' problems')
+          this.$success(response.data.import_count + '문제가 성공적으로 import되었습니다.')
           this.getProblems()
         }
       },
       uploadFailed () {
-        this.$error('Upload failed')
+        this.$error('업로드 실패')
       }
     },
     watch: {

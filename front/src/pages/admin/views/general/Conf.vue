@@ -114,7 +114,7 @@
           this.smtp = res.data.data
         } else {
           this.init = true
-          this.$warning('Please setup SMTP config at first')
+          this.$warning('먼저 SMTP config를 설정해주세요.')
         }
       })
       api.getWebsiteConfig().then(res => {
@@ -137,9 +137,9 @@
         }
       },
       testSMTPConfig () {
-        this.$prompt('Please input your email', '', {
+        this.$prompt('e-mail을 적어주세요.', '', {
           inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
-          inputErrorMessage: 'Error email format'
+          inputErrorMessage: 'email 형식 에러'
         }).then(({value}) => {
           this.loadingBtnTest = true
           api.testSMTPConfig(value).then(() => {

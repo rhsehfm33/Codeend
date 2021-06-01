@@ -10,7 +10,6 @@
         <span>{{user.username}}<em class="el-icon-caret-bottom el-icon--right"></em></span>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item command="logout">Logout</el-dropdown-item>
-
         </el-dropdown-menu>
       </el-dropdown>
     </div>
@@ -22,7 +21,6 @@
         Codeend
       </div>
     </div>
-
     <el-dialog :title="$t('m.Latex_Editor')" :visible.sync="katexVisible">
       <KatexEditor></KatexEditor>
     </el-dialog>
@@ -119,6 +117,7 @@
     padding-top: 20px;
     padding-right: 10px;
     padding-left: 210px;
+    margin: 2rem;
   }
 
   .footer {

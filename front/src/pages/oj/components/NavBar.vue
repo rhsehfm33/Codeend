@@ -8,9 +8,13 @@
         {{$t('m.NavProblems')}}
       </Menu-item>
 
-      <Menu-item name="/contest" class="oj-menu-item">
-        {{$t('m.Contests')}}
+      <Menu-item name="/status" class="oj-menu-item">
+        {{$t('m.NavStatus')}}
       </Menu-item>
+
+      <!-- <Menu-item name="/contest" class="oj-menu-item">
+        {{$t('m.Contests')}}
+      </Menu-item> -->
 
       <Submenu name="community" class="oj-menu-item">
         <template slot="title">
@@ -34,10 +38,6 @@
         {{$t('m.Lecture')}}
       </Menu-item>
     </div>      
-
-     <!-- <Menu-item name="/status">
-        {{$t('m.NavStatus')}}
-      </Menu-item> -->
       
       <!-- <Submenu name="rank">
         <template slot="title">

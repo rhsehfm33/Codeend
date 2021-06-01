@@ -184,9 +184,9 @@ export const m = {
   Sessions: 'Sessions',
   Two_Factor_Authentication: '2단계 인증',
   // Login.vue
-  LoginUser: '사용자 이름',
+  LoginUserEmail: '사용자 이메일',
   LoginPwd: '비밀번호',
-  LoginUsername: '사용자 이름을 적어주세요.',
+  LoginUsername: '사용자 이메일을 적어주세요.',
   LoginPassword: '비밀번호를 적어주세요.',
   TFA_Code: '2단계 인증 코드',
   No_Account: '계정이 없으신가요?',

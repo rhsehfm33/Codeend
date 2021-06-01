@@ -2,7 +2,7 @@
   <div>
     <Form ref="formLogin" :model="formLogin" :rules="ruleLogin">
       <FormItem prop="c">
-        {{$t('m.LoginUser')}}<Input type="text" v-model="formLogin.username" :placeholder="$t('m.LoginUsername')" size="large" @on-enter="handleLogin">
+        {{$t('m.LoginUserEmail')}}<Input type="text" v-model="formLogin.username" :placeholder="$t('m.LoginUsername')" size="large" @on-enter="handleLogin">
         </Input>
       </FormItem>
       <FormItem prop="password"> {{$t('m.LoginPwd')}}

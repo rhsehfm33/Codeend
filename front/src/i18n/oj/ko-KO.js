@@ -206,7 +206,7 @@ export const m = {
   Reset: 'Reset',
   Pick_One: '골라보세요!',
   Difficulty: '수준',
-  Total: '',
+  Total: '합계',
   AC_Rate: 'AC Rate',
   // Register.vue
   Home_Start: '시작하기',

@@ -2,7 +2,6 @@
   <Row type="flex" :gutter="18">
     <Col :span=19>
     <Panel shadow>
-      <!-- 왜 안 먹지?? -->
       <div slot="title">{{$t('m.Problem_List')}}</div>
       <div slot="extra">
         <ul class="filter">
@@ -40,15 +39,15 @@
           </li>
         </ul>
       </div>
-      <Table style="width: 100%; font-size: 16px;"
+      <Table style="width: 100%; font-size: 1.4rem;"
              :columns="problemTableColumns"
              :data="problemList"
              :loading="loadings.table"
-             disabled-hover></Table>
+             disabled-hover><tr></tr>
+      </Table>
     </Panel>
-    <Pagination
-      :total="total" :page-size.sync="query.limit" @on-change="pushRouter" @on-page-size-change="pushRouter" :current.sync="query.page" :show-sizer="true"></Pagination>
-
+    <Pagination :total="total" :page-size.sync="query.limit" @on-change="pushRouter" @on-page-size-change="pushRouter" :current.sync="query.page" :show-sizer="true">
+      </Pagination>
     </Col>
 
     <Col :span="5">

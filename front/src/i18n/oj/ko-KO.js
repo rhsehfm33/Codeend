@@ -142,7 +142,7 @@ export const m = {
   Solarized_Light: 'Solarized Light',
   Material: 'Material',
   // KatexEditor.vue
-  Latex_Editor: 'Latex 編輯器',
+  Latex_Editor: 'Latex 에디터',
   // NavBar.vue
   Home: '홈',
   NavProblems: '문제',
@@ -161,7 +161,7 @@ export const m = {
   Register: '회원가입',
   MyHome: '나의 홈',
   MySubmissions: '나의 제출',
-  Settings: '환경설정',
+  Settings: '설정',
   Management: '관리',
   Logout: '로그아웃',
   Welcome_to: '에 오신 것을 환영합니다.',
@@ -199,11 +199,11 @@ export const m = {
   Total_Score: '총 점수',
   // ProblemList.vue
   Problem_List: '문제 목록',
-  High: 'High',
-  Mid: 'Mid',
-  Low: 'Low',
+  High: '어려움',
+  Mid: '중간',
+  Low: '쉬움',
   All: '전체',
-  Reset: 'Reset',
+  Reset: '초기화',
   Pick_One: '골라보세요!',
   Difficulty: '수준',
   Total: '합계',

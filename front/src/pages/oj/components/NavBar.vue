@@ -71,6 +71,12 @@
                   shape="circle"
                   @click="handleBtnClick('login')">{{$t('m.Login')}}
           </Button>
+          <Button v-if="website.allow_register"
+                  type="ghost"
+                  shape="circle"
+                  @click="handleBtnClick('register')"
+                  style="color: white; background-color: #2db7f5;">{{$t('m.Register')}}
+          </Button>
         </div>
       </template>  
       <template v-else class="display">

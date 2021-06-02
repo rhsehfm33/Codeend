@@ -148,7 +148,7 @@ class CheckTFARequiredAPI(APIView):
                 result = user.two_factor_auth
             except User.DoesNotExist:
                 pass
-        return self.success({"결과": result})
+        return self.success({"result": result})
 
 
 class UserLoginAPI(APIView):
@@ -414,7 +414,7 @@ class OpenAPIAppkeyAPI(APIView):
         api_appkey = rand_str()
         user.open_api_appkey = api_appkey
         user.save()
-        return self.success({"앱키": api_appkey})
+        return self.success({"appkey": api_appkey})
 
 
 class SSOAPI(CSRFExemptAPIView):
@@ -423,7 +423,7 @@ class SSOAPI(CSRFExemptAPIView):
         token = rand_str()
         request.user.auth_token = token
         request.user.save()
-        return self.success({"토큰": token})
+        return self.success({"token": token})
 
     @method_decorator(csrf_exempt)
     @validate_serializer(SSOSerializer)
@@ -432,4 +432,4 @@ class SSOAPI(CSRFExemptAPIView):
             user = User.objects.get(auth_token=request.data["token"])
         except User.DoesNotExist:
             return self.error("사용자가 존재하지 않습니다.")
-        return self.success({"사용자이름": user.username, "아바타": user.userprofile.avatar, "관리자유형": user.admin_type})
+        return self.success({"username": user.username, "avatar": user.userprofile.avatar, "admin_type": user.admin_type})

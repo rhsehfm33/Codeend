@@ -84,7 +84,7 @@ class SubmissionAPI(APIView):
         if hide_id:
             return self.success()
         else:
-            return self.success({"제출번호": submission.id})
+            return self.success({"submission_id": submission.id})
 
     @login_required
     def get(self, request):

@@ -165,7 +165,7 @@ class JudgeServerHeartbeatAPI(CSRFExemptAPIView):
 
 class LanguagesAPI(APIView):
     def get(self, request):
-        return self.success({"언어": SysOptions.languages, "스폐셜저지 언어": SysOptions.spj_languages})
+        return self.success({"languages": SysOptions.languages, "spj_languages": SysOptions.spj_languages})
 
 
 class TestCasePruneAPI(APIView):

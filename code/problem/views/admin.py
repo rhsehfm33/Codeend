@@ -157,7 +157,7 @@ class TestCaseAPI(CSRFExemptAPIView, TestCaseZipProcessor):
                 f.write(chunk)
         info, test_case_id = self.process_zip(zip_file, spj=spj)
         os.remove(zip_file)
-        return self.success({"아이디": test_case_id, "정보": info, "스폐셜저지": spj})
+        return self.success({"id": test_case_id, "info": info, "spj": spj})
 
 
 class CompileSPJAPI(APIView):
@@ -572,7 +572,7 @@ class ImportProblemAPI(CSRFExemptAPIView, TestCaseZipProcessor):
                         problem_info = json.load(f)
                         serializer = ImportProblemSerializer(data=problem_info)
                         if not serializer.is_valid():
-                            return self.error(f"잘못된 문제형식입니다 오류: {serializer.errors}")
+                            return self.error(f"Invalid problem format, error is {serializer.errors}")
                         else:
                             problem_info = serializer.data
                             for item in problem_info["template"].keys():
@@ -697,7 +697,7 @@ class FPSProblemImport(CSRFExemptAPIView):
                 problem_data = helper.save_image(_problem, settings.UPLOAD_DIR, settings.UPLOAD_PREFIX)
                 s = FPSProblemSerializer(data=problem_data)
                 if not s.is_valid():
-                    return self.error(f"FPS 파일 오류 구문 분석: {s.errors}")
+                    self.error(f"Parse FPS file error: {s.errors}")
                 problem_data = s.data
                 problem_data["test_case_id"] = test_case_id
                 problem_data["test_case_score"] = score

@@ -99,7 +99,7 @@ class ContestAccessAPI(APIView):
         except Contest.DoesNotExist:
             return self.error("대회가 없습니다.")
         session_pass = request.session.get(CONTEST_PASSWORD_SESSION_KEY, {}).get(contest.id)
-        return self.success({"접속": check_contest_password(session_pass, contest.password)})
+        return self.success({"access": check_contest_password(session_pass, contest.password)})
 
 
 class ContestRankAPI(APIView):

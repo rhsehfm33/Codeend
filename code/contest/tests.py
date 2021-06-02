@@ -19,7 +19,7 @@ DEFAULT_CONTEST_DATA = {"title": "test title", "description": "test description"
 class ContestAdminAPITest(APITestCase):
     def setUp(self):
         self.create_super_admin()
-        self.url = self.reverse("contest_admin_api")
+        self.url = self.reverse("대회관리자 API")
         self.data = copy.deepcopy(DEFAULT_CONTEST_DATA)
 
     def test_create_contest(self):
@@ -30,7 +30,7 @@ class ContestAdminAPITest(APITestCase):
     def test_create_contest_with_invalid_cidr(self):
         self.data["allowed_ip_ranges"] = ["127.0.0"]
         resp = self.client.post(self.url, data=self.data)
-        self.assertTrue(resp.data["data"].endswith("is not a valid cidr network"))
+        self.assertTrue(resp.data["data"].endswith("유효한 CIDR 네트워크가 아닙니다."))
 
     def test_update_contest(self):
         id = self.test_create_contest().data["data"]["id"]

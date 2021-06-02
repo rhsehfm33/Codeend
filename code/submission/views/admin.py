@@ -10,11 +10,11 @@ class SubmissionRejudgeAPI(APIView):
     def get(self, request):
         id = request.GET.get("id")
         if not id:
-            return self.error("Parameter error, id is required")
+            return self.error("매개 변수 오류, ID는 필수입니다.")
         try:
             submission = Submission.objects.select_related("problem").get(id=id, contest_id__isnull=True)
         except Submission.DoesNotExist:
-            return self.error("Submission does not exists")
+            return self.error("제출한 문제가 없습니다.")
         submission.statistic_info = {}
         submission.save()
 

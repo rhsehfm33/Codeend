@@ -63,7 +63,7 @@ class SMTPTestAPI(APIView):
     @validate_serializer(TestSMTPConfigSerializer)
     def post(self, request):
         if not SysOptions.smtp_config:
-            return self.error("Please setup SMTP config at first")
+            return self.error("먼저 SMTP 구성을 설정하십시오")
         try:
             send_email(smtp_config=SysOptions.smtp_config,
                        from_name=SysOptions.website_name_shortcut,
@@ -135,7 +135,7 @@ class JudgeServerHeartbeatAPI(CSRFExemptAPIView):
         data = request.data
         client_token = request.META.get("HTTP_X_JUDGE_SERVER_TOKEN")
         if hashlib.sha256(SysOptions.judge_server_token.encode("utf-8")).hexdigest() != client_token:
-            return self.error("Invalid token")
+            return self.error("잘못된 토큰")
 
         try:
             server = JudgeServer.objects.get(hostname=data["hostname"])
@@ -165,7 +165,7 @@ class JudgeServerHeartbeatAPI(CSRFExemptAPIView):
 
 class LanguagesAPI(APIView):
     def get(self, request):
-        return self.success({"languages": SysOptions.languages, "spj_languages": SysOptions.spj_languages})
+        return self.success({"언어": SysOptions.languages, "스폐셜저지 언어": SysOptions.spj_languages})
 
 
 class TestCasePruneAPI(APIView):

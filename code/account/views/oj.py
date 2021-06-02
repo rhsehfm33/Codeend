@@ -46,7 +46,7 @@ class UserProfileAPI(APIView):
                 # api返回的是自己的信息，可以返real_name
                 show_real_name = True
         except User.DoesNotExist:
-            return self.error("User does not exist")
+            return self.error("사용자가 존재하지 않습니다")
         return self.success(UserProfileSerializer(user.userprofile, show_real_name=show_real_name).data)
 
     @validate_serializer(EditUserProfileSerializer)
@@ -69,12 +69,12 @@ class AvatarUploadAPI(APIView):
         if form.is_valid():
             avatar = form.cleaned_data["image"]
         else:
-            return self.error("Invalid file content")
+            return self.error("잘못된 파일 내용")
         if avatar.size > 2 * 1024 * 1024:
-            return self.error("Picture is too large")
+            return self.error("사진이 너무 큽니다.")
         suffix = os.path.splitext(avatar.name)[-1].lower()
         if suffix not in [".gif", ".jpg", ".jpeg", ".bmp", ".png"]:
-            return self.error("Unsupported file format")
+            return self.error("지원되지 않는 파일 형식")
 
         name = rand_str(10) + suffix
         with open(os.path.join(settings.AVATAR_UPLOAD_DIR, name), "wb") as img:
@@ -84,7 +84,7 @@ class AvatarUploadAPI(APIView):
 
         user_profile.avatar = f"{settings.AVATAR_URI_PREFIX}/{name}"
         user_profile.save()
-        return self.success("Succeeded")
+        return self.success("성공")
 
 
 class TwoFactorAuthAPI(APIView):
@@ -95,7 +95,7 @@ class TwoFactorAuthAPI(APIView):
         """
         user = request.user
         if user.two_factor_auth:
-            return self.error("2FA is already turned on")
+            return self.error("2단 인증이 이미 켜져 있습니다.")
         token = rand_str()
         user.tfa_token = token
         user.save()
@@ -115,9 +115,9 @@ class TwoFactorAuthAPI(APIView):
         if OtpAuth(user.tfa_token).valid_totp(code):
             user.two_factor_auth = True
             user.save()
-            return self.success("Succeeded")
+            return self.success("성공")
         else:
-            return self.error("Invalid code")
+            return self.error("유효하지 않은 코드")
 
     @login_required
     @validate_serializer(TwoFactorAuthCodeSerializer)
@@ -125,13 +125,13 @@ class TwoFactorAuthAPI(APIView):
         code = request.data["code"]
         user = request.user
         if not user.two_factor_auth:
-            return self.error("2FA is already turned off")
+            return self.error("2단 인증이 이미 꺼져 있습니다.")
         if OtpAuth(user.tfa_token).valid_totp(code):
             user.two_factor_auth = False
             user.save()
-            return self.success("Succeeded")
+            return self.success("성공")
         else:
-            return self.error("Invalid code")
+            return self.error("유효하지 않은 코드")
 
 
 class CheckTFARequiredAPI(APIView):
@@ -148,7 +148,7 @@ class CheckTFARequiredAPI(APIView):
                 result = user.two_factor_auth
             except User.DoesNotExist:
                 pass
-        return self.success({"result": result})
+        return self.success({"결과": result})
 
 
 class UserLoginAPI(APIView):
@@ -162,22 +162,22 @@ class UserLoginAPI(APIView):
         # None is returned if username or password is wrong
         if user:
             if user.is_disabled:
-                return self.error("Your account has been disabled")
+                return self.error("계정이 비활성화 되었습니다.")
             if not user.two_factor_auth:
                 auth.login(request, user)
-                return self.success("Succeeded")
+                return self.success("성공")
 
             # `tfa_code` not in post data
             if user.two_factor_auth and "tfa_code" not in data:
-                return self.error("tfa_required")
+                return self.error("2단 인증 필수")
 
             if OtpAuth(user.tfa_token).valid_totp(data["tfa_code"]):
                 auth.login(request, user)
-                return self.success("Succeeded")
+                return self.success("성공")
             else:
-                return self.error("Invalid two factor verification code")
+                return self.error("2단 인증 코드가 잘못되었습니다.")
         else:
-            return self.error("Invalid username or password")
+            return self.error("사용자 이름 또는 비밀번호가 잘못되었습니다.")
 
 
 class UserLogoutAPI(APIView):
@@ -212,7 +212,7 @@ class UserRegisterAPI(APIView):
         User register api
         """
         if not SysOptions.allow_register:
-            return self.error("Register function has been disabled by admin")
+            return self.error("관리자가 등록 기능을 비활성화했습니다.")
 
         data = request.data
         data["username"] = data["username"].lower()
@@ -221,14 +221,14 @@ class UserRegisterAPI(APIView):
         # if not captcha.check(data["captcha"]):
         #     return self.error("Invalid captcha")
         if User.objects.filter(username=data["username"]).exists():
-            return self.error("Username already exists")
+            return self.error("사용자 이름이 이미 존재합니다")
         if User.objects.filter(email=data["email"]).exists():
-            return self.error("Email already exists")
+            return self.error("이메일이 이미 존재합니다")
         user = User.objects.create(username=data["username"], email=data["email"])
         user.set_password(data["password"])
         user.save()
         UserProfile.objects.create(user=user)
-        return self.success("Succeeded")
+        return self.success("성공")
 
 
 class UserChangeEmailAPI(APIView):
@@ -240,17 +240,17 @@ class UserChangeEmailAPI(APIView):
         if user:
             if user.two_factor_auth:
                 if "tfa_code" not in data:
-                    return self.error("tfa_required")
+                    return self.error("2단 인증 필수")
                 if not OtpAuth(user.tfa_token).valid_totp(data["tfa_code"]):
-                    return self.error("Invalid two factor verification code")
+                    return self.error("2 단계 인증 코드가 잘못되었습니다")
             data["new_email"] = data["new_email"].lower()
             if User.objects.filter(email=data["new_email"]).exists():
-                return self.error("The email is owned by other account")
+                return self.error("다른 계정의 이메일입니다.")
             user.email = data["new_email"]
             user.save()
-            return self.success("Succeeded")
+            return self.success("성공")
         else:
-            return self.error("Wrong password")
+            return self.error("비밀번호가 틀렸습니다.")
 
 
 class UserChangePasswordAPI(APIView):
@@ -266,21 +266,21 @@ class UserChangePasswordAPI(APIView):
         if user:
             if user.two_factor_auth:
                 if "tfa_code" not in data:
-                    return self.error("tfa_required")
+                    return self.error("2단 인증 필수")
                 if not OtpAuth(user.tfa_token).valid_totp(data["tfa_code"]):
-                    return self.error("Invalid two factor verification code")
+                    return self.error("2 단계 인증 코드가 잘못되었습니다.")
             user.set_password(data["new_password"])
             user.save()
-            return self.success("Succeeded")
+            return self.success("성공")
         else:
-            return self.error("Invalid old password")
+            return self.error("비밀번호가 틀렸습니다.")
 
 
 class ApplyResetPasswordAPI(APIView):
     @validate_serializer(ApplyResetPasswordSerializer)
     def post(self, request):
         if request.user.is_authenticated:
-            return self.error("You have already logged in, are you kidding me? ")
+            return self.error("이미 로그인 했습니다.")
         data = request.data
         # captcha = Captcha(request)
         # if not captcha.check(data["captcha"]):
@@ -288,10 +288,10 @@ class ApplyResetPasswordAPI(APIView):
         try:
             user = User.objects.get(email__iexact=data["email"])
         except User.DoesNotExist:
-            return self.error("User does not exist")
+            return self.error("사용자가 존재하지 않습니다.")
         if user.reset_password_token_expire_time and 0 < int(
                 (user.reset_password_token_expire_time - now()).total_seconds()) < 20 * 60:
-            return self.error("You can only reset password once per 20 minutes")
+            return self.error("비밀번호 재설정은 20분에 한 번만 가능합니다.")
         user.reset_password_token = rand_str()
         user.reset_password_token_expire_time = now() + timedelta(minutes=20)
         user.save()
@@ -306,7 +306,7 @@ class ApplyResetPasswordAPI(APIView):
                               to_name=user.username,
                               subject=f"Reset your password",
                               content=email_html)
-        return self.success("Succeeded")
+        return self.success("성공")
 
 
 class ResetPasswordAPI(APIView):
@@ -319,14 +319,14 @@ class ResetPasswordAPI(APIView):
         try:
             user = User.objects.get(reset_password_token=data["token"])
         except User.DoesNotExist:
-            return self.error("Token does not exist")
+            return self.error("토큰이 없습니다.")
         if user.reset_password_token_expire_time < now():
-            return self.error("Token has expired")
+            return self.error("토큰이 만료되었습니다.")
         user.reset_password_token = None
         user.two_factor_auth = False
         user.set_password(data["password"])
         user.save()
-        return self.success("Succeeded")
+        return self.success("성공")
 
 
 class SessionManagementAPI(APIView):
@@ -362,14 +362,14 @@ class SessionManagementAPI(APIView):
     def delete(self, request):
         session_key = request.GET.get("session_key")
         if not session_key:
-            return self.error("Parameter Error")
+            return self.error("매개 변수 오류")
         request.session.delete(session_key)
         if session_key in request.user.session_keys:
             request.user.session_keys.remove(session_key)
             request.user.save()
-            return self.success("Succeeded")
+            return self.success("성공")
         else:
-            return self.error("Invalid session_key")
+            return self.error("잘못된 세션키")
 
 
 class UserRankAPI(APIView):
@@ -410,11 +410,11 @@ class OpenAPIAppkeyAPI(APIView):
     def post(self, request):
         user = request.user
         if not user.open_api:
-            return self.error("OpenAPI function is truned off for you")
+            return self.error("OpenAPI 기능이 차단되었습니다.")
         api_appkey = rand_str()
         user.open_api_appkey = api_appkey
         user.save()
-        return self.success({"appkey": api_appkey})
+        return self.success({"앱키": api_appkey})
 
 
 class SSOAPI(CSRFExemptAPIView):
@@ -423,7 +423,7 @@ class SSOAPI(CSRFExemptAPIView):
         token = rand_str()
         request.user.auth_token = token
         request.user.save()
-        return self.success({"token": token})
+        return self.success({"토큰": token})
 
     @method_decorator(csrf_exempt)
     @validate_serializer(SSOSerializer)
@@ -431,5 +431,5 @@ class SSOAPI(CSRFExemptAPIView):
         try:
             user = User.objects.get(auth_token=request.data["token"])
         except User.DoesNotExist:
-            return self.error("User does not exist")
-        return self.success({"username": user.username, "avatar": user.userprofile.avatar, "admin_type": user.admin_type})
+            return self.error("사용자가 존재하지 않습니다.")
+        return self.success({"사용자이름": user.username, "아바타": user.userprofile.avatar, "관리자유형": user.admin_type})

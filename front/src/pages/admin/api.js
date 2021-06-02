@@ -319,18 +319,20 @@ function ajax (url, method, options) {
       params,
       data
     }).then(res => {
-      // API正常返回(status=20x), 是否错误通过有无error判断
+      // API는 오류 유무에 따라 오류가 있는지
+      // 여부를 정상적으로 반환합니다 (상태 = 20x).
       if (res.data.error !== null) {
         Vue.prototype.$error(res.data.data)
         reject(res)
-        // // 若后端返回为登录，则为session失效，应退出当前登录用户
-        if (res.data.data.startsWith('Please login')) {
+        // 백엔드가 로그인으로 돌아 가면 세션이 유효하지 않음
+        // 현재 로그인 한 사용자는 로그 아웃해야합니다.
+        if (res.data.data.startsWith('로그인이 필요합니다.')) {
           router.push({name: 'login'})
         }
       } else {
         resolve(res)
         if (method !== 'get') {
-          Vue.prototype.$success('Succeeded')
+          Vue.prototype.$success('성공!')
         }
       }
     }, res => {

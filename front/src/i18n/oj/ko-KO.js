@@ -169,10 +169,12 @@ export const m = {
   Refresh: 'Refresh',
   Back: '뒤로 가기',
   No_Announcements: '게시된 공지가 없습니다.',
+
   // Setting.vue
-  Profile: 'Profile',
-  Account: 'Account',
-  Security: 'Security',
+  Profile: '프로필',
+  Account: '계정',
+  Security: '보안',
+
   // AccoutSetting.vue
   ChangePassword: '비밀번호 변경',
   ChangeEmail: 'E-mail 변경',
@@ -180,8 +182,10 @@ export const m = {
   // ProfileSetting.vue
   Avatar_Setting: '아바타 설정',
   Profile_Setting: '프로필 설정',
+
   // SecuritySettig
-  Sessions: 'Sessions',
+  Sessions: '활동 중',
+
   Two_Factor_Authentication: '2단계 인증',
   // Login.vue
   LoginUser: '사용자 이름',

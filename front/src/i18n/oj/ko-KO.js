@@ -199,9 +199,9 @@ export const m = {
   Total_Score: '총 점수',
   // ProblemList.vue
   Problem_List: '문제 목록',
-  High: '어려움',
-  Mid: '중간',
-  Low: '쉬움',
+  High: 'High',
+  Mid: 'Mid',
+  Low: 'Low',
   All: '전체',
   Reset: '초기화',
   Pick_One: '골라보세요!',

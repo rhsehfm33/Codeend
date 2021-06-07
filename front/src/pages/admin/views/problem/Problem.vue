@@ -330,7 +330,7 @@
           output_description: '',
           time_limit: 1000,
           memory_limit: 256,
-          difficulty: '쉬움',
+          difficulty: 'Low',
           visible: true,
           share_submission: false,
           tags: [],

@@ -42,13 +42,6 @@
          질문 게시판
         </Menu-item>
       </Submenu>
-
-      <Menu-item name="/recruit" class="oj-menu-item">
-        {{$t('m.Recruit')}}
-      </Menu-item>
-      <Menu-item name="/lecture" class="oj-menu-item">
-        {{$t('m.Lecture')}}
-      </Menu-item>
     </div>      
 
       <!-- 로그인 인증일 경우 -->

@@ -6,7 +6,7 @@ export const m = {
   Announcement: '공지사항',
   System_Config: '시스템 설정',
   Judge_Server: 'Judge 서버',
-  Prune_Test_Case: '測資',
+  Prune_Test_Case: 'Prune Test Case',
   Problem: '문제 관리',
   FromFile: '파일 읽기',
   ToFile: '파일 쓰기',
@@ -58,10 +58,8 @@ export const m = {
   Last_Heartbeat: '마지막 활동',
   Create_Time: '생성 시간',
   // PruneTestCase
-  Test_Case_Prune_Test_Case: '精簡測資',
+  Test_Case_Prune_Test_Case: 'Prune Test Case',
   // Problem.vue
-  New_Tag: '새로운 태그',
-  Add_Problem: '문제 추가',
   Display_ID: 'Display ID',
   Title: '제목',
   Description: '설명',
@@ -91,6 +89,15 @@ export const m = {
   Score: '점수',
   Hint: '힌트',
   Source: '출처',
+  Edit_Problem: '문제 수정하기',
+  Add_Problem: '문제 추가하기',
+  High: 'High',
+  Mid: 'Mid',
+  Low: 'Low',
+  Tag: '태그',
+  New_Tag: '새로운 태그',
+ // ProblemList.vue
+  Contest_Problem_List: '대회 문제 목록',
   // Contest.vue
   ContestTitle: '제목',
   ContestDescription: '설명',
@@ -108,5 +115,10 @@ export const m = {
   DashBoardJudge_Server: 'Judge 서버',
   HTTPS_Status: 'HTTPS 상태',
   Force_HTTPS: 'Force HTTPS',
-  CDN_HOST: 'CDN HOST'
+  CDN_HOST: 'CDN HOST',
+  // Login.vue
+  Welcome_to_Login: '로그인을 환영합니다.',
+  Go: '로그인',
+  username: '유저명',
+  password: '비밀번호'
 }

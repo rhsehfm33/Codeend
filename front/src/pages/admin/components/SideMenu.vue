@@ -24,11 +24,11 @@
       <!-- <el-menu-item index="/problem/batch_ops">{{$t('m.Export_Import_Problem')}}</el-menu-item> -->
     </el-submenu>
     <!-- 컨테스트 관리 -->
-    <!-- <el-submenu index="contest">
+    <el-submenu index="contest">
       <template slot="title"><i class="el-icon-fa-trophy"></i>{{$t('m.Contest')}}</template>
       <el-menu-item index="/contest">{{$t('m.Contest_List')}}</el-menu-item>
       <el-menu-item index="/contest/create">{{$t('m.Create_Contest')}}</el-menu-item>
-    </el-submenu> -->
+    </el-submenu>
   </el-menu>
 </template>
 

@@ -22,6 +22,8 @@ module.exports = {
       "skipComments": true,
       "skipTemplates": true
     }],
-    "no-unused-vars": ["warn"]
+    "no-unused-vars": ["warn"],
+    "semi": ["off", "never"],
+    "quotes": ["off", "double"],
   }
 }

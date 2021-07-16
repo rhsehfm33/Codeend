@@ -12,9 +12,21 @@
         {{$t('m.NavStatus')}}
       </Menu-item>
 
-      <!-- <Menu-item name="/contest" class="oj-menu-item">
+      <Menu-item name="/contest" class="oj-menu-item">
         {{$t('m.Contests')}}
-      </Menu-item> -->
+      </Menu-item>
+
+      <Submenu name="rank">
+        <template slot="title">
+          랭크
+        </template>
+        <Menu-item name="/acm-rank">
+          {{$t('m.ACM_Rank')}}
+        </Menu-item>
+        <Menu-item name="/oi-rank">
+          {{$t('m.OI_Rank')}}
+        </Menu-item>
+      </Submenu>
 
       <Submenu name="community" class="oj-menu-item">
         <template slot="title">
@@ -38,30 +50,6 @@
         {{$t('m.Lecture')}}
       </Menu-item>
     </div>      
-      
-      <!-- <Submenu name="rank">
-        <template slot="title">
-          랭크
-        </template>
-        <Menu-item name="/acm-rank">
-          {{$t('m.ACM_Rank')}}
-        </Menu-item>
-        <Menu-item name="/oi-rank">
-          {{$t('m.OI_Rank')}}
-        </Menu-item>
-      </Submenu> -->
-
-      <!-- <Submenu name="about">
-        <template slot="title">
-          {{$t('m.About')}}
-        </template>
-        <Menu-item name="/about">
-          {{$t('m.Judger')}}
-        </Menu-item>
-        <Menu-item name="/FAQ">
-          {{$t('m.FAQ')}}
-        </Menu-item>
-      </Submenu> -->
 
       <!-- 로그인 인증일 경우 -->
       <template v-if="!isAuthenticated">

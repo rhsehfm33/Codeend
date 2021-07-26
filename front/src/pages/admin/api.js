@@ -9,7 +9,7 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 axios.defaults.xsrfCookieName = 'csrftoken'
 
 export default {
-  // 登录
+  // 로그인
   login (username, password) {
     return ajax('login', 'post', {
       data: {
@@ -24,7 +24,7 @@ export default {
   getProfile () {
     return ajax('profile', 'get')
   },
-  // 获取公告列表
+  // 공지사항 목록 조회
   getAnnouncementList (offset, limit) {
     return ajax('admin/announcement', 'get', {
       params: {
@@ -34,7 +34,7 @@ export default {
       }
     })
   },
-  // 删除公告
+  // 공지사항 삭제
   deleteAnnouncement (id) {
     return ajax('admin/announcement', 'delete', {
       params: {
@@ -42,19 +42,19 @@ export default {
       }
     })
   },
-  // 修改公告
+  // 공지사항 수정
   updateAnnouncement (data) {
     return ajax('admin/announcement', 'put', {
       data
     })
   },
-  // 添加公告
+  // 공지사항 생성
   createAnnouncement (data) {
     return ajax('admin/announcement', 'post', {
       data
     })
   },
-  // 获取用户列表
+  // 사용자 목록 조회
   getUserList (offset, limit, keyword) {
     let params = {paging: true, offset, limit}
     if (keyword) {
@@ -64,7 +64,7 @@ export default {
       params: params
     })
   },
-  // 获取单个用户信息
+  // 개별 사용자 정보 조회
   getUser (id) {
     return ajax('admin/user', 'get', {
       params: {
@@ -72,12 +72,13 @@ export default {
       }
     })
   },
-  // 编辑用户
+  // 사용자 수정
   editUser (data) {
     return ajax('admin/user', 'put', {
       data
     })
   },
+  // 사용자 삭제
   deleteUsers (id) {
     return ajax('admin/user', 'delete', {
       params: {
@@ -336,7 +337,7 @@ function ajax (url, method, options) {
         }
       }
     }, res => {
-      // API请求异常，一般为Server error 或 network error
+      // API 요청이 비정상 : 일반적으로 서버 오류 또는 네트워크 오류
       reject(res)
       Vue.prototype.$error(res.data.data)
     })

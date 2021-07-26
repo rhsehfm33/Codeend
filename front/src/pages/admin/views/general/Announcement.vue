@@ -112,28 +112,28 @@
     data () {
       return {
         contestID: '',
-        // 显示编辑公告对话框
+        // edit Dialog 표시
         showEditAnnouncementDialog: false,
-        // 公告列表
+        // 공지사항 목록
         announcementList: [],
-        // 一页显示的公告数
-        pageSize: 15,
-        // 总公告数
+        // 한 페이지에 표시되는 공지사항 수
+        pageSize: 10,
+        // 총 공지 수
         total: 0,
-        // 当前公告id
+        // 현재 공지사항 ID
         currentAnnouncementId: null,
         mode: 'create',
-        // 公告 (new | edit) model
+        // 공지 (new | edit) model
         announcement: {
           title: '',
           visible: true,
           content: ''
         },
-        // 对话框标题
+        // Dialog 제목
         announcementDialogTitle: 'Edit Announcement',
-        // 是否显示loading
+        // loading 표시 여부
         loading: true,
-        // 当前页码
+        // 현재 페이지 번호
         currentPage: 0
       }
     },
@@ -149,7 +149,7 @@
           this.getAnnouncementList(1)
         }
       },
-      // 切换页码回调
+      // 현재 페이지 번호 바꾸는 함수
       currentChange (page) {
         this.currentPage = page
         this.getAnnouncementList(page)
@@ -173,10 +173,8 @@
           this.loading = false
         })
       },
-      // 打开编辑对话框的回调
+      // edit dialong 여는 함수
       onOpenEditDialog () {
-        // todo 优化
-        // 暂时解决 文本编辑器显示异常bug
         setTimeout(() => {
           if (document.createEvent) {
             let event = document.createEvent('HTMLEvents')
@@ -187,8 +185,7 @@
           }
         }, 0)
       },
-      // 提交编辑
-      // 默认传入MouseEvent
+      // 마우스 이벤트 전달
       submitAnnouncement (data = undefined) {
         let funcName = ''
         if (!data.title) {
@@ -210,14 +207,13 @@
           this.init()
         }).catch()
       },
-      // 删除公告
+      // 공지사항 삭제
       deleteAnnouncement (announcementId) {
         this.$confirm('공지 사항을 삭제하시나요?', '경고', {
           confirmButtonText: '삭제',
           cancelButtonText: '취소',
           type: 'warning'
         }).then(() => {
-          // then 为确定
           this.loading = true
           let funcName = this.contestID ? 'deleteContestAnnouncement' : 'deleteAnnouncement'
           api[funcName](announcementId).then(res => {

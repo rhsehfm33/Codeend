@@ -3,7 +3,7 @@ export const m = {
   Dashboard: '대시보드',
   General: '일반 관리',
   User: '사용자 관리',
-  Announcement: '공지사항',
+  Announcement: '공지사항 관리',
   System_Config: '시스템 설정',
   Judge_Server: 'Judge 서버',
   Prune_Test_Case: 'Prune Test Case',
@@ -14,7 +14,7 @@ export const m = {
   Problem_List: '문제 목록',
   Create_Problem: '문제 출제',
   Export_Import_Problem: '문제 Export/Import',
-  Contest: '대회',
+  Contest: '대회 관리',
   Contest_List: '대회 목록',
   Create_Contest: '대회 개최',
   // User.vue

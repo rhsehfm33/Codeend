@@ -213,7 +213,7 @@
         rankData.forEach(rank => {
           users.push(rank.user.username)
           let info = rank.submission_info
-          // 提取出已AC题目的时间
+          // AC 문제 시간
           let timeData = []
           Object.keys(info).forEach(problemID => {
             if (info[problemID].is_ac) {
@@ -241,10 +241,9 @@
         this.options.series = seriesData
       },
       applyToTable (data) {
-        // deepcopy
         let dataRank = JSON.parse(JSON.stringify(data))
-        // 从submission_info中取出相应的problem_id 放入到父object中,这么做主要是为了适应iview table的data格式
-        // 见https://www.iviewui.com/components/table
+        // submit_info에서 해당 problem_id를 꺼내 부모 객체에 넣음
+        // 주로 iview 테이블 데이터 형식을 위함
         dataRank.forEach((rank, i) => {
           let info = rank.submission_info
           let cellClass = {}
@@ -265,7 +264,7 @@
         this.dataRank = dataRank
       },
       addTableColumns (problems) {
-        // 根据题目添加table column
+        // 제목에 따라 column 추가
         problems.forEach(problem => {
           this.columns.push({
             align: 'center',

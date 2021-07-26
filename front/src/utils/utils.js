@@ -20,7 +20,7 @@ function getACRate (acCount, totalCount) {
   return String(rate) + '%'
 }
 
-// 去掉值为空的项，返回object
+// 값이 비어 있는 항목을 제거하고 객체를 반환
 function filterEmptyValue (object) {
   let query = {}
   Object.keys(object).forEach(key => {
@@ -31,14 +31,15 @@ function filterEmptyValue (object) {
   return query
 }
 
-// 按指定字符数截断添加换行，非英文字符按指定字符的半数截断
+// 지정된 문자 수에 따라 자르고 줄 바꿈을 추가,
+// 영어가 아닌 문자는 지정된 문자의 절반으로 잘림
 function breakLongWords (value, length = 16) {
   let re
   if (escape(value).indexOf('%u') === -1) {
-    // 没有中文
+    // 문자 없음
     re = new RegExp('(.{' + length + '})', 'g')
   } else {
-    // 中文字符
+    // 문자 없음
     re = new RegExp('(.{' + (length / 2 + 1) + '})', 'g')
   }
   return value.replace(re, '$1\n')

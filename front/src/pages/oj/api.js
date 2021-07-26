@@ -35,7 +35,7 @@ export default {
       }
     })
   },
-  // 注册
+  // 등록
   register (data) {
     return ajax('register', 'post', {
       data
@@ -291,22 +291,20 @@ function ajax (url, method, options) {
       params,
       data
     }).then(res => {
-      // API正常返回(status=20x), 是否错误通过有无error判断
+      // API는 정상적으로 리턴(status=20x), 에러 유무는 에러 유무로 판단
       if (res.data.error !== null) {
         Vue.prototype.$error(res.data.data)
         reject(res)
-        // 若后端返回为登录，则为session失效，应退出当前登录用户
+        // 백엔드가 로그인으로 돌아가면 세션이 유효하지 않음
+        // 현재 로그인한 사용자는 로그아웃
         if (res.data.data.startsWith('Please login')) {
           store.dispatch('changeModalStatus', {'mode': 'login', 'visible': true})
         }
       } else {
         resolve(res)
-        // if (method !== 'get') {
-        //   Vue.prototype.$success('Succeeded')
-        // }
       }
     }, res => {
-      // API请求异常，一般为Server error 或 network error
+      // API 요청이 비정상 : 일반적으로 서버 오류 또는 네트워크 오류입
       reject(res)
       Vue.prototype.$error(res.data.data)
     })

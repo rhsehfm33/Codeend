@@ -171,7 +171,6 @@
           this.$router.push({name: 'create-contest-problem', params: {contestId: this.contestId}})
         }
       },
-      // 切换页码回调
       currentChange (page) {
         this.currentPage = page
         this.getProblemList(page)

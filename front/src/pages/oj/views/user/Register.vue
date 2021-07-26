@@ -83,7 +83,7 @@
       }
       const CheckPassword = (rule, value, callback) => {
         if (this.formRegister.password !== '') {
-          // 对第二个密码框再次验证
+          // 두 번째 비밀번호 상자에서 다시 확인
           this.$refs.formRegister.validateField('passwordAgain')
         }
         callback()

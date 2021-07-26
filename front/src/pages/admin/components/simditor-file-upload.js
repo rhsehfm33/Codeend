@@ -25,6 +25,9 @@ UploadFile = (function (_super) {
   __extends(UploadFile, _super);
 
   UploadFile.i18n = {
+    'ko-KO': {
+      uploadfile: '파일 업로드'
+    },
     'zh-CN': {
       uploadfile: '上传文件'
     },

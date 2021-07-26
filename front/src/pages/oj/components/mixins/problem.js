@@ -11,9 +11,8 @@ export default {
       return utils.getACRate(ACCount, TotalCount)
     },
     addStatusColumn (tableColumns, dataProblems) {
-      // 已添加过直接返回
       if (this.statusColumn) return
-      // 只在有做题记录时才添加column
+      // 문제 제출 기록이 있는 경우에만 추가
       let needAdd = dataProblems.some((item, index) => {
         if (item.my_status !== null && item.my_status !== undefined) {
           return true

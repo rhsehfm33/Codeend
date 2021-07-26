@@ -55,7 +55,9 @@ Vue.component(VerticalMenu.name, VerticalMenu)
 Vue.component(VerticalMenuItem.name, VerticalMenuItem)
 Vue.component(Panel.name, Panel)
 
-// 注册全局消息提示
+// globalProperties 사용
+// 많은 컴포넌트에 사용할 설정을 prototype 선언하여 설정 후,
+// 각 Vue instance에서 사용할 수 있음
 Vue.prototype.$Message.config({
   duration: 2
 })

@@ -85,7 +85,6 @@
         this.validateForm('formResetPassword').then(() => {
           this.btnLoading = true
           api.applyResetPassword(this.formResetPassword).then(res => {
-            // 伪加载
             setTimeout(() => {
               this.btnLoading = false
               this.successApply = true

@@ -109,7 +109,7 @@
       getSessions () {
         api.getSessions().then(res => {
           let data = res.data.data
-          // 将当前session放到第一个
+          // 현재 세션을 첫 번째 세션으로 설정
           let sessions = data.filter(session => {
             return session.current_session
           })

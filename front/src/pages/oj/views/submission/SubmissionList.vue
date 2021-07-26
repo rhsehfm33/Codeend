@@ -155,7 +155,7 @@
               return h('a', {
                 style: {
                   'display': 'inline-block',
-                  'max-width': '150px'
+                  'max-width': '120px'
                 },
                 on: {
                   click: () => {
@@ -185,7 +185,7 @@
     mounted () {
       this.init()
       this.JUDGE_STATUS = Object.assign({}, JUDGE_STATUS)
-      // 去除submitting的状态 和 两个
+      // 제출 상태와 두 가지 상태를 제거
       delete this.JUDGE_STATUS['9']
       delete this.JUDGE_STATUS['2']
     },
@@ -232,7 +232,7 @@
           this.loadingTable = false
         })
       },
-      // 改变route， 通过监听route变化请求数据，这样可以产生route history， 用户返回时就会保存之前的状态
+      // 경로 변경, 경로 변경을 모니터링하여 데이터를 요청하여 경로 이력을 생성할 수 있으며 사용자가 돌아올 때 이전 상태를 저장
       changeRoute () {
         let query = utils.filterEmptyValue(this.buildQuery())
         query.contestID = this.contestID

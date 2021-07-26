@@ -2,7 +2,7 @@ import moment from 'moment'
 import utils from './utils'
 import time from './time'
 
-// 友好显示时间
+// 현재 시간
 function fromNow (time) {
   return moment(time * 3).fromNow()
 }

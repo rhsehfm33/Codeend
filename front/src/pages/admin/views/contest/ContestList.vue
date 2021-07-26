@@ -132,7 +132,7 @@
       }
     },
     methods: {
-      // 切换页码回调
+      // 페이지 번호 바꾸는 함수
       currentChange (page) {
         this.currentPage = page
         this.getContestList(page)

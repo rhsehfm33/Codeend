@@ -91,10 +91,10 @@
           theme: 'solarized',
           lineNumbers: true,
           line: true,
-          // 代码折叠
+          // 코드 접기
           foldGutter: true,
           gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
-          // 选中文本自动高亮，及高亮方式
+          // 선택한 텍스트 자동 하이라이트 표시 및 방법
           styleSelectedText: true,
           lineWrapping: true,
           highlightSelectionMatches: {showToken: /\w/, annotateScrollbar: true}

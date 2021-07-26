@@ -13,9 +13,9 @@ import elko from 'element-ui/lib/locale/lang/ko'
 Vue.use(VueI18n)
 
 const languages = [
+  {value: 'ko-KO', label: '한국어', iv: ivKo, el: elko},
   {value: 'en-US', label: 'English', iv: ivenUS, el: elenUS},
-  {value: 'zh-CN', label: '简体中文', iv: ivzhCN, el: elzhCN},
-  {value: 'ko-KO', label: '한국어', iv: ivKo, el: elko}
+  {value: 'zh-CN', label: '简体中文', iv: ivzhCN, el: elzhCN}
 ]
 const messages = {}
 

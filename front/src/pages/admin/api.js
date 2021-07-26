@@ -327,13 +327,13 @@ function ajax (url, method, options) {
         reject(res)
         // 백엔드가 로그인으로 돌아 가면 세션이 유효하지 않음
         // 현재 로그인 한 사용자는 로그 아웃해야합니다.
-        if (res.data.data.startsWith('로그인이 필요합니다.')) {
+        if (res.data.data.startsWith('You have to login.')) {
           router.push({name: 'login'})
         }
       } else {
         resolve(res)
         if (method !== 'get') {
-          Vue.prototype.$success('성공!')
+          Vue.prototype.$success('success!')
         }
       }
     }, res => {

@@ -24,10 +24,10 @@ class BasePermissionDecorator(object):
 
         if self.check_permission():
             if self.request.user.is_disabled:
-                return self.error("귀하의 계정이 비활성화되었습니다")
+                return self.error("Your account is disabled")
             return self.func(*args, **kwargs)
         else:
-            return self.error("먼저 로그인하시기 바랍니다")
+            return self.error("Please login first")
 
     def check_permission(self):
         raise NotImplementedError()
@@ -101,17 +101,17 @@ def check_contest_permission(check_type="details"):
             else:
                 contest_id = request.GET.get("contest_id")
             if not contest_id:
-                return self.error("매개 변수 오류, 대회번호는 필수입니다.")
+                return self.error("Parameter error, contest_id is required")
 
             try:
                 # use self.contest to avoid query contest again in view.
                 self.contest = Contest.objects.select_related("created_by").get(id=contest_id, visible=True)
             except Contest.DoesNotExist:
-                return self.error("대회 %s 존재하지않음" % contest_id)
+                return self.error("Contest %s doesn't exist" % contest_id)
 
             # Anonymous
             if not user.is_authenticated:
-                return self.error("먼저 로그인하시기 바랍니다")
+                return self.error("Please login first.")
 
             # creator or owner
             if user.is_contest_admin(self.contest):
@@ -120,16 +120,16 @@ def check_contest_permission(check_type="details"):
             if self.contest.contest_type == ContestType.PASSWORD_PROTECTED_CONTEST:
                 # password error
                 if not check_contest_password(request.session.get(CONTEST_PASSWORD_SESSION_KEY, {}).get(self.contest.id), self.contest.password):
-                    return self.error("잘못된 암호 또는 암호 만료")
+                    return self.error("Wrong password or password expired")
 
             # regular user get contest problems, ranks etc. before contest started
             if self.contest.status == ContestStatus.CONTEST_NOT_START and check_type != "details":
-                return self.error("대회가 아직 시작되지 않았습니다.")
+                return self.error("Contest has not started yet.")
 
             # check does user have permission to get ranks, submissions in OI Contest
             if self.contest.status == ContestStatus.CONTEST_UNDERWAY and self.contest.rule_type == ContestRuleType.OI:
                 if not self.contest.real_time_rank and (check_type == "ranks" or check_type == "submissions"):
-                    return self.error(f"{check_type}을 얻을 권한이 없습니다")
+                    return self.error(f"No permission to get {check_type}")
 
             return func(*args, **kwargs)
         return _check_permission

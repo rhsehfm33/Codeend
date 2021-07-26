@@ -4,8 +4,8 @@
       <SideMenu></SideMenu>
     </div>
     <div id="header">
-      <!-- <em class="el-icon-fa-font katex-editor" @click="katexVisible=true" ></em>
-      <screen-full :width="14" :height="14" class="screen-full"></screen-full> -->
+      <em class="el-icon-fa-font katex-editor" @click="katexVisible=true" ></em>
+      <screen-full :width="14" :height="14" class="screen-full"></screen-full>
       <el-dropdown @command="handleCommand">
         <span>{{user.username}}<em class="el-icon-caret-bottom el-icon--right"></em></span>
         <el-dropdown-menu slot="dropdown">

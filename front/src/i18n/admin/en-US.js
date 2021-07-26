@@ -99,7 +99,7 @@ export const m = {
    // ProblemList.vue
   Contest_Problem_List: 'Contest Problem List',
   // Contest.vue
-  ContestTitle: '제목',
+  ContestTitle: '',
   ContestDescription: '설명',
   Contest_Start_Time: '대회 시작 시간',
   Contest_End_Time: '대회 끝난 시간',

@@ -80,7 +80,6 @@
             <Button type="primary" @click="updateProfile" :loading="loadingSaveBtn">저장</Button>
           </Form-item>
         </Col>
-
         <Col :span="11">
           <Form-item label="Blog">
             <Input v-model="formProfile.blog"/>
@@ -221,7 +220,7 @@
         this.loadingSaveBtn = true
         let updateData = utils.filterEmptyValue(Object.assign({}, this.formProfile))
         api.updateProfile(updateData).then(res => {
-          this.$success('성공')
+          this.$success('업데이트 성공')
           this.$store.commit(types.CHANGE_PROFILE, {profile: res.data.data})
           this.loadingSaveBtn = false
         }, _ => {

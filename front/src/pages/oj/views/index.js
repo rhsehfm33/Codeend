@@ -1,12 +1,11 @@
 import ProblemList from './problem/ProblemList.vue'
 import Logout from './user/Logout.vue'
 import UserHome from './user/UserHome.vue'
-import About from './help/About.vue'
-import FAQ from './help/FAQ.vue'
 import NotFound from './general/404.vue'
 import Home from './general/Home.vue'
-import Announcements from './community/Announcements.vue'
-import CommunityList from './community/CommunityList.vue'
+import Announcements from './community/Announcements'
+import Forum from './community/Forum.vue'
+import Question from './community/Question.vue'
 
 // Grouping Components in the Same Chunk
 const SubmissionList = () => import(/* webpackChunkName: "submission" */ '@oj/views/submission/SubmissionList.vue')
@@ -19,14 +18,13 @@ const ApplyResetPassword = () => import(/* webpackChunkName: "password" */ '@oj/
 const ResetPassword = () => import(/* webpackChunkName: "password" */ '@oj/views/user/ResetPassword.vue')
 
 const Problem = () => import(/* webpackChunkName: "Problem" */ '@oj/views/problem/Problem.vue')
-const Community = () => import(/* webpackChunkName: "Problem" */ '@oj/views/community/CommunityList.vue')
 
 export {
-  Home, NotFound, Announcements,
-  Logout, UserHome, About, FAQ,
+  Home, NotFound,
+  Announcements, Forum, Question,
+  Logout, UserHome,
   ProblemList, Problem,
   ACMRank, OIRank,
   SubmissionList, SubmissionDetails,
-  ApplyResetPassword, ResetPassword,
-  Community, CommunityList
+  ApplyResetPassword, ResetPassword
 }

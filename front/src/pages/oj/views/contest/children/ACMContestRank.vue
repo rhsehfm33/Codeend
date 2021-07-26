@@ -26,11 +26,9 @@
               <i-switch :disabled="refreshDisabled" v-model="forceUpdate"></i-switch>
             </p>
           </template>
-          <template>
-            <Button type="primary" size="small" @click="downloadRankCSV">{{$t('m.download_csv')}}</Button>
-          </template>
         </div>
       </Poptip>
+      <Button type="primary" size="small" @click="downloadRankCSV">{{$t('m.download_csv')}}</Button>
     </div>
     <div v-show="showChart" class="echarts">
       <ECharts :options="options" ref="chart" auto-resize></ECharts>
@@ -77,7 +75,7 @@
             title: this.$i18n.t('m.User_User'),
             align: 'center',
             fixed: 'left',
-            width: 150,
+            width: 200,
             render: (h, params) => {
               return h('a', {
                 style: {
@@ -140,13 +138,13 @@
               end: 100
             }
           ],
-          toolbox: {
-            show: true,
-            feature: {
-              saveAsImage: {show: true, title: this.$i18n.t('m.save_as_image')}
-            },
-            right: '5%'
-          },
+          // toolbox: {
+          //   show: true,
+          //   feature: {
+          //     saveAsImage: {show: true, title: this.$i18n.t('m.save_as_image')}
+          //   },
+          //   right: '5%'
+          // },
           tooltip: {
             trigger: 'axis',
             axisPointer: {

@@ -1,10 +1,10 @@
 // all routes here.
 import {
-  About,
   ACMRank,
-  Announcements,
   ApplyResetPassword,
-  FAQ,
+  Announcements,
+  Question,
+  Forum,
   Home,
   Logout,
   NotFound,
@@ -14,8 +14,7 @@ import {
   ResetPassword,
   SubmissionDetails,
   SubmissionList,
-  UserHome,
-  CommunityList
+  UserHome
 } from '../views'
 
 import * as Contest from '@oj/views/contest'
@@ -163,10 +162,10 @@ export default [
     ]
   },
   {
-    name: 'community-list',
-    path: '/community',
-    meta: {title: 'Community List'},
-    component: CommunityList
+    name: 'forum',
+    path: '/forum',
+    meta: {title: 'Forum'},
+    component: Forum
   },
   {
     name: 'announcements',
@@ -175,16 +174,10 @@ export default [
     component: Home
   },
   {
-    path: '/about',
-    name: 'about',
-    meta: {title: 'About'},
-    component: About
-  },
-  {
-    path: '/faq',
-    name: 'faq',
-    meta: {title: 'FAQ'},
-    component: FAQ
+    name: 'question',
+    path: '/question',
+    meta: {title: 'Question'},
+    component: Question
   },
   {
     path: '*',

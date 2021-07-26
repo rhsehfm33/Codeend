@@ -32,6 +32,9 @@
         <template slot="title">
           {{$t('m.Community')}}
         </template>
+        <Menu-item name="/total" class="oj-menu-item">
+          전체 게시판
+        </Menu-item>
         <Menu-item name="/announcements" class="oj-menu-item">
           공지 게시판
         </Menu-item>

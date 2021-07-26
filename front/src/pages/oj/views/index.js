@@ -6,6 +6,7 @@ import Home from './general/Home.vue'
 import Announcements from './community/Announcements.vue'
 import Forum from './community/Forum.vue'
 import Question from './community/Question.vue'
+import Total from './community/Total.vue'
 
 // Grouping Components in the Same Chunk
 const SubmissionList = () => import(/* webpackChunkName: "submission" */ '@oj/views/submission/SubmissionList.vue')
@@ -21,7 +22,7 @@ const Problem = () => import(/* webpackChunkName: "Problem" */ '@oj/views/proble
 
 export {
   Home, NotFound,
-  Announcements, Forum, Question,
+  Announcements, Forum, Question, Total,
   Logout, UserHome,
   ProblemList, Problem,
   ACMRank, OIRank,

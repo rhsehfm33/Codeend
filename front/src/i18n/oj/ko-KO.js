@@ -214,5 +214,10 @@ export const m = {
   UserHomeserSubmissions: '제출 횟수',
   UserHomeScore: '점수',
   List_Solved_Problems: '완료된 문제 목록',
-  UserHomeIntro: '아직 해결한 문제가 없습니다...'
+  UserHomeIntro: '아직 해결한 문제가 없습니다...',
+  // Community.vue
+  Total_Community: '전체',
+  Announcements_Community: '공지',
+  Forum: '자유',
+  Question: '질문'
 }

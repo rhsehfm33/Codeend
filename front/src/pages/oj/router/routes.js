@@ -5,6 +5,7 @@ import {
   Announcements,
   Question,
   Forum,
+  Total,
   Home,
   Logout,
   NotFound,
@@ -160,6 +161,12 @@ export default [
         component: Setting.SecuritySetting
       }
     ]
+  },
+  {
+    name: 'total',
+    path: '/total',
+    meta: {title: 'Total'},
+    component: Total
   },
   {
     name: 'forum',

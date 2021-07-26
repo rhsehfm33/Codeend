@@ -12,7 +12,7 @@
                   <a @click.stop="goRoute({name: 'profile-setting'})">
                     <div class="mask-content">
                       <Icon type="camera" size="30"></Icon>
-                      <p class="text">프로필사진 번경</p>
+                      <p class="text">프로필사진 변경</p>
                     </div>
                   </a>
                 </div>

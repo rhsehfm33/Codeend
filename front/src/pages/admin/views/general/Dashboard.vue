@@ -2,9 +2,9 @@
   <el-card class="admin-info">
         <el-row :gutter="20">
           <!-- 관리자 사진 -->
-          <!-- <el-col :span="10">
+          <el-col :span="10">
             <img class="avatar" :src="profile.avatar"/>
-          </el-col> -->
+          </el-col>
           <el-col :span="14">
             <p class="admin-info-name">{{user.username}}</p>
             <p>{{user.admin_type}}</p>

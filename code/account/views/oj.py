@@ -86,7 +86,6 @@ class AvatarUploadAPI(APIView):
         user_profile.save()
         return self.success("성공")
 
-
 class TwoFactorAuthAPI(APIView):
     @login_required
     def get(self, request):

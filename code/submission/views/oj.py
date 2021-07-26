@@ -38,12 +38,12 @@ class SubmissionAPI(APIView):
     def check_contest_permission(self, request):
         contest = self.contest
         if contest.status == ContestStatus.CONTEST_ENDED:
-            return self.error("대회가 종료되었습니다.")
+            return self.error("The contest have ended")
         if not request.user.is_contest_admin(contest):
             user_ip = ipaddress.ip_address(request.session.get("ip"))
             if contest.allowed_ip_ranges:
                 if not any(user_ip in ipaddress.ip_network(cidr, strict=False) for cidr in contest.allowed_ip_ranges):
-                    return self.error("이 대회에서 귀하의 IP는 허용되지 않습니다")
+                    return self.error("Your IP is not allowed in this contest")
 
     @validate_serializer(CreateSubmissionSerializer)
     @login_required
@@ -60,7 +60,7 @@ class SubmissionAPI(APIView):
 
         if data.get("captcha"):
             if not Captcha(request).check(data["captcha"]):
-                return self.error("잘못된 보안 문자")
+                return self.error("Invalid captcha")
         error = self.throttling(request)
         if error:
             return self.error(error)
@@ -68,9 +68,9 @@ class SubmissionAPI(APIView):
         try:
             problem = Problem.objects.get(id=data["problem_id"], contest_id=data.get("contest_id"), visible=True)
         except Problem.DoesNotExist:
-            return self.error("문제가 없습니다.")
+            return self.error("Problem not exist")
         if data["language"] not in problem.languages:
-            return self.error(f"{data['language']} 이제 문제에 허용됩니다.")
+            return self.error(f"{data['language']} is now allowed in the problem")
         submission = Submission.objects.create(user_id=request.user.id,
                                                username=request.user.username,
                                                language=data["language"],
@@ -90,13 +90,13 @@ class SubmissionAPI(APIView):
     def get(self, request):
         submission_id = request.GET.get("id")
         if not submission_id:
-            return self.error("매개 변수 ID가 없습니다.")
+            return self.error("Parameter id doesn't exist")
         try:
             submission = Submission.objects.select_related("problem").get(id=submission_id)
         except Submission.DoesNotExist:
-            return self.error("제출한 문제가 없습니다.")
+            return self.error("Submission doesn't exist")
         if not submission.check_user_permission(request.user):
-            return self.error("이 제출에 대한 권한이 없습니다.")
+            return self.error("No permission for this submission")
 
         if submission.problem.rule_type == ProblemRuleType.OI or request.user.is_admin_role():
             submission_data = SubmissionModelSerializer(submission).data
@@ -115,11 +115,11 @@ class SubmissionAPI(APIView):
         try:
             submission = Submission.objects.select_related("problem").get(id=request.data["id"])
         except Submission.DoesNotExist:
-            return self.error("제출한 문제가 없습니다.")
+            return self.error("Submission doesn't exist")
         if not submission.check_user_permission(request.user, check_share=False):
-            return self.error("제출된 문제를 공유 할 권한이 없습니다.")
+            return self.error("No permission to share the submission")
         if submission.contest and submission.contest.status == ContestStatus.CONTEST_UNDERWAY:
-            return self.error("지금 제출문제를 공유 할 수 없습니다.")
+            return self.error("Can not share submission now")
         submission.shared = request.data["shared"]
         submission.save(update_fields=["shared"])
         return self.success()
@@ -128,9 +128,9 @@ class SubmissionAPI(APIView):
 class SubmissionListAPI(APIView):
     def get(self, request):
         if not request.GET.get("limit"):
-            return self.error("Limit가 필요합니다.")
+            return self.error("Limit is needed")
         if request.GET.get("contest_id"):
-            return self.error("매개 변수 오류")
+            return self.error("Parameter error")
 
         submissions = Submission.objects.filter(contest_id__isnull=True).select_related("problem__created_by")
         problem_id = request.GET.get("problem_id")
@@ -141,7 +141,7 @@ class SubmissionListAPI(APIView):
             try:
                 problem = Problem.objects.get(_id=problem_id, contest_id__isnull=True, visible=True)
             except Problem.DoesNotExist:
-                return self.error("문제가 존재하지 않습니다")
+                return self.error("Problem doesn't exist")
             submissions = submissions.filter(problem=problem)
         if (myself and myself == "1") or not SysOptions.submission_list_show_all:
             submissions = submissions.filter(user_id=request.user.id)
@@ -158,7 +158,7 @@ class ContestSubmissionListAPI(APIView):
     @check_contest_permission(check_type="submissions")
     def get(self, request):
         if not request.GET.get("limit"):
-            return self.error("Limit가 필요합니다.")
+            return self.error("Limit is needed")
 
         contest = self.contest
         submissions = Submission.objects.filter(contest_id=contest.id).select_related("problem__created_by")
@@ -170,7 +170,7 @@ class ContestSubmissionListAPI(APIView):
             try:
                 problem = Problem.objects.get(_id=problem_id, contest_id=contest.id, visible=True)
             except Problem.DoesNotExist:
-                return self.error("문제가 존재하지 않습니다")
+                return self.error("Problem doesn't exist")
             submissions = submissions.filter(problem=problem)
 
         if myself and myself == "1":
@@ -197,7 +197,7 @@ class ContestSubmissionListAPI(APIView):
 class SubmissionExistsAPI(APIView):
     def get(self, request):
         if not request.GET.get("problem_id"):
-            return self.error("매개 변수 오류, 문제아이디는 필수입니다.")
+            return self.error("Parameter error, problem_id is required")
         return self.success(request.user.is_authenticated and
                             Submission.objects.filter(problem_id=request.GET["problem_id"],
                                                       user_id=request.user.id).exists())

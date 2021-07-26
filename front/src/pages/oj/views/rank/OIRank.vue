@@ -3,9 +3,6 @@
     <Col :span="22">
     <Panel :padding="10">
       <div slot="title">{{$t('m.OI_Ranklist')}}</div>
-      <div class="echarts">
-        <ECharts :options="options" ref="chart" auto-resize></ECharts>
-      </div>
     </Panel>
     <Table :data="dataRank" :columns="columns" size="large"></Table>
     <Pagination :total="total" :page-size.sync="limit" :current.sync="page"
@@ -62,7 +59,7 @@
             }
           },
           {
-            title: this.$i18n.t('m.mood'),
+            title: this.$i18n.t('m.StatusMessage'),
             align: 'center',
             key: 'mood'
           },

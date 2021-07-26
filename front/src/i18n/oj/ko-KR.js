@@ -24,11 +24,11 @@ export const m = {
   Wrong_Answer: 'Wrong Answer',
   Statistic: '통계',
   Close: '닫기',
-  View_Contest: '대회 보기',
+  View_Contest: '대회',
   Are_you_sure_you_want_to_reset_your_code: '코드를 초기화하실 건가요?',
   Code_can_not_be_empty: '코드를 입력해주세요.',
   Submit_code_successfully: '성공적으로 코드를 제출하였습니다.',
-  You_have_solved_the_problem: '정답입니다!',
+  You_have_solved_the_problem: '문제를 해결하셨습니다.',
   Submitted_successfully: '성공적으로 제출되었습니다.',
   You_have_submitted_a_solution: '정답을 제출하셨습니다.',
   Contest_has_ended: '대회가 종료되었습니다.',
@@ -54,7 +54,7 @@ export const m = {
   Check_It: '확인해보세요',
   // ACMRank.vue
   ACM_Ranklist: 'ACM 랭크 목록',
-  mood: '모드',
+  StatusMessage: '상태메세지',
   AC: 'AC',
   Rating: '점수',
   // Announcements.vue
@@ -148,7 +148,7 @@ export const m = {
   UserLogin: '로그인',
   Welcome_back: '돌아오신 것을 환영합니다!',
   // OIRank.vue
-  OI_Ranklist: 'OI 랭크',
+  OI_Ranklist: 'OI 랭크 목록',
   // OIContestRank.vue
   Total_Score: '총 점수',
   // ProblemList.vue

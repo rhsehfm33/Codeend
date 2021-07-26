@@ -18,7 +18,7 @@
 
       <Submenu name="rank">
         <template slot="title">
-          랭크
+        {{$t('m.Rank')}}
         </template>
         <Menu-item name="/acm-rank">
           {{$t('m.ACM_Rank')}}

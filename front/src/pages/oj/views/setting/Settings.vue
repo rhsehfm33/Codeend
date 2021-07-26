@@ -6,6 +6,7 @@
           <Menu accordion @on-select="goRoute" :activeName="activeName" style="text-align: center;" width="auto">
             <div class="avatar-editor">
               <div class="avatar-container">
+                <!-- profile.avatar 표시 오류 -->
                 <img class="avatar" :src="profile.avatar"/>
                 <div class="avatar-mask">
                   <a @click.stop="goRoute({name: 'profile-setting'})">

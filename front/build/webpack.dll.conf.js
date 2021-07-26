@@ -33,19 +33,20 @@ console.log("building ..")
 
 module.exports = {
   entry: {
-    "vendor": vendors,
+    "vendor": vendors
   },
   output: {
     path: path.join(__dirname, '../static/js'),
     filename: '[name].dll.[hash:7].js',
-    library: '[name]_[hash]_dll',
+    library: '[name]_[hash]_dll'
   },
   plugins: [
     new webpack.DefinePlugin({
       'process.env': NODE_ENV === 'production' ? config.build.env : config.dev.env
     }),
     new webpack.optimize.ModuleConcatenationPlugin(),
-    new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /zh-cn/),
+    // moment/locale컨텍스트 파일의 일치로 제한
+    new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /ko-KR|zh-CN|en-US/),
     new UglifyJSPlugin({
       exclude: /\.min\.js$/,
       cache: true,
@@ -54,7 +55,7 @@ module.exports = {
     new webpack.DllPlugin({
       context: __dirname,
       path: path.join(__dirname, '[name]-manifest.json'),
-      name: '[name]_[hash]_dll',
+      name: '[name]_[hash]_dll'
     })
   ]
 };

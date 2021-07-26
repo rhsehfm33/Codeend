@@ -35,7 +35,7 @@
         <Menu-item name="/announcements" class="oj-menu-item">
           공지 게시판
         </Menu-item>
-        <Menu-item name="/general-forum" class="oj-menu-item">
+        <Menu-item name="/forum" class="oj-menu-item">
           자유 게시판
         </Menu-item>
         <Menu-item name="/question" class="oj-menu-item">

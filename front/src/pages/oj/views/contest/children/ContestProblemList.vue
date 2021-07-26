@@ -27,7 +27,7 @@
       return {
         ACMTableColumns: [
           {
-            title: '#',
+            title: 'ID',
             key: '_id',
             sortType: 'asc',
             width: 150

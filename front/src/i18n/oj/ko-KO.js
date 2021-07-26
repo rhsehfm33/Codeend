@@ -69,7 +69,8 @@ export const m = {
   // ContestDetail.vue
   Problems: '문제',
   Announcements: '공지',
-  Submissions: '제출 기록',
+  Submissions: '제출 목록',
+  Problem_Submissions: '문제 제출 목록',
   Rankings: '랭킹',
   Overview: '개요',
   Admin_Helper: '관리자 Helper',

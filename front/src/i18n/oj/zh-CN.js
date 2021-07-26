@@ -67,10 +67,11 @@ export const m = {
   // Cancel.vue
   Cancel: '取消',
   // ContestDetail.vue
-  Problems: '문제',
-  Announcements: '공지사항',
-  Submissions: '제출',
-  Rankings: '랭킹',
+  Problems: '问题',
+  Announcements: '注意',
+  Submissions: '提交',
+  Problem_Submissions: 'Problem Submissions',
+  Rankings: '排名',
   Overview: '概要',
   Admin_Helper: '管理员助手',
   StartAt: '开始时间',
@@ -137,8 +138,8 @@ export const m = {
   Sessions: '登录记录',
   Two_Factor_Authentication: '双因素认证',
   // Login.vue
-  LoginUser: 'Username',
-  LoginPwd: 'Password',
+  LoginUser: '用户名',
+  LoginPwd: '密码',
   LoginUsername: '用户名',
   LoginPassword: '密码',
   TFA_Code: 'TFA App 双因素认证码',
@@ -151,7 +152,7 @@ export const m = {
   // OIContestRank.vue
   Total_Score: '总分',
   // ProblemList.vue
-  Problem_List: '문제 목록',
+  Problem_List: '问题 列表',
   High: '高',
   Mid: '中',
   Low: '低',

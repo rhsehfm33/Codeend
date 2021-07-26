@@ -1,11 +1,5 @@
 <template>
   <div>
-    <!-- <Menu>
-      <Menu-item name="/total">{{$t('m.Profile')}}</Menu-item>
-      <Menu-item name="/announcements">{{$t('m.Account')}}</Menu-item>
-      <Menu-item name="/forum">{{$t('m.Security')}}</Menu-item>
-      <Menu-item name="/question">{{$t('m.Security')}}</Menu-item>
-    </Menu> -->
     <div>
       <router-link to="total">{{$t('m.Total_Community')}}</router-link>
       <router-link to="announcements">{{$t('m.Announcements_Community')}}</router-link>
@@ -27,6 +21,7 @@
                 :page-size="limit"
                 @on-change="getAnnouncementList">
         </Pagination> 
+        <router-view></router-view>
     </panel>
   </div>
 </template>

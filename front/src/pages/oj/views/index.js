@@ -3,7 +3,7 @@ import Logout from './user/Logout.vue'
 import UserHome from './user/UserHome.vue'
 import NotFound from './general/404.vue'
 import Home from './general/Home.vue'
-import Announcements from './community/Announcements'
+import Announcements from './community/Announcements.vue'
 import Forum from './community/Forum.vue'
 import Question from './community/Question.vue'
 

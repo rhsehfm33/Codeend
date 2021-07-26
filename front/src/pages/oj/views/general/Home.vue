@@ -17,12 +17,13 @@
 
 <script>
   import { mapGetters } from 'vuex'
-  import Announcements from './Announcements.vue'
+  import Announcements from '../general/Announcements'
   import HomeStart from '../../components/HomeStart'
   import api from '@oj/api'
   import time from '@/utils/time'
   import { CONTEST_STATUS } from '@/utils/constants'
-  export default {
+
+export default {
     name: 'home',
     components: {
       Announcements,

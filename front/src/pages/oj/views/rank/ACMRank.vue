@@ -3,9 +3,9 @@
     <Col :span="22">
     <Panel :padding="10">
       <div slot="title">{{$t('m.ACM_Ranklist')}}</div>
-      <!-- <div class="echarts">
+      <div class="echarts">
         <ECharts :options="options" ref="chart" auto-resize></ECharts>
-      </div> -->
+      </div>
     </Panel>
     <Table :data="dataRank" :columns="columns" :loading="loadingTable" size="large"></Table>
     <Pagination :total="total" :page-size.sync="limit" :current.sync="page"

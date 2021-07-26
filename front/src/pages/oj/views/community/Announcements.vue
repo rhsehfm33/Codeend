@@ -32,13 +32,13 @@
 </template>
 
 <script>
-  import Announcements from './Announcements.vue'
+  import Announcements from '../general/Announcements'
   import api from '@oj/api'
   import time from '@/utils/time'
   import { CONTEST_STATUS } from '@/utils/constants'
 
   export default {
-    name: 'home',
+    name: 'announcements',
     components: {
       Announcements
     },

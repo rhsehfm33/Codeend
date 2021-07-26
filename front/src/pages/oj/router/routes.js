@@ -171,7 +171,7 @@ export default [
     name: 'announcements',
     path: '/announcements',
     meta: {title: 'Announcements'},
-    component: Home
+    component: Announcements
   },
   {
     name: 'question',

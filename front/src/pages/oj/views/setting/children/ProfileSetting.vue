@@ -68,6 +68,9 @@
           <FormItem label="이름">
             <Input v-model="formProfile.real_name"/>
           </FormItem>
+          <FormItem label="상태 메시지">
+            <Input v-model="formProfile.statusMessage"/>
+          </FormItem>
           <FormItem label="언어설정">
             <Select v-model="formProfile.language">
               <Option v-for="lang in languages" :key="lang.value" :value="lang.value">{{lang.label}}</Option>
@@ -117,7 +120,7 @@
         languages: languages,
         formProfile: {
           real_name: '',
-          mood: '',
+          statusMessage: '',
           major: '',
           blog: '',
           school: '',

@@ -220,7 +220,7 @@
         this.loadingSaveBtn = true
         let updateData = utils.filterEmptyValue(Object.assign({}, this.formProfile))
         api.updateProfile(updateData).then(res => {
-          this.$success('업데이트 성공')
+          this.$success('Update succeeded!')
           this.$store.commit(types.CHANGE_PROFILE, {profile: res.data.data})
           this.loadingSaveBtn = false
         }, _ => {

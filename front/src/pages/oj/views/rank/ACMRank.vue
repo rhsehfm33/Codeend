@@ -3,6 +3,9 @@
     <Col :span="22">
     <Panel :padding="10">
       <div slot="title">{{$t('m.ACM_Ranklist')}}</div>
+      <div class="echarts">
+         <ECharts :options="options" ref="chart" auto-resize></ECharts>
+     </div>
     </Panel>
     <Table :data="dataRank" :columns="columns" :loading="loadingTable" size="large"></Table>
     <Pagination :total="total" :page-size.sync="limit" :current.sync="page"
@@ -17,6 +20,7 @@
   import Pagination from '@oj/components/Pagination'
   import utils from '@/utils/utils'
   import { RULE_TYPE } from '@/utils/constants'
+import { locale } from 'moment'
 
   export default {
     name: 'acm-rank',
@@ -96,9 +100,7 @@
           toolbox: {
             show: true,
             feature: {
-              dataView: {show: true, readOnly: true},
-              magicType: {show: true, type: ['line', 'bar', 'stack']},
-              saveAsImage: {show: true}
+              saveAsImage: {show: true, title: this.$i18n.t('m.SaveAsImage')}
             },
             right: '10%'
           },

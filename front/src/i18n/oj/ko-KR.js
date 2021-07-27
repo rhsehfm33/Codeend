@@ -42,7 +42,7 @@ export const m = {
   download_csv: 'csv 다운로드',
   TotalTime: '총 소요시간',
   Top_10_Teams: '탑 10위',
-  save_as_image: '이미지 다운로드',
+  SaveAsImage: '이미지 다운로드',
   // ACMHelper.vue
   ACM_Helper: 'ACM Helper',
   AC_Time: 'AC Time',
@@ -57,6 +57,7 @@ export const m = {
   StatusMessage: '상태메세지',
   AC: 'AC',
   Rating: '점수',
+  DataView: '데이터 조회',
   // Announcements.vue
   Contest_Announcements: '대회 공지',
   By: '작성자',

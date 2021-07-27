@@ -42,7 +42,7 @@ export const m = {
   download_csv: '下载 csv',
   TotalTime: '总时间',
   Top_10_Teams: '前 10 强队伍',
-  save_as_image: '保存图片',
+  SaveAsImage: '保存图片',
   // ACMHelper.vue
   ACM_Helper: 'ACM 助手',
   AC_Time: 'AC 时间',

@@ -3,6 +3,9 @@
     <Col :span="22">
     <Panel :padding="10">
       <div slot="title">{{$t('m.OI_Ranklist')}}</div>
+      <div class="echarts">
+         <ECharts :options="options" ref="chart" auto-resize></ECharts>
+     </div>
     </Panel>
     <Table :data="dataRank" :columns="columns" size="large"></Table>
     <Pagination :total="total" :page-size.sync="limit" :current.sync="page"
@@ -100,9 +103,7 @@
           toolbox: {
             show: true,
             feature: {
-              dataView: {show: true, readOnly: true},
-              magicType: {show: true, type: ['line', 'bar']},
-              saveAsImage: {show: true}
+              saveAsImage: {show: true, title: this.$i18n.t('m.SaveAsImage')}
             },
             right: '10%'
           },

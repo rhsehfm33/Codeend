@@ -6,7 +6,7 @@ export const m = {
   Announcement: '공지사항 관리',
   System_Config: '시스템 설정',
   Judge_Server: 'Judge 서버',
-  Prune_Test_Case: 'Prune Test Case',
+  Prune_Test_Case: 'Test Case 정리',
   Problem: '문제 관리',
   FromFile: '파일 읽기',
   ToFile: '파일 쓰기',

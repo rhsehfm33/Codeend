@@ -18,6 +18,14 @@ export default {
       }
     })
   },
+  adminLogin (username, password) {
+    return ajax('admin/admin_login', 'post', {
+      data: {
+        username,
+        password
+      }
+    })
+  },
   logout () {
     return ajax('logout', 'get')
   },

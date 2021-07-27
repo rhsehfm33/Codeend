@@ -1,10 +1,12 @@
 <template>
-  <el-card class="admin-info">
+  <el-row type="flex" :gutter="20">
+    <el-col :md="10" :lg="8">
+      <el-card class="admin-info">
         <el-row :gutter="20">
           <!-- 관리자 사진 -->
-          <el-col :span="10">
+          <!-- <el-col :span="10">
             <img class="avatar" :src="profile.avatar"/>
-          </el-col>
+          </el-col> -->
           <el-col :span="14">
             <p class="admin-info-name">{{user.username}}</p>
             <p>{{user.admin_type}}</p>
@@ -29,25 +31,22 @@
           </el-form>
         </div>
       </el-card>
-  <!-- <el-row type="flex" :gutter="20">
-    <el-col :md="10" :lg="8">
+      
+    </el-col>
 
-       -->
-    <!-- </el-col>
-
-    <el-col :md="14" :lg="16" v-if="isSuperAdmin"> -->
-      <!-- <div class="info-container">
+    <el-col :md="14" :lg="16" v-if="isSuperAdmin">
+      <div class="info-container">
         <info-card color="#909399" icon="el-icon-fa-users" message="Total Users" iconSize="30px" class="info-item"
                    :value="infoData.user_count"></info-card>
         <info-card color="#67C23A" icon="el-icon-fa-list" message="Today Submissions" class="info-item"
-                   :value="infoData.today_submission_count"></info-card> -->
+                   :value="infoData.today_submission_count"></info-card>
 
         <!-- <info-card color="#409EFF" icon="el-icon-fa-trophy" message="Recent Contests" class="info-item"
                    :value="infoData.recent_contest_count"></info-card> -->
 
-      <!-- </div> -->
+      </div>
       <!-- 시스템 개요 패널 시작-->
-      <!-- <panel :title="$t('m.System_Overview')" v-if="isSuperAdmin">
+      <panel :title="$t('m.System_Overview')" v-if="isSuperAdmin">
         <p>{{$t('m.DashBoardJudge_Server')}}:  {{infoData.judge_server_count}}</p>
         <p>{{$t('m.HTTPS_Status')}}:
           <el-tag :type="https ? 'success' : 'danger'" size="small">
@@ -64,7 +63,7 @@
             {{cdn ? cdn : 'Not Use'}}
           </el-tag>
         </p>
-      </panel> -->
+      </panel>
         <!-- 시스템 개요 패널 끝 -->
 
         <!-- <panel style="margin-top: 5px"> 
@@ -95,8 +94,8 @@
             </div>
           </el-collapse-item>
         </el-collapse>  -->
-    <!-- </el-col>
-  </el-row> -->
+    </el-col>
+  </el-row>
 </template>
 
 

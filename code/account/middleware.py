@@ -36,9 +36,9 @@ class SessionRecordMiddleware(MiddlewareMixin):
 class AdminRoleRequiredMiddleware(MiddlewareMixin):
     def process_request(self, request):
         path = request.path_info
-        if path.startswith("/admin/") or path.startswith("/api/admin/"):
+        if (path.startswith("/admin/") or path.startswith("/api/admin/")) and not path.find('admin_login'):
             if not (request.user.is_authenticated and request.user.is_admin_role()):
-                return JSONResponse.response({"error": "login-required", "data": "Please login in first"})
+                return JSONResponse.response({"error": "login-required", "data": "Please login with admin user first"})
 
 
 class LogSqlMiddleware(MiddlewareMixin):

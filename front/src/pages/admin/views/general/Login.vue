@@ -42,7 +42,7 @@
         this.$refs.ruleForm2.validate((valid) => {
           if (valid) {
             this.logining = true
-            api.login(this.ruleForm2.account, this.ruleForm2.password).then(data => {
+            api.adminLogin(this.ruleForm2.account, this.ruleForm2.password).then(data => {
               this.logining = false
               this.$router.push({name: 'dashboard'})
             }, () => {

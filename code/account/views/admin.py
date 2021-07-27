@@ -10,12 +10,24 @@ from django.contrib.auth.hashers import make_password
 from submission.models import Submission
 from utils.api import APIView, validate_serializer
 from utils.shortcuts import rand_str
+from django.contrib import auth
 
 from ..decorators import super_admin_required
 from ..models import AdminType, ProblemPermission, User, UserProfile
 from ..serializers import EditUserSerializer, UserAdminSerializer, GenerateUserSerializer
-from ..serializers import ImportUserSeralizer
+from ..serializers import ImportUserSeralizer, UserLoginSerializer
 
+
+class UserAdminLoginAPI(APIView):
+    @validate_serializer(UserLoginSerializer)
+    def post(self, request):
+        data = request.data
+        user = auth.authenticate(username=data["username"], password=data["password"])
+        if user and not user.is_disabled and user.is_admin_role():
+            auth.login(request, user)
+            return self.success("Succeeded")
+        else:
+            return self.error("Invalid admin's username or password")
 
 class UserAdminAPI(APIView):
     @validate_serializer(ImportUserSeralizer)

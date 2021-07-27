@@ -5,15 +5,10 @@
     </div>
     <Card :padding="100">
       <div v-if="profile.user">
-        <p style="margin-top: -10px">
-          <span v-if="profile.user" class="emphasis">{{profile.user.username}}</span>
-          <span v-if="profile.school">@{{profile.school}}</span>
-        </p>
         <p v-if="profile.mood">
           {{profile.mood}}
         </p>
         <hr id="split"/>
-
         <div class="flex-container">
           <div class="left">
             <p>{{$t('m.UserHomeSolved')}}</p>

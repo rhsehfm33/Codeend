@@ -9,8 +9,8 @@
           <p>
             <span>{{$t('m.Menu')}}</span>
             <i-switch v-model="showMenu"></i-switch>
-            <span>{{$t('m.Chart')}}</span>
-            <i-switch v-model="showChart"></i-switch>
+            <!-- <span>{{$t('m.Chart')}}</span>
+            <i-switch v-model="showChart"></i-switch> -->
           </p>
           <p>
             <span>{{$t('m.Auto_Refresh')}}(10s)</span>
@@ -30,9 +30,9 @@
       </Poptip>
       <Button type="primary" size="small" @click="downloadRankCSV">{{$t('m.download_csv')}}</Button>
     </div>
-    <div v-show="showChart" class="echarts">
+    <!-- <div v-show="showChart" class="echarts">
       <ECharts :options="options" ref="chart" auto-resize></ECharts>
-    </div>
+    </div> -->
     <Table ref="tableRank" :columns="columns" :data="dataRank" disabled-hover height="600"></Table>
     <Pagination :total="total"
                 :page-size.sync="limit"

@@ -120,11 +120,11 @@
         formProfile: {
           real_name: '',
           statusMessage: '',
-          major: '',
           blog: '',
-          school: '',
           github: '',
           language: ''
+          // major: '',
+          // school: '',
         }
       }
     },
@@ -207,7 +207,7 @@
             headers: {'content-type': 'multipart/form-data'}
           }).then(res => {
             this.loadingUploadBtn = false
-            this.$success('변경완료!')
+            this.$success('Update succeeded!')
             this.uploadModalVisible = false
             this.avatarOption.imgSrc = ''
             this.$store.dispatch('getProfile')
@@ -264,7 +264,6 @@
     }
     .cropper-preview {
       flex: none;
-      /*margin: 10px;*/
       margin-left: 20px;
       box-shadow: 0 0 1px 0;
       .copper-img;

@@ -49,9 +49,9 @@ export const m = {
   ProblemID: '문제ID',
   First_Blood: 'First Blood',
   Username: '유저명',
-  Checked: '확인',
+  Checked: '확인됨',
   Not_Checked: '대기',
-  Check_It: '확인해보세요',
+  Check_It: '확인',
   // ACMRank.vue
   ACM_Ranklist: 'ACM 랭크 목록',
   StatusMessage: '상태메세지',

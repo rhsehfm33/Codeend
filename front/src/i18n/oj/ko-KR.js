@@ -54,7 +54,7 @@ export const m = {
   Check_It: '확인',
   // ACMRank.vue
   ACM_Ranklist: 'ACM 랭크 목록',
-  StatusMessage: '상태메세지',
+  mood: '상태메세지',
   AC: 'AC',
   Rating: '점수',
   DataView: '데이터 조회',

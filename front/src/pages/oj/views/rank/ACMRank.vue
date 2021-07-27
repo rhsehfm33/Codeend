@@ -64,7 +64,7 @@ import { locale } from 'moment'
             }
           },
           {
-            title: this.$i18n.t('m.StatusMessage'),
+            title: this.$i18n.t('m.mood'),
             align: 'center',
             key: 'mood'
           },

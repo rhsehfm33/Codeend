@@ -54,7 +54,7 @@ export const m = {
   Check_It: 'Check It',
   // ACMRank.vue
   ACM_Ranklist: 'ACM Ranklist',
-  StatusMessage: 'StatusMessage',
+  mood: 'mood',
   AC: 'AC',
   Rating: 'Rating',
   // Announcements.vue

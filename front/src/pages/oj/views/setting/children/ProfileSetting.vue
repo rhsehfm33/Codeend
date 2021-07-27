@@ -69,7 +69,7 @@
             <Input v-model="formProfile.real_name"/>
           </FormItem>
           <FormItem label="상태 메시지">
-            <Input v-model="formProfile.statusMessage"/>
+            <Input v-model="formProfile.mood"/>
           </FormItem>
           <FormItem label="언어설정">
             <Select v-model="formProfile.language">
@@ -119,7 +119,7 @@
         languages: languages,
         formProfile: {
           real_name: '',
-          statusMessage: '',
+          mood: '',
           blog: '',
           github: '',
           language: ''

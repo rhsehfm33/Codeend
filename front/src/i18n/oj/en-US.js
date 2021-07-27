@@ -218,7 +218,8 @@ export const m = {
   UserHomeIntro: 'The guy is so lazy that has not solved any problem yet.',
   // Community.vue
   Total_Community: 'Total',
-  Announcements_Community: 'Announcements',
+  Notice: 'Announcements',
   Forum: 'Forum',
-  Question: 'Question'
+  Question: 'Question',
+  Category: 'Category'
 }

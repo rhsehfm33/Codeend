@@ -3,9 +3,9 @@ import {
   ACMRank,
   ApplyResetPassword,
   Announcements,
-  Question,
   Forum,
-  Total,
+  QnA,
+  Notice,
   Home,
   Logout,
   NotFound,
@@ -163,28 +163,28 @@ export default [
     ]
   },
   {
-    name: 'total',
-    path: '/total',
-    meta: {title: 'Total'},
-    component: Total
-  },
-  {
     name: 'forum',
     path: '/forum',
     meta: {title: 'Forum'},
     component: Forum
   },
   {
-    name: 'announcements',
-    path: '/announcements',
-    meta: {title: 'Announcements'},
-    component: Announcements
+    name: 'forum-details',
+    path: '/forum/:forum',
+    meta: {title: 'forum Details'},
+    component: Forum
   },
   {
-    name: 'question',
-    path: '/question',
-    meta: {title: 'Question'},
-    component: Question
+    name: 'notice',
+    path: '/notice',
+    meta: {title: 'Notice'},
+    component: Notice
+  },
+  {
+    name: 'qna',
+    path: '/qna',
+    meta: {title: 'QnA'},
+    component: QnA
   },
   {
     path: '*',

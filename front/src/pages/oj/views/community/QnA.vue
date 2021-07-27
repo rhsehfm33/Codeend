@@ -1,29 +1,15 @@
 <template>
-  <div>
-    <div>
-      <router-link to="total">{{$t('m.Total_Community')}}</router-link>
-      <router-link to="announcements">{{$t('m.Announcements_Community')}}</router-link>
-      <router-link to="forum">{{$t('m.Forum')}}</router-link>
-      <router-link to="question">{{$t('m.Question')}}</router-link>   
+  <panel>
+    <div slot="title">질문 게시판</div>
+    <div class="content markdown-body">
     </div>
-    <panel>
-      <div slot="title">전체 게시판</div>
-              <div class="panel">
-          <transition name="fadeInUp">
-            <router-view></router-view>
-          </transition>
-        </div>
-      <div class="content markdown-body">
-      </div>
-        <Pagination v-if="!isContest"
-                key="page"
-                :total="total"
-                :page-size="limit"
-                @on-change="getAnnouncementList">
-        </Pagination> 
-        <router-view></router-view>
-    </panel>
-  </div>
+      <Pagination v-if="!isContest"
+              key="page"
+              :total="total"
+              :page-size="limit"
+              @on-change="getAnnouncementList">
+              </Pagination> 
+  </panel>
 </template>
 
 <script>
@@ -99,16 +85,6 @@
 </script>
 
 <style lang="less" scoped>
-
-.category-container{
-    display: inline-block;
-    min-width: 280px;
-    height: auto;
-    width: 100%;
-    z-index: 1000;
-    background-color: white;
-    box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.1);
-}
   .content {
     font-size: 16px;
     margin: 0 50px 40px 50px;

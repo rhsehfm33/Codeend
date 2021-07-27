@@ -218,7 +218,8 @@ export const m = {
   UserHomeIntro: '这个家伙太懒了，还没有做题呢...',
   // Community.vue
   Total_Community: '总计',
-  Announcements_Community: '通知',
+  Notice: '通知',
   Forum: '论坛',
-  Question: '问题'
+  Question: '问题',
+  Category: '类别'
 }

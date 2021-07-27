@@ -218,8 +218,14 @@ export const m = {
   List_Solved_Problems: '완료된 문제 목록',
   UserHomeIntro: '아직 해결한 문제가 없습니다...',
   // Community.vue
-  Total_Community: '전체',
-  Announcements_Community: '공지',
+  Board: '게시판',
+  // Total_Community: '전체',
+  Notice: '공지',
   Forum: '자유',
-  Question: '질문'
+  Question: '질문',
+  Category: '카테고리',
+  Writer: '글쓴이',
+  View: '조회수',
+  Comment: '댓글',
+  Date: '작성일'
 }

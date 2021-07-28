@@ -33,6 +33,8 @@ class BoardAPI(BoardBase):
                 board = Board.objects.get(id=board_id)
             except Board.DoesNotExist:
                 return self.error("Board does not exist")
+            board.views += 1
+            board.save(update_fields=["views"])
             return self.success(BoardSerializer(board).data)
     
     @login_required

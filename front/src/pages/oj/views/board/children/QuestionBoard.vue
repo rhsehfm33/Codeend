@@ -1,45 +1,33 @@
 <template>
-  <Row type="flex" :gutter="18">
-    <Col :span=19>
-    <Panel shadow>
-      <div slot="title">자유 게시판</div>
-      <div slot="extra">
-        <ul class="filter">
-          <li>
-            <Dropdown @on-click="filterByDifficulty">
-              <span>{{$t('m.Category')}}
-                <Icon type="arrow-down-b"></Icon>
-              </span>
-              <Dropdown-menu slot="list">
-                <Dropdown-item name="">{{$t('m.All')}}</Dropdown-item>
-                <Dropdown-item name="Low">{{$t('m.Low')}}</Dropdown-item>
-                <Dropdown-item name="Mid" >{{$t('m.Mid')}}</Dropdown-item>
-                <Dropdown-item name="High">{{$t('m.High')}}</Dropdown-item>
-              </Dropdown-menu>
-            </Dropdown>
-          </li>
-          <li>
-            <Input v-model="query.keyword"
-                   @on-enter="filterByKeyword"
-                   @on-click="filterByKeyword"
-                   placeholder="keyword"
-                   icon="ios-search-strong"/>
-          </li>
-        </ul>
-      </div>
-      <div>
-      </div>
-      <Table style="width: 100%; font-size: 1.4rem;"
-             :columns="boardListTableColumns"
-             :data="boardList"
-             :loading="loadings.table"
-             disabled-hover><tr></tr>
-      </Table>
-    </Panel>
-    <Pagination :total="total" :page-size.sync="query.limit" @on-change="pushRouter" @on-page-size-change="pushRouter" :current.sync="query.page" :show-sizer="true">
-      </Pagination>
-    </Col>
-  </Row>
+        <Panel shadow>
+          <div slot="title">{{$t('m.Question')}} {{$t('m.Board')}}</div>
+          <div slot="extra">
+            <ul class="filter">
+              <li>
+                <Input v-model="query.keyword"
+                      @on-enter="filterByKeyword"
+                      @on-click="filterByKeyword"
+                      placeholder="keyword"
+                      icon="ios-search-strong"/>
+              </li>
+            </ul>
+          </div>
+          <div>
+          <Table style="width: 100%; font-size: 1.4rem;"
+                :columns="questionBoardTableColumns"
+                :data="questionBoard"
+                :loading="loadings.table"
+                disabled-hover><tr></tr>
+          </Table>            
+          </div>
+          <div class="panel">
+              <transition name="fadeInUp">
+                <router-view></router-view>
+              </transition>
+          </div>
+        <Pagination :total="total" :page-size.sync="query.limit" @on-change="pushRouter" @on-page-size-change="pushRouter" :current.sync="query.page" :show-sizer="true">
+          </Pagination>
+        </Panel>
 </template>
 
 <script>
@@ -55,7 +43,7 @@
     },
     data () {
       return {
-        boardListTableColumns: [
+        questionBoardTableColumns: [
           {
             title: this.$i18n.t('m.Title'),
             key: '_id',
@@ -88,7 +76,7 @@
             }
           },
           {
-            title: this.$i18n.t('m.Writer'),
+            title: this.$i18n.t('m.Created_By'),
             render: (h, params) => {
               return h(params.row.created_by)
             }
@@ -113,7 +101,7 @@
             }
           }
         ],
-        boardList: [],
+        questionBoard: [],
         limit: 20,
         total: 0,
         loadings: {
@@ -153,13 +141,14 @@
       },
       getBoardList () {
         let offset = (this.query.page - 1) * this.query.limit
-        this.loadings.table = true
+        this.loadings.table = false
+        // this.loadings.table = true
         api.getBoardList(offset, this.limit, this.query).then(res => {
           this.loadings.table = false
           this.total = res.data.data.total
-          this.boardList = res.data.data.results
+          this.questionBoard = res.data.data.results
           if (this.isAuthenticated) {
-            this.addStatusColumn(this.boardListTableColumns, res.data.data.results)
+            this.addStatusColumn(this.questionBoardTableColumns, res.data.data.results)
           }
         }, res => {
           this.loadings.table = false

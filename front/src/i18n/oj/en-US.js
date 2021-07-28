@@ -106,7 +106,7 @@ export const m = {
   Home: 'Home',
   NavProblems: 'Problems',
   Contests: 'Contests',
-  Community: 'Community',
+  Board: 'Board',
   NavStatus: 'Status',
   Rank: 'Rank',
   ACM_Rank: 'ACM Rank',
@@ -216,10 +216,13 @@ export const m = {
   UserHomeScore: 'Score',
   List_Solved_Problems: 'List of solved problems',
   UserHomeIntro: 'The guy is so lazy that has not solved any problem yet.',
-  // Community.vue
-  Total_Community: 'Total',
-  Notice: 'Announcements',
+  // Board.vue
+  All_Board: 'All',
   Free: 'Free',
   Question: 'Question',
-  Category: 'Category'
+  Category: 'Category',
+  Created_By: 'Created_By',
+  Views: 'Views',
+  Comment: 'Comment',
+  Date: 'Date'
 }

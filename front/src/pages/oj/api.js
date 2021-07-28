@@ -268,28 +268,6 @@ export default {
     return ajax('admin/contest/acm_helper', 'put', {
       data
     })
-  },
-  getBoardList (offset, limit, searchParams) {
-    let params = {
-      paging: true,
-      offset,
-      limit
-    }
-    Object.keys(searchParams).forEach((element) => {
-      if (searchParams[element]) {
-        params[element] = searchParams[element]
-      }
-    })
-    return ajax('board', 'get', {
-      params: params
-    })
-  },
-  getBoard (boardID) {
-    return ajax('board', 'get', {
-      params: {
-        board_id: boardID
-      }
-    })
   }
 }
 

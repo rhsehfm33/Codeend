@@ -70,7 +70,6 @@
         </div>
       </div>
     </Panel>
-    <!--对话框-->
     <el-dialog :title="announcementDialogTitle" :visible.sync="showEditAnnouncementDialog"
                @open="onOpenEditDialog" :close-on-click-modal="false">
       <el-form label-position="top">

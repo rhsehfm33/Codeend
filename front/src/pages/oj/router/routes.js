@@ -3,10 +3,6 @@ import {
   ACMRank,
   ApplyResetPassword,
   Announcements,
-  Board,
-  BoardList,
-  QnA,
-  Notice,
   Home,
   Logout,
   NotFound,
@@ -21,6 +17,7 @@ import {
 
 import * as Contest from '@oj/views/contest'
 import * as Setting from '@oj/views/setting'
+import * as Board from '@oj/views/board'
 
 export default [
   {
@@ -164,28 +161,40 @@ export default [
     ]
   },
   {
-    name: 'board-list',
     path: '/board',
-    meta: {title: 'Board List'},
-    component: BoardList
+    component: Board.Boards,
+    children: [
+      {
+        name: 'all-board',
+        path: '',
+        meta: {title: 'All Board'},
+        component: Board.AllBoard
+      },
+      {
+        name: 'free-board',
+        path: 'free',
+        meta: {title: 'Free Board'},
+        component: Board.FreeBoard
+      },
+      {
+        name: 'question-board',
+        path: 'question',
+        meta: {title: 'Question Board'},
+        component: Board.QuestionBoard
+      },
+      {
+        name: 'write-board',
+        path: 'write',
+        meta: {requiresAuth: true, title: 'Write Board'},
+        component: Board.WriteBoard
+      }
+    ]
   },
   {
     name: 'board-details',
     path: '/board/:boardID',
     meta: {title: 'Board Details'},
-    component: Board
-  },
-  {
-    name: 'notice',
-    path: '/notice',
-    meta: {title: 'Notice'},
-    component: Notice
-  },
-  {
-    name: 'qna',
-    path: '/qna',
-    meta: {title: 'QnA'},
-    component: QnA
+    component: Board.BoardDetail
   },
   {
     path: '*',

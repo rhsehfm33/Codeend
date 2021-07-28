@@ -3,10 +3,8 @@ import Logout from './user/Logout.vue'
 import UserHome from './user/UserHome.vue'
 import NotFound from './general/404.vue'
 import Home from './general/Home.vue'
-import Notice from './community/Notice.vue'
-import QnA from './community/QnA.vue'
-import Board from './community/Board.vue'
-import BoardList from './community/BoardList.vue'
+import Announcements from './general/Announcements.vue'
+import BoardDetail from './board/BoardDetail.vue'
 
 // Grouping Components in the Same Chunk
 const SubmissionList = () => import(/* webpackChunkName: "submission" */ '@oj/views/submission/SubmissionList.vue')
@@ -21,10 +19,9 @@ const ResetPassword = () => import(/* webpackChunkName: "password" */ '@oj/views
 const Problem = () => import(/* webpackChunkName: "Problem" */ '@oj/views/problem/Problem.vue')
 
 export {
-  Home, NotFound,
-  Notice, QnA, Board, BoardList,
+  Home, NotFound, Announcements,
   Logout, UserHome,
-  ProblemList, Problem,
+  ProblemList, Problem, BoardDetail,
   ACMRank, OIRank,
   SubmissionList, SubmissionDetails,
   ApplyResetPassword, ResetPassword

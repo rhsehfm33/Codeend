@@ -106,7 +106,7 @@ export const m = {
   Home: '首页',
   NavProblems: '问题',
   Contests: '练习&比赛',
-  Community: '社区',
+  Board: '社区',
   NavStatus: '状态',
   Rank: '排名',
   ACM_Rank: 'ACM 排名',
@@ -216,10 +216,13 @@ export const m = {
   UserHomeScore: '分数',
   List_Solved_Problems: '已解决问题的列表',
   UserHomeIntro: '这个家伙太懒了，还没有做题呢...',
-  // Community.vue
-  Total_Community: '总计',
-  Notice: '通知',
+  // Board.vue
+  All_Board: '总计',
   Free: '论坛',
   Question: '问题',
-  Category: '类别'
+  Category: '类别',
+  Created_By: 'Created_By',
+  Views: 'Views',
+  Comment: 'Comment',
+  Date: 'Date'
 }

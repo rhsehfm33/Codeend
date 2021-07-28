@@ -2,20 +2,17 @@
   <div id="header">
     <Menu theme="light" mode="horizontal" @on-select="handleRoute" :active-name="activeMenu" class="oj-menu">
       <!-- logo 클릭하면 index 페이지로 이동  -->
-       <router-link to="/" tag="div" class="logo"><span>{{website.website_name}}</span></router-link>
+    <router-link to="/" tag="div" class="logo"><span>{{website.website_name}}</span></router-link>
     <div class="category-div"> 
       <Menu-item name="/problem" class="oj-menu-item">
         {{$t('m.NavProblems')}}
       </Menu-item>
-
       <Menu-item name="/status" class="oj-menu-item">
         {{$t('m.NavStatus')}}
       </Menu-item>
-
       <Menu-item name="/contest" class="oj-menu-item">
         {{$t('m.Contests')}}
       </Menu-item>
-
       <Submenu name="rank">
         <template slot="title">
         {{$t('m.Rank')}}
@@ -27,23 +24,10 @@
           {{$t('m.OI_Rank')}}
         </Menu-item>
       </Submenu>
-
-      <Submenu name="community" class="oj-menu-item">
-        <template slot="title">
-          {{$t('m.Community')}}
-        </template>
-        <Menu-item name="/notice" class="oj-menu-item">
-          공지 게시판
-        </Menu-item>
-        <Menu-item name="/board" class="oj-menu-item">
-          자유 게시판
-        </Menu-item>
-        <Menu-item name="/qna" class="oj-menu-item">
-         질문 게시판
-        </Menu-item>
-      </Submenu>
+      <Menu-item name="/board" class="oj-menu-item">
+        {{$t('m.Board')}}
+      </Menu-item>      
     </div>      
-
       <!-- 로그인 인증일 경우 -->
       <template v-if="!isAuthenticated">
         <div class="btn-menu">
@@ -81,8 +65,6 @@
       <div slot="footer" style="display: none"></div>
     </Modal>
   </div>
-
-  
 </template>
 
 <script>

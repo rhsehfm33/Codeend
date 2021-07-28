@@ -107,7 +107,7 @@ export const m = {
   Home: '홈',
   NavProblems: '문제',
   Contests: '대회',
-  Community: '커뮤니티',
+  Board: '게시판',
   NavStatus: '제출',
   Rank: '랭크',
   ACM_Rank: 'ACM 랭크',
@@ -217,15 +217,16 @@ export const m = {
   UserHomeScore: '점수',
   List_Solved_Problems: '완료된 문제 목록',
   UserHomeIntro: '아직 해결한 문제가 없습니다...',
-  // Community.vue
-  Board: '게시판',
-  // Total_Community: '전체',
-  Notice: '공지',
+  // Board.vue
+  All_Board: '전체',
   Free: '자유',
   Question: '질문',
   Category: '카테고리',
-  Writer: '글쓴이',
+  Created_By: '글쓴이',
   Views: '조회수',
   Comment: '댓글',
-  Date: '작성일'
+  Date: '작성일',
+  Write: '글쓰기',
+  // Write.vue
+  Choose_Category: '게시판을 선택하세요.'
 }

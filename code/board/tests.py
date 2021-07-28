@@ -1,12 +1,15 @@
 import json
+import copy
 
 from copy import deepcopy
 
 from utils.api.tests import APITestCase
-from .models import Board, Comment
+from .models import Board
+from comment.models import Comment
 
 SETUP_BOARD_DATA = {"title": "setup", "category": "Announcement", "content": "<p>setup</p>"}
 SETUP_COMMENT_DATA = {"content": "setup"}
+
 
 TEST_BOARD_DATA = {"title": "test", "category": "Free", "content": "<p>test</p>"}
 
@@ -16,13 +19,19 @@ class BardAPITest(APITestCase):
         self.board_data = Board.objects.create(created_by=self.user, **SETUP_BOARD_DATA)
         self.comment_data = Comment.objects.create(created_by=self.user, board=self.board_data, **SETUP_COMMENT_DATA)
         self.url = self.reverse("board_api")
-    
+
     def test_create_board(self):
         resp = self.client.post(self.url, TEST_BOARD_DATA)
         self.assertSuccess(resp)
 
         # Use this when you want to know the json structrue
         # print(json.dumps(resp.data))
+
+    def test_create_board_validation(self):
+        wrong_board_data = copy.deepcopy(TEST_BOARD_DATA)
+        del wrong_board_data["title"]
+        resp = self.client.post(self.url, wrong_board_data)
+        self.assertDictEqual(resp.data, {"error": "invalid-title", "data": "title: This field is required."})
 
     def test_get_board(self):
         resp = self.client.get(self.url + "?id=" + str(self.board_data.id))
@@ -39,5 +48,4 @@ class BardAPITest(APITestCase):
         id = self.board_data.id
         TEST_BOARD_DATA["id"] = id
         resp = self.client.put(self.url, TEST_BOARD_DATA)
-        print(json.dumps(resp.data))
         self.assertSuccess(resp)

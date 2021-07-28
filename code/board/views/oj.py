@@ -33,10 +33,12 @@ class BoardAPI(BoardBase):
                 board = Board.objects.get(id=board_id)
             except Board.DoesNotExist:
                 return self.error("Board does not exist")
+            board.views += 1
+            board.save(update_fields=["views"])
             return self.success(BoardSerializer(board).data)
     
-    @login_required
     @validate_serializer(EditBoardSerializer)
+    @login_required
     def put(self, request):
         data = request.data
         
@@ -63,9 +65,6 @@ class BoardAPI(BoardBase):
 
         if board.created_by == user:
             board.delete()
-            return self.success()
+            return self.success("Board has successfully deleted")
         else:
             return self.error("You are not the writer of this board")
-
-# class CommentAPI(APIView):
-

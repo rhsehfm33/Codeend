@@ -3,7 +3,8 @@ import {
   ACMRank,
   ApplyResetPassword,
   Announcements,
-  Forum,
+  Board,
+  BoardList,
   QnA,
   Notice,
   Home,
@@ -163,16 +164,16 @@ export default [
     ]
   },
   {
-    name: 'forum',
-    path: '/forum',
-    meta: {title: 'Forum'},
-    component: Forum
+    name: 'board-list',
+    path: '/board',
+    meta: {title: 'Board List'},
+    component: BoardList
   },
   {
-    name: 'forum-details',
-    path: '/forum/:forum',
-    meta: {title: 'forum Details'},
-    component: Forum
+    name: 'board-details',
+    path: '/board/:boardID',
+    meta: {title: 'Board Details'},
+    component: Board
   },
   {
     name: 'notice',

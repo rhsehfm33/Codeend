@@ -219,7 +219,7 @@ export const m = {
   // Community.vue
   Total_Community: '总计',
   Notice: '通知',
-  Forum: '论坛',
+  Free: '论坛',
   Question: '问题',
   Category: '类别'
 }

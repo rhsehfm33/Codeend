@@ -1,23 +1,23 @@
 <template>
-  <Row type="flex" justify="space-around">
-    <Col :span="22">
+  <Row type="flex" :gutter="18">
+    <Col :span=19>
     <Panel shadow>
-      <div slot="title">{{$t('m.Forum')+' '+$t('m.Board')}}</div>
-      <!-- 검색창 -->
+      <div slot="title">자유 게시판</div>
       <div slot="extra">
         <ul class="filter">
-        <li>
+          <li>
             <Dropdown @on-click="filterByDifficulty">
-              <span>{{$t('m.Board')}}
+              <span>{{$t('m.Category')}}
                 <Icon type="arrow-down-b"></Icon>
               </span>
               <Dropdown-menu slot="list">
-                <Dropdown-item name="Notice">{{$t('m.Notice')}}</Dropdown-item>
-                <Dropdown-item name="Forum" >{{$t('m.Forum')}}</Dropdown-item>
-                <Dropdown-item name="Question">{{$t('m.Question')}}</Dropdown-item>
+                <Dropdown-item name="">{{$t('m.All')}}</Dropdown-item>
+                <Dropdown-item name="Low">{{$t('m.Low')}}</Dropdown-item>
+                <Dropdown-item name="Mid" >{{$t('m.Mid')}}</Dropdown-item>
+                <Dropdown-item name="High">{{$t('m.High')}}</Dropdown-item>
               </Dropdown-menu>
             </Dropdown>
-          </li>          
+          </li>
           <li>
             <Input v-model="query.keyword"
                    @on-enter="filterByKeyword"
@@ -30,13 +30,12 @@
       <div>
       </div>
       <Table style="width: 100%; font-size: 1.4rem;"
-             :columns="TotalListTableColumns"
-             :data="problemList"
+             :columns="boardListTableColumns"
+             :data="boardList"
              :loading="loadings.table"
              disabled-hover><tr></tr>
       </Table>
     </Panel>
-    <!-- 페이지 변경 -->
     <Pagination :total="total" :page-size.sync="query.limit" @on-change="pushRouter" @on-page-size-change="pushRouter" :current.sync="query.page" :show-sizer="true">
       </Pagination>
     </Col>
@@ -47,20 +46,20 @@
   import { mapGetters } from 'vuex'
   import api from '@oj/api'
   import utils from '@/utils/utils'
-  import time from '@/utils/time'
   import Pagination from '@oj/components/Pagination'
 
   export default {
-    name: 'ProblemList',
+    name: 'BoardList',
     components: {
       Pagination
     },
     data () {
       return {
-        TotalListTableColumns: [
+        boardListTableColumns: [
           {
             title: this.$i18n.t('m.Title'),
-            width: 500,
+            key: '_id',
+            width: 400,
             render: (h, params) => {
               return h('Button', {
                 props: {
@@ -68,12 +67,13 @@
                   size: 'large'
                 },
                 on: {
+                  // 제목 클릭하면 상세 화면으로 라우터를 통해 이동함
                   click: () => {
-                    this.$router.push({name: 'forum-details', params: {problemID: params.row._id}})
+                    this.$router.push({name: 'board-details', params: {boardID: params.row._id}})
                   }
                 },
                 style: {
-                  padding: '2px 0 0',
+                  padding: '2px 0 0 10px',
                   overflowX: 'auto',
                   textAlign: 'left',
                   width: '100%'
@@ -84,35 +84,47 @@
           {
             title: this.$i18n.t('m.Category'),
             render: (h, params) => {
+              return h(params.row.title)
             }
           },
           {
             title: this.$i18n.t('m.Writer'),
             render: (h, params) => {
+              return h(params.row.created_by)
             }
           },
           {
-            title: this.$i18n.t('m.Comment')
+            title: this.$i18n.t('m.Comment'),
+            render: (h, params) => {
+              return h(params.row.comment)
+            }
           },
           {
-            title: this.$i18n.t('m.Views')
+            title: this.$i18n.t('m.Views'),
+            render: (h, params) => {
+              return h(params.row.views)
+            }
           },
           {
             title: this.$i18n.t('m.Date'),
             render: (h, params) => {
-              return h('span', time.utcToLocal(params.row.create_time))
+              // last_update_time 업데이트될 경우 변경
+              return h(params.row.create_time)
             }
           }
         ],
-        problemList: [],
+        boardList: [],
         limit: 20,
         total: 0,
         loadings: {
-          table: true
+          table: true,
+          tag: true
         },
         routeName: '',
         query: {
           keyword: '',
+          difficulty: '',
+          tag: '',
           page: 1,
           limit: 10
         }
@@ -131,23 +143,23 @@
           this.query.page = 1
         }
         this.query.limit = parseInt(query.limit) || 10
-        this.getProblemList()
+        this.getBoardList()
       },
       pushRouter () {
         this.$router.push({
-          name: 'problem-list',
+          name: 'board-list',
           query: utils.filterEmptyValue(this.query)
         })
       },
-      getProblemList () {
+      getBoardList () {
         let offset = (this.query.page - 1) * this.query.limit
         this.loadings.table = true
-        api.getProblemList(offset, this.limit, this.query).then(res => {
+        api.getBoardList(offset, this.limit, this.query).then(res => {
           this.loadings.table = false
           this.total = res.data.data.total
-          this.problemList = res.data.data.results
+          this.boardList = res.data.data.results
           if (this.isAuthenticated) {
-            this.addStatusColumn(this.TotalListTableColumns, res.data.data.results)
+            this.addStatusColumn(this.boardListTableColumns, res.data.data.results)
           }
         }, res => {
           this.loadings.table = false

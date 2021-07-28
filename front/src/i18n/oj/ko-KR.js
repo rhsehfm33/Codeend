@@ -221,11 +221,11 @@ export const m = {
   Board: '게시판',
   // Total_Community: '전체',
   Notice: '공지',
-  Forum: '자유',
+  Free: '자유',
   Question: '질문',
   Category: '카테고리',
   Writer: '글쓴이',
-  View: '조회수',
+  Views: '조회수',
   Comment: '댓글',
   Date: '작성일'
 }

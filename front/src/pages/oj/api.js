@@ -268,6 +268,28 @@ export default {
     return ajax('admin/contest/acm_helper', 'put', {
       data
     })
+  },
+  getBoardList (offset, limit, searchParams) {
+    let params = {
+      paging: true,
+      offset,
+      limit
+    }
+    Object.keys(searchParams).forEach((element) => {
+      if (searchParams[element]) {
+        params[element] = searchParams[element]
+      }
+    })
+    return ajax('board', 'get', {
+      params: params
+    })
+  },
+  getBoard (boardID) {
+    return ajax('board', 'get', {
+      params: {
+        board_id: boardID
+      }
+    })
   }
 }
 
@@ -304,7 +326,7 @@ function ajax (url, method, options) {
         resolve(res)
       }
     }, res => {
-      // API 요청이 비정상 : 일반적으로 서버 오류 또는 네트워크 오류입
+      // API 요청이 비정상 : 일반적으로 서버 오류 또는 네트워크 오류
       reject(res)
       Vue.prototype.$error(res.data.data)
     })

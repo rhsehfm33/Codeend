@@ -219,7 +219,7 @@ export const m = {
   // Community.vue
   Total_Community: 'Total',
   Notice: 'Announcements',
-  Forum: 'Forum',
+  Free: 'Free',
   Question: 'Question',
   Category: 'Category'
 }

@@ -37,7 +37,7 @@
   import Pagination from '@oj/components/Pagination'
 
   export default {
-    name: 'BoardList',
+    name: 'AllBoard',
     components: {
       Pagination
     },
@@ -57,7 +57,8 @@
                 on: {
                   // 제목 클릭하면 상세 화면으로 라우터를 통해 이동함
                   click: () => {
-                    this.$router.push({name: 'board-details', params: {boardID: params.row._id}})
+                    // board_id 전달
+                    this.$router.push({name: 'board-details', params: {boardID: params.row.board_id}})
                   }
                 },
                 style: {
@@ -66,7 +67,7 @@
                   textAlign: 'left',
                   width: '100%'
                 }
-              }, params.row.title)
+              }, params)
             }
           },
           {
@@ -131,19 +132,20 @@
           this.query.page = 1
         }
         this.query.limit = parseInt(query.limit) || 10
-        this.getBoardList()
+        this.getBoards()
       },
       pushRouter () {
         this.$router.push({
-          name: 'board-list',
+          name: 'all-board',
           query: utils.filterEmptyValue(this.query)
         })
       },
-      getBoardList () {
+      getBoards () {
         let offset = (this.query.page - 1) * this.query.limit
         this.loadings.table = false
         // this.loadings.table = true
-        api.getBoardList(offset, this.limit, this.query).then(res => {
+
+        api.getBoards(offset, this.limit, this.query).then(res => {
           this.loadings.table = false
           this.total = res.data.data.total
           this.allBoard = res.data.data.results

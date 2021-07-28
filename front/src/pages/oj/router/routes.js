@@ -12,7 +12,8 @@ import {
   ResetPassword,
   SubmissionDetails,
   SubmissionList,
-  UserHome
+  UserHome,
+  Comment
 } from '../views'
 
 import * as Contest from '@oj/views/contest'
@@ -54,7 +55,7 @@ export default [
     name: 'problem-details',
     path: '/problem/:problemID',
     meta: {title: 'Problem Details'},
-    component: Problem
+    component: Board.BoardDetail
   },
   {
     name: 'submission-list',
@@ -194,7 +195,15 @@ export default [
     name: 'board-details',
     path: '/board/:boardID',
     meta: {title: 'Board Details'},
-    component: Board.BoardDetail
+    component: Board.BoardDetail,
+    children: [
+      {
+        name: 'default-setting',
+        path: "comment/:commentID",
+        meta: {requiresAuth: true, title: 'Comment'},
+        component: Comment
+      }
+    ]
   },
   {
     path: '*',

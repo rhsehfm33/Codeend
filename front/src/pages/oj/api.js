@@ -268,6 +268,45 @@ export default {
     return ajax('admin/contest/acm_helper', 'put', {
       data
     })
+  },
+  getBoards (offset, limit, searchParams) {
+    let params = {
+      paging: true,
+      offset,
+      limit
+    }
+    Object.keys(searchParams).forEach((element) => {
+      if (searchParams[element]) {
+        params[element] = searchParams[element]
+      }
+    })
+    return ajax('board_api', 'get', {
+      params: params
+    })
+  },
+  getBoardDetail (boardID) {
+    return ajax('board_api', 'get', {
+      params: {
+        board_id: boardID
+      }
+    })
+  },
+  creatBoard (data) {
+    return ajax('board_api', 'post', {
+      data
+    })
+  },
+  editBoard (data) {
+    return ajax('board_api', 'put', {
+      data
+    })
+  },
+  deleteBoard (boardID) {
+    return ajax('board_api', 'delete', {
+      params: {
+        board_id: boardID
+      }
+    })
   }
 }
 

@@ -45,6 +45,7 @@ LOCAL_APPS = [
     'account',
     'announcement',
     'board',
+    'comment',
     'conf',
     'problem',
     'contest',

@@ -6,7 +6,6 @@ from utils.models import RichTextField
 from utils.constants import Choices
 
 class BoardCategory(Choices):
-    Announcement = "Announcement"
     Free = "Free"
     Question = "Question"
 

@@ -5,15 +5,13 @@ from utils.serializers import LanguageNameChoiceField
 
 class CreateBoardSerializer(serializers.Serializer):
     title = serializers.CharField(max_length=255)
-    category = serializers.ChoiceField(choices=(BoardCategory.Announcement,
-                                                BoardCategory.Free, BoardCategory.Question))
+    category = serializers.ChoiceField(choices=(BoardCategory.Free, BoardCategory.Question))
     content = serializers.CharField(max_length=1024 * 1024)
 
 class EditBoardSerializer(serializers.Serializer):
     id = serializers.IntegerField()
     title = serializers.CharField(max_length=255)
-    category = serializers.ChoiceField(choices=(BoardCategory.Announcement,
-                                                BoardCategory.Free, BoardCategory.Question))
+    category = serializers.ChoiceField(choices=(BoardCategory.Free, BoardCategory.Question))
     content = serializers.CharField(max_length=1024 * 1024)
 
 class CommentSerializer(serializers.ModelSerializer):

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-// import view components
+// admin의 모든 view components 가져옴
 import {
   Announcement,
   Conf,

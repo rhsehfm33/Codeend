@@ -1,4 +1,4 @@
-// all routes here.
+// oj의 모든 view components 가져옴
 import {
   ACMRank,
   ApplyResetPassword,
@@ -55,7 +55,8 @@ export default [
     name: 'problem-details',
     path: '/problem/:problemID',
     meta: {title: 'Problem Details'},
-    component: Board.BoardDetail
+    component: Problem
+    // component: Board.BoardDetail
   },
   {
     name: 'submission-list',
@@ -198,12 +199,17 @@ export default [
     component: Board.BoardDetail,
     children: [
       {
-        name: 'default-setting',
+        name: 'comment',
         path: "comment/:commentID",
-        meta: {requiresAuth: true, title: 'Comment'},
+        meta: {title: 'Comment'},
         component: Comment
       }
     ]
+  },
+  {
+    name: 'edit-board',
+    path: '/board/:boardID/edit',
+    component: Board.WriteBoard
   },
   {
     path: '*',

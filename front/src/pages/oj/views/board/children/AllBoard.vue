@@ -132,7 +132,7 @@
           this.query.page = 1
         }
         this.query.limit = parseInt(query.limit) || 10
-        this.getBoards()
+        this.getBoardList()
       },
       pushRouter () {
         this.$router.push({
@@ -140,12 +140,12 @@
           query: utils.filterEmptyValue(this.query)
         })
       },
-      getBoards () {
+      getBoardList () {
         let offset = (this.query.page - 1) * this.query.limit
         this.loadings.table = false
         // this.loadings.table = true
 
-        api.getBoards(offset, this.limit, this.query).then(res => {
+        api.getBoardList(offset, this.limit, this.query).then(res => {
           this.loadings.table = false
           this.total = res.data.data.total
           this.allBoard = res.data.data.results

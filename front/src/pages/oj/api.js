@@ -269,7 +269,7 @@ export default {
       data
     })
   },
-  getBoards (offset, limit, searchParams) {
+  getBoardList (offset, limit, searchParams) {
     let params = {
       paging: true,
       offset,
@@ -287,24 +287,48 @@ export default {
   getBoardDetail (boardID) {
     return ajax('board_api', 'get', {
       params: {
+        // only id parameter
         board_id: boardID
       }
     })
   },
-  creatBoard (data) {
+  createBoard (data) {
     return ajax('board_api', 'post', {
+      // title, category("Free" or "Question"), content
       data
     })
   },
   editBoard (data) {
     return ajax('board_api', 'put', {
+      // id, title, category("Free" or "Question"), content
       data
     })
   },
   deleteBoard (boardID) {
     return ajax('board_api', 'delete', {
       params: {
+        // only id parameter
         board_id: boardID
+      }
+    })
+  },
+  createComment (data) {
+    return ajax('comment', 'post', {
+      // board_id, content
+      data
+    })
+  },
+  editComment (data) {
+    return ajax('comment', 'put', {
+      // comment_id, content
+      data
+    })
+  },
+  deleteComment (commentID) {
+    return ajax('comment', 'delete', {
+      params: {
+        // only id parameter
+        comment_id: commentID
       }
     })
   }

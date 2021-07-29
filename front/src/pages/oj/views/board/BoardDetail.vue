@@ -9,7 +9,6 @@
           <p class="content" v-html=problem.description></p>
           <p class="title">{{$t('m.Date')}} <span v-if="problem.io_mode.io_mode=='File IO'">({{$t('m.FromFile')}}: {{ problem.io_mode.input }})</span></p>
           <p class="content" v-html=problem.input_description></p>
-
           <p class="title">{{$t('m.Output')}} <span v-if="problem.io_mode.io_mode=='File IO'">({{$t('m.ToFile')}}: {{ problem.io_mode.output }})</span></p>
           <p class="content" v-html=problem.output_description></p>
         </div>

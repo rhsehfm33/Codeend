@@ -1,7 +1,8 @@
 from utils.api import APIView
 
 from board.models import Board, BoardCategory
-from ..serializers import CreateBoardSerializer, BoardSerializer, EditBoardSerializer
+from ..serializers import (CreateBoardSerializer, BoardSerializer, EditBoardSerializer,
+                            BoardListSerializer)
 from account.decorators import login_required
 from utils.api import validate_serializer
 
@@ -68,3 +69,16 @@ class BoardAPI(BoardBase):
             return self.success("Board has successfully deleted")
         else:
             return self.error("You are not the writer of this board")
+
+class BoardListAPI(APIView):
+    def get(self, request):
+        if not request.GET.get("limit"):
+            return self.error("Limit is needed")
+
+        keyword = request.GET.get("keyword")
+
+        boards = Board.objects.all().select_related("created_by")
+        if keyword:
+            boards = boards.filter(title__contains=keyword)
+        return self.success(self.paginate_data(request, boards, BoardListSerializer))
+        

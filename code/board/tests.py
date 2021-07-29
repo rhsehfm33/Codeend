@@ -13,7 +13,7 @@ SETUP_COMMENT_DATA = {"content": "setup"}
 
 TEST_BOARD_DATA = {"title": "test", "category": "Free", "content": "<p>test</p>"}
 
-class BardAPITest(APITestCase):
+class BoardAPITest(APITestCase):
     def setUp(self):
         self.user = self.create_user("test_user_username", "test_user_password")
         self.board_data = Board.objects.create(created_by=self.user, **SETUP_BOARD_DATA)
@@ -49,3 +49,17 @@ class BardAPITest(APITestCase):
         TEST_BOARD_DATA["id"] = id
         resp = self.client.put(self.url, TEST_BOARD_DATA)
         self.assertSuccess(resp)
+
+    def test_get_boards_pagination(self):
+        for i in range(1, 3):
+            self.client.post(self.url, TEST_BOARD_DATA)
+        resp = self.client.get(self.url + "s?limit=10&offset=0")
+        
+        self.assertContains(resp, "\"total\": 3")
+
+    def test_get_boards_keyword_search(self):
+        for i in range(1, 20):
+            self.client.post(self.url, TEST_BOARD_DATA)
+        resp = self.client.get(self.url + "s?limit=10&offset=10&keyword=test")
+        print(json.dumps(resp.data))
+        self.assertContains(resp, "\"total\": 19")

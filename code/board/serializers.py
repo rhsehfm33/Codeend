@@ -23,3 +23,10 @@ class BoardSerializer(serializers.ModelSerializer):
     class Meta:
         model = Board
         fields = "__all__"
+
+class BoardListSerializer(serializers.ModelSerializer):
+    created_by = UsernameSerializer()
+    
+    class Meta:
+        model = Board
+        exclude = ("content",)

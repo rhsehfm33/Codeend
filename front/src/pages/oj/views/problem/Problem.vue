@@ -7,13 +7,10 @@
         <div id="problem-content" class="markdown-body" v-katex>
           <p class="title">{{$t('m.Description')}}</p>
           <p class="content" v-html=problem.description></p>
-          <!-- {{$t('m.music')}} -->
           <p class="title">{{$t('m.Input')}} <span v-if="problem.io_mode.io_mode=='File IO'">({{$t('m.FromFile')}}: {{ problem.io_mode.input }})</span></p>
           <p class="content" v-html=problem.input_description></p>
-
           <p class="title">{{$t('m.Output')}} <span v-if="problem.io_mode.io_mode=='File IO'">({{$t('m.ToFile')}}: {{ problem.io_mode.output }})</span></p>
           <p class="content" v-html=problem.output_description></p>
-
           <div v-for="(sample, index) of problem.samples" :key="index">
             <div class="flex-container sample">
               <div class="sample-input">

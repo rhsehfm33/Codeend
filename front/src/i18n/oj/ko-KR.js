@@ -230,4 +230,5 @@ export const m = {
   // Write.vue
   Choose_Category: '게시판을 선택하세요.',
   Post: '게시글 등록'
+  // BoardDetail
 }

@@ -1,33 +1,43 @@
 <template>
-        <Panel shadow>
-          <div slot="title">{{$t('m.All_Board')}} {{$t('m.Board')}}</div>
-          <div slot="extra">
-            <ul class="filter">
-              <li>
-                <Input v-model="query.keyword"
-                      @on-enter="filterByKeyword"
-                      @on-click="filterByKeyword"
-                      placeholder="keyword"
-                      icon="ios-search-strong"/>
-              </li>
-            </ul>
-          </div>
-          <div>
-          <Table style="width: 100%; font-size: 1.4rem;"
-                :columns="allBoardTableColumns"
-                :data="allBoard"
-                :loading="loadings.table"
-                disabled-hover><tr></tr>
-          </Table>            
-          </div>
-          <div class="panel">
-              <transition name="fadeInUp">
-                <router-view></router-view>
-              </transition>
-          </div>
-        <Pagination :total="total" :page-size.sync="query.limit" @on-change="pushRouter" @on-page-size-change="pushRouter" :current.sync="query.page" :show-sizer="true">
-          </Pagination>
-        </Panel>
+    <Panel shadow>
+      <div slot="title">{{$t('m.All_Board')}} {{$t('m.Board')}}</div>
+      <div slot="extra">
+        <ul class="filter">
+          <li>
+            <Dropdown @on-click="filterByCategory">
+              <span>{{$t('m.Category')}}
+                <Icon type="arrow-down-b"></Icon>
+              </span>
+              <Dropdown-menu slot="list">
+                <Dropdown-item name="All">{{$t('m.All')}}</Dropdown-item>
+                <Dropdown-item name="Free">{{$t('m.Free')}}</Dropdown-item>
+                <Dropdown-item name="Question" >{{$t('m.Question')}}</Dropdown-item>
+              </Dropdown-menu>
+            </Dropdown>
+          </li>
+          <li>
+            <Input v-model="query.keyword"
+                   @on-enter="filterByKeyword"
+                   @on-click="filterByKeyword"
+                   placeholder="keyword"
+                   icon="ios-search-strong"/>
+          </li>
+        </ul>
+      </div>
+      <Table style="width: 100%; font-size: 1.4rem;"
+             :columns="boardTableColumns"
+             :data="boardList"
+             :loading="loadings.table"
+             disabled-hover>
+      </Table>
+      <Pagination :total="total" 
+    :page-size.sync="query.limit" 
+    @on-change="pushRouter" 
+    @on-page-size-change="pushRouter" 
+    :current.sync="query.page" 
+    :show-sizer="true">
+    </Pagination>
+    </Panel>
 </template>
 
 <script>
@@ -37,16 +47,15 @@
   import Pagination from '@oj/components/Pagination'
 
   export default {
-    name: 'AllBoard',
+    name: 'ProblemList',
     components: {
       Pagination
     },
     data () {
       return {
-        allBoardTableColumns: [
+        boardTableColumns: [
           {
             title: this.$i18n.t('m.Title'),
-            key: '_id',
             width: 400,
             render: (h, params) => {
               return h('Button', {
@@ -55,65 +64,98 @@
                   size: 'large'
                 },
                 on: {
-                  // 제목 클릭하면 상세 화면으로 라우터를 통해 이동함
                   click: () => {
-                    // board_id 전달
-                    this.$router.push({name: 'board-details', params: {boardID: params.row.board_id}})
+                    this.$router.push({name: 'board-detail', params: {boardID: params.row.id}})
                   }
                 },
                 style: {
-                  padding: '2px 0 0 10px',
+                  padding: '2px 0',
                   overflowX: 'auto',
                   textAlign: 'left',
                   width: '100%'
                 }
-              }, params)
+              }, params.row.title)
             }
           },
           {
             title: this.$i18n.t('m.Category'),
             render: (h, params) => {
-              return h(params.row.title)
+              let t = params.row.difficulty
+              let color = 'blue'
+              if (t === 'Low') color = 'green'
+              else if (t === 'High') color = 'yellow'
+              return h('Tag', {
+                props: {
+                  color: color
+                }
+              }, this.$i18n.t('m.' + params.row.category))
             }
           },
           {
             title: this.$i18n.t('m.Created_By'),
             render: (h, params) => {
-              return h(params.row.created_by)
+              return h('Button', {
+                props: {
+                  type: 'text',
+                  size: 'large'
+                },
+                on: {
+                  click: () => {
+                    this.$router.push({name: 'board-detail', params: {boardID: params.row.created_by.username}})
+                  }
+                }
+              }, params.row.title)
             }
           },
           {
             title: this.$i18n.t('m.Comment'),
             render: (h, params) => {
-              return h(params.row.comment)
+              return h(params.row.title)
             }
           },
           {
             title: this.$i18n.t('m.Views'),
             render: (h, params) => {
-              return h(params.row.views)
+              return h('Button', {
+                props: {
+                  type: 'text',
+                  size: 'large'
+                },
+                on: {
+                  click: () => {
+                    this.$router.push({name: 'board-detail', params: {boardID: params.row.views}})
+                  }
+                }
+              }, params.row.title)
             }
           },
           {
             title: this.$i18n.t('m.Date'),
             render: (h, params) => {
-              // last_update_time 업데이트될 경우 변경
-              return h(params.row.create_time)
+              return h('Button', {
+                props: {
+                  type: 'text',
+                  size: 'large'
+                },
+                on: {
+                  click: () => {
+                    this.$router.push({name: 'board-detail', params: {boardID: params.row.create_time}})
+                  }
+                }
+              }, params.row.title)
             }
           }
         ],
-        allBoard: [],
+        boardList: [],
         limit: 20,
-        total: 0,
         loadings: {
-          table: true,
-          tag: true
+          // 임시로 로딩 멈춤
+          table: false
         },
         routeName: '',
         query: {
           keyword: '',
-          difficulty: '',
-          tag: '',
+          category: '',
           page: 1,
           limit: 10
         }
@@ -123,9 +165,10 @@
       this.init()
     },
     methods: {
-      init (simulate = false) {
+      init () {
         this.routeName = this.$route.name
         let query = this.$route.query
+        this.query.difficulty = query.difficulty || ''
         this.query.keyword = query.keyword || ''
         this.query.page = parseInt(query.page) || 1
         if (this.query.page < 1) {
@@ -133,6 +176,7 @@
         }
         this.query.limit = parseInt(query.limit) || 10
         this.getBoardList()
+        console.log(this.boardList)
       },
       pushRouter () {
         this.$router.push({
@@ -142,19 +186,19 @@
       },
       getBoardList () {
         let offset = (this.query.page - 1) * this.query.limit
-        this.loadings.table = false
-        // this.loadings.table = true
-
+        this.loadings.table = true
         api.getBoardList(offset, this.limit, this.query).then(res => {
           this.loadings.table = false
-          this.total = res.data.data.total
-          this.allBoard = res.data.data.results
-          if (this.isAuthenticated) {
-            this.addStatusColumn(this.allBoardTableColumns, res.data.data.results)
-          }
+          this.boardList = res.data.data.results
+          console.log(this.boardList)
         }, res => {
           this.loadings.table = false
         })
+      },
+      filterByCategory (category) {
+        this.query.category = category
+        this.query.page = 1
+        this.pushRouter()
       },
       filterByKeyword () {
         this.query.page = 1

@@ -280,15 +280,15 @@ export default {
         params[element] = searchParams[element]
       }
     })
-    return ajax('board_api', 'get', {
+    return ajax('board_list_api', 'get', {
       params: params
     })
   },
-  getBoardDetail (boardID) {
-    return ajax('board_api', 'get', {
+  getBoardDetail (id) {
+    return ajax('board_api/:id', 'get', {
       params: {
         // only id parameter
-        board_id: boardID
+        id
       }
     })
   },
@@ -301,7 +301,10 @@ export default {
   editBoard (data) {
     return ajax('board_api', 'put', {
       // id, title, category("Free" or "Question"), content
-      data
+      id: data.id,
+      title: data.title,
+      category: data.category,
+      content: data.content
     })
   },
   deleteBoard (boardID) {
@@ -328,7 +331,7 @@ export default {
     return ajax('comment', 'delete', {
       params: {
         // only id parameter
-        comment_id: commentID
+        id: commentID
       }
     })
   }

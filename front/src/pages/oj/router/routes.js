@@ -12,8 +12,7 @@ import {
   ResetPassword,
   SubmissionDetails,
   SubmissionList,
-  UserHome,
-  Comment
+  UserHome
 } from '../views'
 
 import * as Contest from '@oj/views/contest'
@@ -56,7 +55,6 @@ export default [
     path: '/problem/:problemID',
     meta: {title: 'Problem Details'},
     component: Problem
-    // component: Board.BoardDetail
   },
   {
     name: 'submission-list',
@@ -163,12 +161,12 @@ export default [
     ]
   },
   {
-    path: '/board',
-    component: Board.Boards,
+    path: '/boards',
+    component: Board.BoardList,
     children: [
       {
         name: 'all-board',
-        path: '',
+        path: 'all',
         meta: {title: 'All Board'},
         component: Board.AllBoard
       },
@@ -187,29 +185,16 @@ export default [
       {
         name: 'write-board',
         path: 'write',
-        meta: {requiresAuth: true, title: 'Write Board'},
-        component: Board.WriteBoard
-      }
-    ]
-  },
-  {
-    name: 'board-details',
-    path: '/board/:boardID',
-    meta: {title: 'Board Details'},
-    component: Board.BoardDetail,
-    children: [
+        meta: {title: 'Add Board'},
+        component: Board.AddBoard
+      },
       {
-        name: 'comment',
-        path: "comment/:commentID",
-        meta: {title: 'Comment'},
-        component: Comment
+        name: 'board-detail',
+        path: 'view/:boardID',
+        meta: {title: 'Board Detail'},
+        component: Board.BoardDetail
       }
     ]
-  },
-  {
-    name: 'edit-board',
-    path: '/board/:boardID/edit',
-    component: Board.WriteBoard
   },
   {
     path: '*',

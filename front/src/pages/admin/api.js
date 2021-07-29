@@ -334,7 +334,7 @@ function ajax (url, method, options) {
         Vue.prototype.$error(res.data.data)
         reject(res)
         // 백엔드가 로그인으로 돌아 가면 세션이 유효하지 않음
-        // 현재 로그인 한 사용자는 로그 아웃해야합니다.
+        // 현재 로그인 한 사용자는 로그 아웃해야 함
         if (res.data.data.startsWith('You have to login.')) {
           router.push({name: 'login'})
         }

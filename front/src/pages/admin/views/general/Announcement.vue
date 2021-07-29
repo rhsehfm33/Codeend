@@ -98,6 +98,7 @@
     </el-dialog>
   </div>
 </template>
+
 <script>
   import Simditor from '../../components/Simditor.vue'
   import api from '../../api.js'

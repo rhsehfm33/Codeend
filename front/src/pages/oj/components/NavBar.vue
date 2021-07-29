@@ -24,7 +24,7 @@
           {{$t('m.OI_Rank')}}
         </Menu-item>
       </Submenu>
-      <Menu-item name="/board" class="oj-menu-item">
+      <Menu-item name="/boards/all" class="oj-menu-item">
         {{$t('m.Board')}}
       </Menu-item>      
     </div>      

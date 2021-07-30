@@ -7,29 +7,34 @@
         <p>{{board.create_time}}</p>
         <p>{{board.last_update_time}}</p>
       </div>
-      <div class="body-container">
+      <Card class="body-container">
         <p v-html=board.content></p>
-      </div>
+      </Card>
     </Panel>
-    <Panel class="comment-container">
-      <p>{{board.comment}}</p>
-    </Panel>
+    <Comment v-bind:boardID="this.board.id"></Comment>
   </div>
 </template>
 
 <script>
   import api from '@oj/api'
+  import Comment from './Comment.vue'
+  import { mapActions } from 'vuex'
 
   export default {
     name: 'BoardDetail',
+    components: {
+      Comment
+    },
     data () {
       return {
         user: {},
+        mode: 'create',
         board: {
           created_by: {
             username: ''
           },
-          comment: [],
+          comment: [
+          ],
           title: '',
           category: '',
           views: '',
@@ -41,11 +46,13 @@
       this.init()
     },
     methods: {
+      ...mapActions(['getProfile', 'changeModalStatus']),
       init () {
         const boardID = this.$route.params.boardID
         api.getBoardDetail(boardID).then(res => {
           const board = res.data.data
           this.board = board
+          console.log(this.board.id)
         })
       }
     }
@@ -53,4 +60,16 @@
 </script>
 
 <style scoped lang="less">
+.board-container {
+  background-color: yellow;
+  padding: 0;
+}
+
+.top-container {
+  background-color: aqua;
+}
+
+.body-container {
+  height: 500px;
+}
 </style>

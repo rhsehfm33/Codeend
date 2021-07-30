@@ -1,6 +1,7 @@
 <template>
     <Panel shadow>
-      <div slot="title">{{$t('m.All_Board')}} {{$t('m.Board')}}</div>
+      <div slot="title">{{$t('m.All_Board')}} {{$t('m.Board')}}
+      </div>
       <div slot="extra">
         <ul class="filter">
           <li>
@@ -104,6 +105,12 @@
                     // todo - 그 유저의 홈으로 이동
                     this.$router.push({name: 'board-detail', params: {boardID: params.row.created_by.username}})
                   }
+                },
+                style: {
+                  padding: '0',
+                  // overflowX: 'auto',
+                  textAlign: 'left',
+                  width: '100%'
                 }
               }, params.row.created_by.username)
             }
@@ -111,55 +118,24 @@
           {
             title: this.$i18n.t('m.Comment'),
             render: (h, params) => {
-              return h('Button', {
+              return h('Text', {
                 props: {
                   type: 'text',
                   size: 'large'
-                },
-                on: {
-                  click: () => {
-                    this.$router.push({name: 'board-detail', params: {boardID: params.row.id}})
-                  }
-                },
-                style: {
-                  padding: '2px 0',
-                  overflowX: 'auto',
-                  textAlign: 'left',
-                  width: '100%'
                 }
-              }, params.row.title)
+              }, params.row.comment)
             }
           },
           {
             title: this.$i18n.t('m.Views'),
             render: (h, params) => {
-              return h('Button', {
-                props: {
-                  type: 'text',
-                  size: 'large'
-                },
-                on: {
-                  click: () => {
-                    this.$router.push({name: 'board-detail', params: {boardID: params.row.views}})
-                  }
-                }
-              }, params.row.views)
+              return h('span', params.row.views)
             }
           },
           {
             title: this.$i18n.t('m.Date'),
             render: (h, params) => {
-              return h('Button', {
-                props: {
-                  type: 'text',
-                  size: 'large'
-                },
-                on: {
-                  click: () => {
-                    this.$router.push({name: 'board-detail', params: {boardID: params.row.create_time}})
-                  }
-                }
-              }, params.row.last_update_time)
+              return h('span', params.row.last_update_time)
             }
           }
         ],
@@ -168,6 +144,7 @@
         loadings: {
           table: true
         },
+        comment: '',
         routeName: '',
         query: {
           keyword: '',

@@ -5,6 +5,7 @@ from copy import deepcopy
 
 from utils.api.tests import APITestCase
 from .models import Board
+from problem.models import Problem
 from comment.models import Comment
 from problem.tests import ProblemCreateTestBase, DEFAULT_PROBLEM_DATA
 
@@ -20,7 +21,7 @@ class BoardAPITest(APITestCase):
         self.board_data = Board.objects.create(created_by=self.user, problem=self.problem, **SETUP_BOARD_DATA)
         self.comment_data = Comment.objects.create(created_by=self.user, board=self.board_data, **SETUP_COMMENT_DATA)
         self.url = self.reverse("board_api")
-        TEST_BOARD_DATA["problem_id"] = self.problem.id
+        TEST_BOARD_DATA["problem_id"] = self.problem._id
 
     def test_create_board(self):
         resp = self.client.post(self.url, TEST_BOARD_DATA)
@@ -75,3 +76,7 @@ class BoardAPITest(APITestCase):
     def test_get_boards_total_comments(self):
         resp = self.client.get(self.url + "s?limit=10&offset=0&category=" + self.board_data.category)
         self.assertContains(resp, "\"total_comments\": 1")
+
+    def test_paging_page(self):
+        resp = self.client.get(self.url + "s?paging=true&offset=0&limit=10&page=")
+        self.assertSuccess(resp)

@@ -26,11 +26,13 @@ class BoardAPI(BoardBase):
             return self.error(error_info)
 
         data = request.data
-        try:
-            problem = Problem.objects.get(id=data["problem_id"])
-        except Problem.DoesNotExist:
-            return self.error("Problem does not exist")
+        if data["problem_id"]:
+            try:
+                problem = Problem.objects.get(_id=data["problem_id"])
+            except Problem.DoesNotExist:
+                return self.error("Problem does not exist")
 
+        del data["problem_id"]
         data["created_by"] = request.user
         data["problem"] = problem
         board = Board.objects.create(**data)
@@ -38,7 +40,7 @@ class BoardAPI(BoardBase):
         
     def get(self, request):
         board_id = request.GET.get("id")
-        if (board_id):
+        if board_id:
             try:
                 board = Board.objects.get(id=board_id)
             except Board.DoesNotExist:
@@ -57,12 +59,13 @@ class BoardAPI(BoardBase):
         except Board.DoesNotExist:
             return self.error("Board does not exist")
 
-        try:
-            problem = Problem.objects.get(id=data["problem_id"])
-        except Problem.DoesNotExist:
-            return self.error("Problem does not exist")
+        if data["problem_id"]:
+            try:
+                data["problem"] = Problem.objects.get(_id=data["problem_id"])
+            except Problem.DoesNotExist:
+                return self.error("Problem does not exist")
 
-        data["problem"] = problem
+        del data["problem_id"]
         for k, v in data.items():
             setattr(board, k, v)
         board.save()

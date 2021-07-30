@@ -5,26 +5,26 @@
         <p>{{board.title}}</p>
         <p>{{board.created_by.username}}</p>
         <p>{{board.create_time}}</p>
+        <p>{{board.last_update_time}}</p>
       </div>
       <div class="body-container">
         <p v-html=board.content></p>
       </div>
     </Panel>
     <Panel class="comment-container">
+      <p>{{board.comment}}</p>
     </Panel>
   </div>
 </template>
 
 <script>
   import api from '@oj/api'
-import { mapActions } from 'vuex'
 
   export default {
     name: 'BoardDetail',
     data () {
       return {
         user: {},
-        boardID: '',
         board: {
           created_by: {
             username: ''
@@ -42,11 +42,10 @@ import { mapActions } from 'vuex'
     },
     methods: {
       init () {
-        this.boardID = this.$route.params.boardID
-        api.getBoardDetail(1).then(res => {
-          let board = res.data.data.results
+        const boardID = this.$route.params.boardID
+        api.getBoardDetail(boardID).then(res => {
+          const board = res.data.data
           this.board = board
-          console.log(this.board)
         })
       }
     }

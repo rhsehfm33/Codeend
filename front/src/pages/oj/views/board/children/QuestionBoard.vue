@@ -80,10 +80,10 @@
           {
             title: this.$i18n.t('m.Category'),
             render: (h, params) => {
-              let t = params.row.difficulty
+              let t = params.row.category
               let color = 'blue'
-              if (t === 'Low') color = 'green'
-              else if (t === 'High') color = 'yellow'
+              if (t === 'Free') color = 'green'
+              else if (t === 'Question') color = 'yellow'
               return h('Tag', {
                 props: {
                   color: color

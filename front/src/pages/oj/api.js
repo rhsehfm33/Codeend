@@ -285,8 +285,10 @@ export default {
     })
   },
   getBoardDetail (id) {
-    return ajax(`board/${id}`, 'get', {
-      id
+    return ajax('board', 'get', {
+      params: {
+        id
+      }
     })
   },
   createBoard (data) {
@@ -300,11 +302,11 @@ export default {
       data
     })
   },
-  deleteBoard (boardID) {
+  deleteBoard (id) {
     return ajax('board', 'delete', {
       params: {
         // only id parameter
-        board_id: boardID
+        id
       }
     })
   },

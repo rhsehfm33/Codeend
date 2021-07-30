@@ -56,6 +56,27 @@
       return {
         boardTableColumns: [
           {
+            title: this.$i18n.t('m.ProblemNumber'),
+            key: '_id',
+            width: 100,
+            render: (h, params) => {
+              return h('Button', {
+                props: {
+                  type: 'text',
+                  size: 'large'
+                },
+                on: {
+                  click: () => {
+                    this.$router.push({name: 'problem-details', params: {problemID: params.row._id}})
+                  }
+                },
+                style: {
+                  padding: '2px 0'
+                }
+              }, params.row._id)
+            }
+          },
+          {
             title: this.$i18n.t('m.Title'),
             width: 300,
             render: (h, params) => {
@@ -169,6 +190,7 @@
         }
         this.query.limit = parseInt(query.limit) || 10
         this.getBoardList()
+        console.log(this.boardList)
       },
       pushRouter () {
         this.$router.push({

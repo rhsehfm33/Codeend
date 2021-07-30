@@ -1,7 +1,7 @@
 <template>
   <div>
     <Panel class="board-container">
-      <div class="top-container">
+      <div class="top-container" >
         <p>{{board.title}}</p>
         <p>{{board.created_by.username}}</p>
         <p>{{board.create_time}}</p>

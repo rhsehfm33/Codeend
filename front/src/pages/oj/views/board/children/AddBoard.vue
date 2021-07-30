@@ -13,6 +13,9 @@
               <Option :label="$t('m.Question')+$t('m.Board')" value="Question"></Option>
             </Select>
           </FormItem>
+          <FormItem prop="board_problemID">
+            <Input placeholder="문제 번호를 입력하세요." v-model="board.problemID" type="text"/>
+          </FormItem>
           <FormItem required>
             <Simditor v-model="board.content"/>
           </FormItem>
@@ -36,10 +39,14 @@
     },
     data () {
       return {
+        // query: {
+        //   problemID: ''
+        // },
         currentAnnouncementId: null,
         // mode: 'create',
         // 공지 (new | edit) model
         board: {
+          problemID: '',
           id: '',
           title: '',
           category: '',
@@ -55,20 +62,28 @@
     methods: {
       ...mapActions(['getProfile']),
       init () {
+        // let query = this.$route.query
+        // this.query.problemID = query.problemID || ''
         api.getUserInfo(this.username).then(res => {
           this.created_by = res.data.data.user
         })
       },
       submitPost () {
         let data = {
+          problem_id: this.problemID,
           id: this.created_by.id,
           title: this.board.title,
           category: this.board.category,
           content: this.board.content
         }
+        console.log(data)
         api.createBoard(data).then(res => {
           this.$router.push({name: 'all-board'})
         })
+      },
+      filterByProblemID () {
+        this.query.page = 1
+        this.pushRouter()
       }
     }
   }

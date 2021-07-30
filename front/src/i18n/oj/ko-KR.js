@@ -227,6 +227,7 @@ export const m = {
   Comment: '댓글',
   Date: '작성일',
   Write: '글쓰기',
+  ProblemNumber: '문제 번호',
   // Write.vue
   Choose_Category: '게시판을 선택하세요.',
   Post: '게시글 등록'

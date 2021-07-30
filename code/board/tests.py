@@ -7,7 +7,7 @@ from utils.api.tests import APITestCase
 from .models import Board
 from comment.models import Comment
 
-SETUP_BOARD_DATA = {"title": "setup", "category": "Announcement", "content": "<p>setup</p>"}
+SETUP_BOARD_DATA = {"title": "setup", "category": "Question", "content": "<p>setup</p>"}
 SETUP_COMMENT_DATA = {"content": "setup"}
 
 
@@ -61,5 +61,12 @@ class BoardAPITest(APITestCase):
         for i in range(1, 20):
             self.client.post(self.url, TEST_BOARD_DATA)
         resp = self.client.get(self.url + "s?limit=10&offset=10&keyword=test")
-        print(json.dumps(resp.data))
         self.assertContains(resp, "\"total\": 19")
+
+    def test_get_boards_category_search(self):
+        for i in range(1, 6):
+            self.client.post(self.url, TEST_BOARD_DATA)
+            self.client.post(self.url, SETUP_BOARD_DATA)
+        resp = self.client.get(self.url + "s?limit=10&offset=0&category=Free")
+        print(json.dumps(resp.data))
+        self.assertContains(resp, "\"total\": 5")

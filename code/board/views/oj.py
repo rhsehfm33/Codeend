@@ -76,9 +76,12 @@ class BoardListAPI(APIView):
             return self.error("Limit is needed")
 
         keyword = request.GET.get("keyword")
+        category = request.GET.get("category")
 
         boards = Board.objects.all().select_related("created_by")
         if keyword:
             boards = boards.filter(title__contains=keyword)
+        if category:
+            boards = boards.filter(category=category)
         return self.success(self.paginate_data(request, boards, BoardListSerializer))
         

@@ -5,7 +5,9 @@
         <p class="section-title">{{$t('m.Write')}}</p>
         <Form class="setting-content" ref="board" :model="board">
           <FormItem prop="board_title">
-            <Input placeholder="제목을 입력하세요." v-model="board.title" type="text"/>
+            <Input placeholder="제목을 입력하세요." v-model="board.title" type="text">
+              {{this.board.title}}
+            </Input>
           </FormItem>
           <FormItem prop="board_category">
             <Select v-model="board.category" placeholder="게시판을 선택하세요.">
@@ -14,10 +16,12 @@
             </Select>
           </FormItem>
           <FormItem prop="board_problemID">
-            <Input placeholder="문제 번호를 입력하세요." v-model="board.problemID" type="text"/>
+            <Input placeholder="문제 번호를 입력하세요." v-model="board.problemID" type="text">
+            {{this.board.problemID}}
+            </Input>
           </FormItem>
           <FormItem required>
-            <Simditor v-model="board.content"/>
+            <Simditor v-model="board.content">{{this.board.content}}</Simditor>
           </FormItem>
           <div v-if="this.mode === 'create'">
           <el-button type="primary" @click="submitPost">{{$t('m.Post')}}</el-button>
@@ -72,15 +76,25 @@
         api.getUserInfo(this.username).then(res => {
           this.created_by.id = res.data.data.user.id
         })
+        api.getBoardDetail(this.$route.query.boardID).then(res => {
+          const board = res.data.data
+          this.board.problemID = board.problem._id
+          this.board.id = board.id
+          this.board.title = board.title
+          this.board.category = board.category
+          this.board.content = board.content
+          console.log(board)
+        })
       },
       submitPost () {
         let data = {
           problem_id: this.board.problemID,
-          id: this.created_by.id,
+          id: this.board.id,
           title: this.board.title,
           category: this.board.category,
           content: this.board.content
         }
+        console.log(data)
         let funcName = this.mode === 'create' ? 'createBoard' : 'editBoard'
         api[funcName](data).then(res => {
           this.$router.push({name: 'all-board'})

@@ -6,7 +6,7 @@
         <p>{{board.created_by.username}}</p>
         <p>{{board.create_time | localtime }}</p>
         <p>{{board.last_update_time | localtime}}</p>
-        <div v-if="this.isVisibie">
+        <div v-if="this.user.id === this.board.created_by.id">
         <el-button type="primary" size="small" @click="editBoard()" icon="el-icon-plus">수정</el-button>
         <el-button type="primary" size="small" @click="deleteBoard()" icon="el-icon-plus">삭제</el-button>
         </div>
@@ -62,64 +62,45 @@ import { mapGetters } from 'vuex'
       ...mapGetters(['isAuthenticated', 'user']),
       init () {
         const boardID = this.$route.params.boardID
+        this.checkUserID()
+        this.getBoard(boardID)
+      },
+      getBoard (boardID) {
         api.getBoardDetail(boardID).then(res => {
           const board = res.data.data
           const comments = res.data.data.comment
           this.board = board
           this.comments = comments
-          this.checkUserID()
         })
       },
       checkUserID () {
-        const createdByID = this.$data.board.created_by.id
-        // todos: 지금 유저 아이디 가져오기
-        const nowUserID = this.$data
-        console.log(createdByID)
-        console.log(nowUserID)
-        if (nowUserID === createdByID) {
-          // console.log("일치!")
-          this.isVisibie = true
-        } else {
-          console.log("불일치")
-          this.isVisibie = false
-        }
+        api.getUserInfo(this.username).then(res => {
+          this.user.id = res.data.data.user.id
+        })
       },
       deleteBoard () {
         const boardID = this.$route.params.boardID
-        api.deleteBoard(boardID).then(res => {
-          this.init()
-        })
+        this.$confirm("Are you sure?").then(() => {
+          api.deleteBoard(boardID).then(res => {
+            this.$router.push({name: 'all-board'})
+          })
+        });
       },
       editBoard () {
-        console.log(this.board)
-        const boardID = this.$route.params.boardID
         let data = {
-          id: boardID,
-          title: "",
-          category: "",
+          problem_id: this.board.problem._id,
+          id: this.board.id,
+          title: this.board.title,
+          category: this.board.category,
           content: this.board.content
         }
         api.editBoard(data).then(res => {
+          // 수정 입력창 오픈!
+          console.log("짜잔 수정")
           this.init()
         })
       }
     }
-    // computed: {
-    //   ...mapGetters(['isAuthenticated', 'user']),
-    //   checkUser () {
-    //     const nowUserId = this.user.id
-    //     const createdById = this.board.created_by.id
-    //     if (!this.isAuthenticated) {
-    //       // console.log("no")
-    //       this.isDisabled = true
-    //     } else if (nowUserId === createdById) {
-    //       // console.log("일치!")
-    //       this.isVisibie = true
-    //     } else {
-    //       console.log("불일치")
-    //     }
-    //   }
-    // }
   }
 </script>
 

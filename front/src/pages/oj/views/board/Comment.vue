@@ -11,7 +11,9 @@
                   disabled=this.isDisabled
                   />
       </FormItem>
-      <Button type="primary" @click="submitComment">댓글 등록</Button>
+      <div>
+      <el-button type="primary" @click="submitComment">댓글 등록</el-button>
+      </div>
     </Form>
   </Panel> 
 </template>

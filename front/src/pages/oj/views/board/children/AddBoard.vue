@@ -30,7 +30,7 @@
   import api from '@oj/api'
   import { FormMixin } from '@oj/components/mixins'
   import Simditor from '../../../../admin/components/Simditor.vue'
-  import { mapActions } from 'vuex'
+  import { mapGetters } from 'vuex'
 
   export default {
     mixins: [FormMixin],
@@ -49,7 +49,7 @@
           content: ''
         },
         created_by: {
-          id: 0
+          id: -1
         }
       }
     },
@@ -58,10 +58,10 @@
     },
     methods: {
       // ...mapActions(['getProfile']),
+      ...mapGetters(['user']),
       init () {
         api.getUserInfo(this.username).then(res => {
           this.created_by.id = res.data.data.user.id
-          console.log(this.created_by.id)
         })
       },
       submitPost () {

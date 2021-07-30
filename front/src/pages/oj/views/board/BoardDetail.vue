@@ -11,6 +11,15 @@
         <p v-html=board.content></p>
       </Card>
     </Panel>
+    <div 
+      v-for="comment in comments"
+      :key="comment.id">
+      <Card :comment="comment">
+        {{comment.content}}
+        {{comment.create_time}}
+        {{comment.created_by.username}}
+      </Card>
+      </div>
     <Comment v-bind:boardID="this.board.id"></Comment>
   </div>
 </template>
@@ -33,13 +42,12 @@
           created_by: {
             username: ''
           },
-          comment: [
-          ],
           title: '',
           category: '',
           views: '',
           create_time: ''
-        }
+        },
+        comments: []
       }
     },
     mounted () {
@@ -51,8 +59,9 @@
         const boardID = this.$route.params.boardID
         api.getBoardDetail(boardID).then(res => {
           const board = res.data.data
+          const comments = res.data.data.comment
           this.board = board
-          console.log(`보드 아이디 : ${this.board.id}`)
+          this.comments = comments
         })
       }
     }

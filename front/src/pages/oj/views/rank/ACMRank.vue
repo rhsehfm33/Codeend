@@ -20,7 +20,7 @@
   import Pagination from '@oj/components/Pagination'
   import utils from '@/utils/utils'
   import { RULE_TYPE } from '@/utils/constants'
-import { locale } from 'moment'
+  import { locale } from 'moment'
 
   export default {
     name: 'acm-rank',

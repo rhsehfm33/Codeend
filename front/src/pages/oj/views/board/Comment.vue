@@ -1,6 +1,7 @@
 <template>
   <Panel class="comment-container">
     <p>댓글 창!</p>
+    <div></div>
     <Form class="setting-content" ref="comment" :model="comment">
       <FormItem prop="board_title">
         <Input placeholder="댓글을 입력하세요." v-model="comment.content" type="text"/>

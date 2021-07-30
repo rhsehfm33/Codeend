@@ -2,6 +2,7 @@ import board
 from django.db import models
 
 from account.models import User
+from problem.models import Problem
 from utils.models import RichTextField
 from utils.constants import Choices
 
@@ -11,6 +12,7 @@ class BoardCategory(Choices):
 
 class Board(models.Model):
     id = models.BigAutoField(primary_key=True)
+    problem = models.ForeignKey(Problem, on_delete=models.CASCADE)
     title = models.TextField()
     category = models.TextField()
     content = RichTextField()

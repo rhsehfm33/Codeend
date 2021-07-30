@@ -1,6 +1,7 @@
 from utils.api import APIView
 
 from board.models import Board, BoardCategory
+from problem.models import Problem
 from ..serializers import (CreateBoardSerializer, BoardSerializer, EditBoardSerializer,
                             BoardListSerializer)
 from account.decorators import login_required
@@ -22,8 +23,15 @@ class BoardAPI(BoardBase):
         error_info = self.common_checks(request)
         if error_info:
             return self.error(error_info)
+
         data = request.data
+        try:
+            problem = Problem.objects.get(id=data["problem_id"])
+        except Problem.DoesNotExist:
+            return self.error("Problem does not exist")
+
         data["created_by"] = request.user
+        data["problem"] = problem
         board = Board.objects.create(**data)
         return self.success(BoardSerializer(board).data)
         
@@ -48,6 +56,12 @@ class BoardAPI(BoardBase):
         except Board.DoesNotExist:
             return self.error("Board does not exist")
 
+        try:
+            problem = Problem.objects.get(id=data["problem_id"])
+        except Problem.DoesNotExist:
+            return self.error("Problem does not exist")
+
+        data["problem"] = problem
         for k, v in data.items():
             setattr(board, k, v)
         board.save()

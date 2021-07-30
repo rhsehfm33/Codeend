@@ -39,10 +39,6 @@
     },
     data () {
       return {
-        // query: {
-        //   problemID: ''
-        // },
-        currentAnnouncementId: null,
         // mode: 'create',
         // 공지 (new | edit) model
         board: {
@@ -70,21 +66,20 @@
       },
       submitPost () {
         let data = {
-          problem_id: this.problemID,
+          problem_id: this.board.problemID,
           id: this.created_by.id,
           title: this.board.title,
           category: this.board.category,
           content: this.board.content
         }
-        console.log(data)
         api.createBoard(data).then(res => {
           this.$router.push({name: 'all-board'})
         })
-      },
-      filterByProblemID () {
-        this.query.page = 1
-        this.pushRouter()
       }
+      // filterByProblemID () {
+      //   this.query.page = 1
+      //   this.pushRouter()
+      // }
     }
   }
 </script>

@@ -139,12 +139,7 @@
           {
             title: this.$i18n.t('m.Comment'),
             render: (h, params) => {
-              return h('Text', {
-                props: {
-                  type: 'text',
-                  size: 'large'
-                }
-              }, params.row.comment)
+              return h('span', params.row.total_comments)
             }
           },
           {
@@ -190,7 +185,6 @@
         }
         this.query.limit = parseInt(query.limit) || 10
         this.getBoardList()
-        console.log(this.boardList)
       },
       pushRouter () {
         this.$router.push({
@@ -204,6 +198,7 @@
         api.getBoardList(offset, this.limit, this.query).then(res => {
           this.loadings.table = false
           this.boardList = res.data.data.results
+          console.log(this.boardList)
         }, res => {
           this.loadings.table = false
         })

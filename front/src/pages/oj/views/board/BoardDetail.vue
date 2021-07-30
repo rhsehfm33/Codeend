@@ -4,8 +4,8 @@
       <div class="top-container" >
         <p>{{board.title}}</p>
         <p>{{board.created_by.username}}</p>
-        <p>{{board.create_time}}</p>
-        <p>{{board.last_update_time}}</p>
+        <p>{{board.create_time | localtime }}</p>
+        <p>{{board.last_update_time | localtime}}</p>
       </div>
       <Card class="body-container">
         <p v-html=board.content></p>
@@ -52,7 +52,7 @@
         api.getBoardDetail(boardID).then(res => {
           const board = res.data.data
           this.board = board
-          console.log(this.board.id)
+          console.log(`보드 아이디 : ${this.board.id}`)
         })
       }
     }

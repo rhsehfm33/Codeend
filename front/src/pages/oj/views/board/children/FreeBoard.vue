@@ -55,6 +55,27 @@
       return {
         boardTableColumns: [
           {
+            title: this.$i18n.t('m.ProblemNumber'),
+            key: '_id',
+            width: 100,
+            render: (h, params) => {
+              return h('Button', {
+                props: {
+                  type: 'text',
+                  size: 'large'
+                },
+                on: {
+                  click: () => {
+                    this.$router.push({name: 'problem-details', params: {problemID: params.row.problem_id}})
+                  }
+                },
+                style: {
+                  padding: '2px 0'
+                }
+              }, params.row.problem_id)
+            }
+          },
+          {
             title: this.$i18n.t('m.Title'),
             width: 300,
             render: (h, params) => {
@@ -117,12 +138,7 @@
           {
             title: this.$i18n.t('m.Comment'),
             render: (h, params) => {
-              return h('Text', {
-                props: {
-                  type: 'text',
-                  size: 'large'
-                }
-              }, params.row.comment)
+              return h('span', params.row.total_comments)
             }
           },
           {

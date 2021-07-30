@@ -67,13 +67,13 @@
                 },
                 on: {
                   click: () => {
-                    this.$router.push({name: 'problem-details', params: {problemID: params.row._id}})
+                    this.$router.push({name: 'problem-details', params: {problemID: params.row.problem_id}})
                   }
                 },
                 style: {
                   padding: '2px 0'
                 }
-              }, params.row._id)
+              }, params.row.problem_id)
             }
           },
           {

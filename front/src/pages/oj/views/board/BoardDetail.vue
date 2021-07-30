@@ -11,16 +11,16 @@
         <p v-html=board.content></p>
       </Card>
     </Panel>
+      <Comment v-bind:boardID="this.board.id"></Comment>
     <div 
       v-for="comment in comments"
       :key="comment.id">
       <Card :comment="comment">
         {{comment.content}}
-        {{comment.create_time}}
+        {{comment.create_time | localtime}}
         {{comment.created_by.username}}
       </Card>
       </div>
-    <Comment v-bind:boardID="this.board.id"></Comment>
   </div>
 </template>
 

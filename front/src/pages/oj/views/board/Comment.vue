@@ -4,7 +4,7 @@
     <div></div>
     <Form class="setting-content" ref="comment" :model="comment">
       <FormItem prop="board_title">
-        <Input placeholder="댓글을 입력하세요." v-model="comment.content" type="text"/>
+        <textarea placeholder="댓글을 입력하세요." v-model="comment.content" v-on:keypress.enter="submitComment"  type="text"/>
       </FormItem>
       <Button type="primary" @click="submitComment">댓글 등록</Button>
     </Form>
@@ -34,7 +34,7 @@
           content: this.comment.content
         }
         api.createComment(data).then(res => {
-          this.$router.push({name: 'board-detail'})
+          this.$router.go()
         })
       }
     }

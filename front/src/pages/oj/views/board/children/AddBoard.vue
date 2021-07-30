@@ -19,7 +19,14 @@
           <FormItem required>
             <Simditor v-model="board.content"/>
           </FormItem>
-          <Button type="primary" @click="submitPost">{{$t('m.Post')}}</Button>
+          <div v-if="this.mode === 'create'">
+          <el-button type="primary" @click="submitPost">{{$t('m.Post')}}</el-button>
+          <el-button type="primary" @click="goBack">{{$t('m.Back')}}</el-button>
+          </div>
+          <div v-else>
+          <el-button type="primary" @click="submitPost">{{$t('m.Post')}}</el-button>
+          <el-button type="primary" @click="deleteBoard()">{{$t('m.Delete')}}</el-button>
+          </div>
         </Form>
       </div>
     </div>
@@ -39,8 +46,7 @@
     },
     data () {
       return {
-        // mode: 'create',
-        // 공지 (new | edit) model
+        mode: 'create',
         board: {
           problemID: '',
           id: '',
@@ -60,6 +66,9 @@
       // ...mapActions(['getProfile']),
       ...mapGetters(['user']),
       init () {
+        if (this.$route.query.mode) {
+          this.mode = this.$route.query.mode
+        }
         api.getUserInfo(this.username).then(res => {
           this.created_by.id = res.data.data.user.id
         })
@@ -72,14 +81,17 @@
           category: this.board.category,
           content: this.board.content
         }
-        api.createBoard(data).then(res => {
+        let funcName = this.mode === 'create' ? 'createBoard' : 'editBoard'
+        api[funcName](data).then(res => {
           this.$router.push({name: 'all-board'})
         })
+      },
+      goBack () {
+        this.$router.go(-1)
+      },
+      deleteBoard () {
+        console.log("deleteBoard")
       }
-      // filterByProblemID () {
-      //   this.query.page = 1
-      //   this.pushRouter()
-      // }
     }
   }
 </script>

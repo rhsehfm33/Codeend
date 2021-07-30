@@ -230,6 +230,7 @@ export const m = {
   ProblemNumber: '문제 번호',
   // Write.vue
   Choose_Category: '게시판을 선택하세요.',
-  Post: '게시글 등록'
+  Post: '등록',
+  Delete: '삭제'
   // BoardDetail
 }

@@ -7,8 +7,8 @@
         <p>{{board.create_time | localtime }}</p>
         <p>{{board.last_update_time | localtime}}</p>
         <div v-if="this.user.id === this.board.created_by.id">
-        <el-button type="primary" size="small" @click="editBoard()" icon="el-icon-plus">수정</el-button>
-        <el-button type="primary" size="small" @click="deleteBoard()" icon="el-icon-plus">삭제</el-button>
+        <el-button type="primary" size="small" @click="editBoard()">수정</el-button>
+        <el-button type="primary" size="small" @click="deleteBoard()">삭제</el-button>
         </div>
       </div>
       <Card class="body-container">
@@ -87,18 +87,7 @@ import { mapGetters } from 'vuex'
         });
       },
       editBoard () {
-        let data = {
-          problem_id: this.board.problem._id,
-          id: this.board.id,
-          title: this.board.title,
-          category: this.board.category,
-          content: this.board.content
-        }
-        api.editBoard(data).then(res => {
-          // 수정 입력창 오픈!
-          console.log("짜잔 수정")
-          this.init()
-        })
+        this.$router.push({name: 'write-board', query: {mode: 'edit'}})
       }
     }
   }

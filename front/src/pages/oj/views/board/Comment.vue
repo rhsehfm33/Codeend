@@ -25,11 +25,11 @@
     },
     methods: {
       init () {
-        console.log(this.$route.params.boardID)
       },
       submitComment () {
+        this.boardID = parseInt((this.$route.params.boardID))
         let data = {
-          id: this.$route.params.boardID,
+          board_id: this.boardID,
           content: this.comment.content
         }
         api.createComment(data).then(res => {

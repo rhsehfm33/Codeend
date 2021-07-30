@@ -41,6 +41,7 @@
 </template>
 
 <script>
+  import filters from '@/utils/filters'
   import { mapGetters } from 'vuex'
   import api from '@oj/api'
   import utils from '@/utils/utils'
@@ -150,7 +151,7 @@
           {
             title: this.$i18n.t('m.Date'),
             render: (h, params) => {
-              return h('span', params.row.last_update_time)
+              return h('span', filters.localtime(params.row.last_update_time))
             }
           }
         ],

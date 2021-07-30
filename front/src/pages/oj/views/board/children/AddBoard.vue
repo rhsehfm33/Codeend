@@ -27,6 +27,7 @@
   import api from '@oj/api'
   import { FormMixin } from '@oj/components/mixins'
   import Simditor from '../../../../admin/components/Simditor.vue'
+  import { mapActions } from 'vuex'
 
   export default {
     mixins: [FormMixin],
@@ -36,26 +37,35 @@
     data () {
       return {
         currentAnnouncementId: null,
-        mode: 'create',
+        // mode: 'create',
         // 공지 (new | edit) model
         board: {
           id: '',
           title: '',
           category: '',
           content: ''
+        },
+        created_by: {
         }
       }
     },
+    mounted () {
+      this.init()
+    },
     methods: {
+      ...mapActions(['getProfile']),
+      init () {
+        api.getUserInfo(this.username).then(res => {
+          this.created_by = res.data.data.user
+        })
+      },
       submitPost () {
         let data = {
-          // id: this.board.id,
-          id: 1,
+          id: this.created_by.id,
           title: this.board.title,
           category: this.board.category,
           content: this.board.content
         }
-        console.log(data)
         api.createBoard(data).then(res => {
           this.$router.push({name: 'all-board'})
         })

@@ -280,35 +280,30 @@ export default {
         params[element] = searchParams[element]
       }
     })
-    return ajax('board_list_api', 'get', {
-      params: params
+    return ajax('boards', 'get', {
+      params
     })
   },
   getBoardDetail (id) {
-    return ajax('board_api/:id', 'get', {
+    return ajax(`board/${id}`, 'get', {
       params: {
-        // only id parameter
         id
       }
     })
   },
   createBoard (data) {
-    return ajax('board_api', 'post', {
-      // title, category("Free" or "Question"), content
+    return ajax('board', 'post', {
       data
     })
   },
   editBoard (data) {
-    return ajax('board_api', 'put', {
+    return ajax('board', 'put', {
       // id, title, category("Free" or "Question"), content
-      id: data.id,
-      title: data.title,
-      category: data.category,
-      content: data.content
+      data
     })
   },
   deleteBoard (boardID) {
-    return ajax('board_api', 'delete', {
+    return ajax('board', 'delete', {
       params: {
         // only id parameter
         board_id: boardID

@@ -47,7 +47,7 @@
   import Pagination from '@oj/components/Pagination'
 
   export default {
-    name: 'ProblemList',
+    name: 'all-board',
     components: {
       Pagination
     },
@@ -56,7 +56,7 @@
         boardTableColumns: [
           {
             title: this.$i18n.t('m.Title'),
-            width: 400,
+            width: 300,
             render: (h, params) => {
               return h('Button', {
                 props: {
@@ -80,10 +80,10 @@
           {
             title: this.$i18n.t('m.Category'),
             render: (h, params) => {
-              let t = params.row.difficulty
+              let t = params.row.category
               let color = 'blue'
-              if (t === 'Low') color = 'green'
-              else if (t === 'High') color = 'yellow'
+              if (t === 'Free') color = 'green'
+              else if (t === 'Question') color = 'yellow'
               return h('Tag', {
                 props: {
                   color: color
@@ -101,16 +101,33 @@
                 },
                 on: {
                   click: () => {
+                    // todo - 그 유저의 홈으로 이동
                     this.$router.push({name: 'board-detail', params: {boardID: params.row.created_by.username}})
                   }
                 }
-              }, params.row.title)
+              }, params.row.created_by.username)
             }
           },
           {
             title: this.$i18n.t('m.Comment'),
             render: (h, params) => {
-              return h(params.row.title)
+              return h('Button', {
+                props: {
+                  type: 'text',
+                  size: 'large'
+                },
+                on: {
+                  click: () => {
+                    this.$router.push({name: 'board-detail', params: {boardID: params.row.id}})
+                  }
+                },
+                style: {
+                  padding: '2px 0',
+                  overflowX: 'auto',
+                  textAlign: 'left',
+                  width: '100%'
+                }
+              }, params.row.title)
             }
           },
           {
@@ -126,7 +143,7 @@
                     this.$router.push({name: 'board-detail', params: {boardID: params.row.views}})
                   }
                 }
-              }, params.row.title)
+              }, params.row.views)
             }
           },
           {
@@ -142,15 +159,14 @@
                     this.$router.push({name: 'board-detail', params: {boardID: params.row.create_time}})
                   }
                 }
-              }, params.row.title)
+              }, params.row.last_update_time)
             }
           }
         ],
         boardList: [],
         limit: 20,
         loadings: {
-          // 임시로 로딩 멈춤
-          table: false
+          table: true
         },
         routeName: '',
         query: {
@@ -168,6 +184,7 @@
       init () {
         this.routeName = this.$route.name
         let query = this.$route.query
+        console.log(this.$route.query.keyword)
         this.query.difficulty = query.difficulty || ''
         this.query.keyword = query.keyword || ''
         this.query.page = parseInt(query.page) || 1
@@ -176,7 +193,6 @@
         }
         this.query.limit = parseInt(query.limit) || 10
         this.getBoardList()
-        console.log(this.boardList)
       },
       pushRouter () {
         this.$router.push({
@@ -190,7 +206,6 @@
         api.getBoardList(offset, this.limit, this.query).then(res => {
           this.loadings.table = false
           this.boardList = res.data.data.results
-          console.log(this.boardList)
         }, res => {
           this.loadings.table = false
         })

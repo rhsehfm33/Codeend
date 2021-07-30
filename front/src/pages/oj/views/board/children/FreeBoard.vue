@@ -47,7 +47,7 @@
   import Pagination from '@oj/components/Pagination'
 
   export default {
-    name: 'ProblemList',
+    name: 'FreeBoard',
     components: {
       Pagination
     },
@@ -80,7 +80,7 @@
           {
             title: this.$i18n.t('m.Category'),
             render: (h, params) => {
-              let t = params.row.difficulty
+              let t = params.row.category
               let color = 'blue'
               if (t === 'Low') color = 'green'
               else if (t === 'High') color = 'yellow'
@@ -88,7 +88,7 @@
                 props: {
                   color: color
                 }
-              }, this.$i18n.t('m.' + params.row.difficulty))
+              }, this.$i18n.t('m.' + params.row.category))
             }
           },
           {
@@ -101,10 +101,10 @@
                 },
                 on: {
                   click: () => {
-                    this.$router.push({name: 'board-detail', params: {boardID: params.row.id}})
+                    this.$router.push({name: 'board-detail', params: {username: params.row.created_by.username}})
                   }
                 }
-              }, params.row.title)
+              }, params.row.created_by.username)
             }
           },
           {

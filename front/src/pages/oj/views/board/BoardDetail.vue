@@ -2,34 +2,30 @@
   <div>
     <Panel class="board-container">
       <div class="top-container">
-        <p v-html=board.title></p>
-        <p v-html=board.created_by.username></p>
-        <p v-html=board.create_time></p>
+        <p>{{board.title}}</p>
+        <p>{{board.created_by.username}}</p>
+        <p>{{board.create_time}}</p>
       </div>
       <div class="body-container">
         <p v-html=board.content></p>
       </div>
     </Panel>
     <Panel class="comment-container">
-      <!-- <Card
-        v-for="comment in comments"
-        :key=""
-        :card="card"
-        :boardId="board.boardId"
-      /> -->
     </Panel>
   </div>
 </template>
 
 <script>
   import api from '@oj/api'
+import { mapActions } from 'vuex'
 
   export default {
     name: 'BoardDetail',
     data () {
       return {
+        user: {},
+        boardID: '',
         board: {
-          boardId: '',
           created_by: {
             username: ''
           },
@@ -46,8 +42,12 @@
     },
     methods: {
       init () {
+        this.boardID = this.$route.params.boardID
+        console.log(this.boardID)
+        // this.board.created_by = this.$route.query
+        // api.getUserInfo(this.username).then
         api.getBoardDetail(this.boardId).then(res => {
-          let board = res.data.data
+          let board = res.data.data.results
           this.board = board
         })
       }

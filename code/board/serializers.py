@@ -28,7 +28,11 @@ class BoardSerializer(serializers.ModelSerializer):
 
 class BoardListSerializer(serializers.ModelSerializer):
     created_by = UsernameSerializer()
+    total_comments = serializers.SerializerMethodField()
     
     class Meta:
         model = Board
         exclude = ("content",)
+
+    def get_total_comments(self, obj):
+        return obj.comment.count()

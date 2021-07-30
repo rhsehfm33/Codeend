@@ -1,5 +1,6 @@
 from utils.api import APIView
 
+from comment.models import Comment
 from board.models import Board, BoardCategory
 from problem.models import Problem
 from ..serializers import (CreateBoardSerializer, BoardSerializer, EditBoardSerializer,

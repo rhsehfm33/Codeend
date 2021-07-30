@@ -71,3 +71,7 @@ class BoardAPITest(APITestCase):
             self.client.post(self.url, SETUP_BOARD_DATA)
         resp = self.client.get(self.url + "s?limit=10&offset=0&category=Free")
         self.assertContains(resp, "\"total\": 5")
+
+    def test_get_boards_total_comments(self):
+        resp = self.client.get(self.url + "s?limit=10&offset=0&category=" + self.board_data.category)
+        self.assertContains(resp, "\"total_comments\": 1")

@@ -184,7 +184,6 @@
       init () {
         this.routeName = this.$route.name
         let query = this.$route.query
-        console.log(this.$route.query.keyword)
         this.query.difficulty = query.difficulty || ''
         this.query.keyword = query.keyword || ''
         this.query.page = parseInt(query.page) || 1

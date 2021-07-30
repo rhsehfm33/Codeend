@@ -43,12 +43,10 @@ import { mapActions } from 'vuex'
     methods: {
       init () {
         this.boardID = this.$route.params.boardID
-        console.log(this.boardID)
-        // this.board.created_by = this.$route.query
-        // api.getUserInfo(this.username).then
-        api.getBoardDetail(this.boardId).then(res => {
+        api.getBoardDetail(1).then(res => {
           let board = res.data.data.results
           this.board = board
+          console.log(this.board)
         })
       }
     }

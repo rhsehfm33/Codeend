@@ -88,7 +88,7 @@
                 props: {
                   color: color
                 }
-              }, this.$i18n.t('m.' + params.row.difficulty))
+              }, this.$i18n.t('m.' + params.row.category))
             }
           },
           {

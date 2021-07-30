@@ -286,9 +286,7 @@ export default {
   },
   getBoardDetail (id) {
     return ajax(`board/${id}`, 'get', {
-      params: {
-        id
-      }
+      id
     })
   },
   createBoard (data) {

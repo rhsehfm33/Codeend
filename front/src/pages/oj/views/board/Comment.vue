@@ -4,7 +4,12 @@
     <div></div>
     <Form class="setting-content" ref="comment" :model="comment">
       <FormItem prop="board_title">
-        <textarea placeholder="댓글을 입력하세요." v-model="comment.content" v-on:keypress.enter="submitComment"  type="text"/>
+        <textarea placeholder="댓글을 입력하세요." 
+                  v-model="comment.content" 
+                  v-on:keypress.enter="submitComment"  
+                  type="text"
+                  disabled=this.isDisabled
+                  />
       </FormItem>
       <Button type="primary" @click="submitComment">댓글 등록</Button>
     </Form>
@@ -18,6 +23,7 @@
     data () {
       return {
         boardID: "",
+        isDisabled: false,
         comment: []
       }
     },
@@ -26,6 +32,7 @@
     },
     methods: {
       init () {
+        console.log(this.$route)
       },
       submitComment () {
         this.boardID = parseInt((this.$route.params.boardID))

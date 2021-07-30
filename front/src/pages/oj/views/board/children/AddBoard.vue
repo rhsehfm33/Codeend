@@ -49,6 +49,7 @@
           content: ''
         },
         created_by: {
+          id: 0
         }
       }
     },
@@ -56,12 +57,11 @@
       this.init()
     },
     methods: {
-      ...mapActions(['getProfile']),
+      // ...mapActions(['getProfile']),
       init () {
-        // let query = this.$route.query
-        // this.query.problemID = query.problemID || ''
         api.getUserInfo(this.username).then(res => {
-          this.created_by = res.data.data.user
+          this.created_by.id = res.data.data.user.id
+          console.log(this.created_by.id)
         })
       },
       submitPost () {

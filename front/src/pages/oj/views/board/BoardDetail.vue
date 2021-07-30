@@ -87,7 +87,7 @@ import { mapGetters } from 'vuex'
         });
       },
       editBoard () {
-        this.$router.push({name: 'write-board', query: {mode: 'edit'}})
+        this.$router.push({name: 'write-board', query: {mode: 'edit', boardID: this.$route.params.boardID}})
       }
     }
   }

@@ -90,7 +90,12 @@
         this.$router.go(-1)
       },
       deleteBoard () {
-        console.log("deleteBoard")
+        const boardID = this.$route.query.boardID
+        this.$confirm("Are you sure?").then(() => {
+          api.deleteBoard(boardID).then(res => {
+            this.$router.push({name: 'all-board'})
+          })
+        });
       }
     }
   }

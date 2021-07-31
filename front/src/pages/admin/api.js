@@ -62,6 +62,32 @@ export default {
       data
     })
   },
+  // 게시글 목록 조회
+  getBoardList (offset, limit, keyword) {
+    let params = {paging: true, offset, limit}
+    if (keyword) {
+      params.keyword = keyword
+    }
+    return ajax('admin/board', 'get', {
+      params: params
+    })
+  },
+  // 개별 게시글 정보 조회
+  getBoard (id) {
+    return ajax('admin/board', 'get', {
+      params: {
+        id
+      }
+    })
+  },
+  // 게시글 삭제
+  deleteBoard (id) {
+    return ajax('admin/board', 'delete', {
+      params: {
+        id
+      }
+    })
+  },
   // 사용자 목록 조회
   getUserList (offset, limit, keyword) {
     let params = {paging: true, offset, limit}

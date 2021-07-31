@@ -11,6 +11,7 @@
       <template slot="title"><em class="el-icon-menu"></em>{{$t('m.General')}}</template>
       <el-menu-item index="/user">{{$t('m.User')}}</el-menu-item>
       <el-menu-item index="/announcement">{{$t('m.Announcement')}}</el-menu-item>
+      <el-menu-item index="/board">{{$t('m.BoardManage')}}</el-menu-item>
       <el-menu-item index="/conf">{{$t('m.System_Config')}}</el-menu-item>
       <!-- <el-menu-item index="/judge-server">{{$t('m.Judge_Server')}}</el-menu-item>
       <el-menu-item index="/prune-test-case">{{$t('m.Prune_Test_Case')}}</el-menu-item> -->

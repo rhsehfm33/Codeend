@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 // admin의 모든 view components 가져옴
 import {
   Announcement,
+  Board,
   Conf,
   Contest,
   ContestList,
@@ -43,6 +44,11 @@ export default new VueRouter({
           path: '/announcement',
           name: 'announcement',
           component: Announcement
+        },
+        {
+          path: '/board',
+          name: 'board',
+          component: Board
         },
         {
           path: '/user',

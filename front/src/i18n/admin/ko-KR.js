@@ -120,5 +120,9 @@ export const m = {
   Welcome_to_Login: '로그인을 환영합니다.',
   Go: '로그인',
   username: '유저명',
-  password: '비밀번호'
+  password: '비밀번호',
+  // Board.vue
+  BoardManage: '게시판 관리',
+  Board: '게시판',
+  BoardList: '게시판 목록'
 }

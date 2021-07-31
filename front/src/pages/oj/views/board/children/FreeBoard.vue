@@ -101,6 +101,7 @@
           },
           {
             title: this.$i18n.t('m.Category'),
+            width: 120,
             render: (h, params) => {
               let t = params.row.category
               let color = 'blue'
@@ -115,6 +116,7 @@
           },
           {
             title: this.$i18n.t('m.Created_By'),
+            width: 120,
             render: (h, params) => {
               return h('Button', {
                 props: {
@@ -137,12 +139,14 @@
           },
           {
             title: this.$i18n.t('m.Comment'),
+            width: 100,
             render: (h, params) => {
               return h('span', params.row.total_comments)
             }
           },
           {
             title: this.$i18n.t('m.Views'),
+            width: 100,
             render: (h, params) => {
               return h('span', params.row.views)
             }

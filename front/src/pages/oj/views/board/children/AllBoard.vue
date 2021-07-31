@@ -102,6 +102,7 @@
           },
           {
             title: this.$i18n.t('m.Category'),
+            width: 120,
             render: (h, params) => {
               let t = params.row.category
               let color = 'blue'
@@ -110,12 +111,16 @@
               return h('Tag', {
                 props: {
                   color: color
+                },
+                style: {
+                  overflowX: 'auto'
                 }
               }, this.$i18n.t('m.' + params.row.category))
             }
           },
           {
             title: this.$i18n.t('m.Created_By'),
+            width: 120,
             render: (h, params) => {
               return h('Button', {
                 props: {
@@ -129,23 +134,33 @@
                 },
                 style: {
                   padding: '0',
-                  // overflowX: 'auto',
-                  textAlign: 'left',
-                  width: '100%'
+                  overflowX: 'auto'
                 }
               }, params.row.created_by.username)
             }
           },
           {
             title: this.$i18n.t('m.Comment'),
+            width: 100,
+            textAlign: 'left',
             render: (h, params) => {
-              return h('span', params.row.total_comments)
+              return h('span', {
+                style: {
+                  width: '100%'
+                }
+              }, params.row.total_comments)
             }
           },
           {
             title: this.$i18n.t('m.Views'),
+            width: 100,
             render: (h, params) => {
-              return h('span', params.row.views)
+              return h('span', {
+                style: {
+                  textAlign: 'center',
+                  width: '100%'
+                }
+              }, params.row.views)
             }
           },
           {

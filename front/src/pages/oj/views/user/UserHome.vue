@@ -5,6 +5,7 @@
     </div>
     <Card :padding="100">
       <div v-if="profile.user">
+        <p>{{profile.user.username}}</p>
         <p v-if="profile.mood">
           {{profile.mood}}
         </p>

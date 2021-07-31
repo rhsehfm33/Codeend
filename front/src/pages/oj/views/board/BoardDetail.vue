@@ -1,37 +1,47 @@
 <template>
   <div>
-    <Panel class="board-container">
-      <div class="top-container" >
-        <p>{{board.title}}</p>
-        <p>{{board.created_by.username}}</p>
-        <p>{{board.create_time | localtime }}</p>
-        <p>{{board.last_update_time | localtime}}</p>
-        <div v-if="this.user.id === this.board.created_by.id">
-        <el-button type="primary" size="small" @click="editBoard()">수정</el-button>
-        <el-button type="primary" size="small" @click="deleteBoard()">삭제</el-button>
+    <Panel>
+        <div slot="title" >
+          {{board.title}}
+          <div class="userInfo-container">
+            <div class="user-container">
+              <div class="font-box">
+                <h5 style="font-weight:400;">{{board.created_by.username}}</h5>
+              </div>
+              <div class="font-box">
+               <h5 style="font-weight:350;">{{board.create_time | localtime }}</h5>
+              </div>
+            </div>
+            <div class="edit-box" v-if="this.user.id === this.board.created_by.id">
+              <el-button type="primary" size="small" @click="editBoard()">수정</el-button>
+              <el-button type="primary" size="small" @click="deleteBoard()">삭제</el-button>
+            </div>
+            <div v-else class="default-box"/>
+          </div>
         </div>
-      </div>
-      <Card class="body-container">
+      <div class="body-container">
         <p v-html=board.content></p>
-      </Card>
+      </div>
     </Panel>
-      <Comment></Comment>
-    <ul>
+    <div>
+    <Comment/>
+    <ul class="ul">
       <li v-for="comment in comments"
           v-bind:key="comment.id"
       >
         <div v-if="isVisible || comment.id !== ClickCommentID" class="comment-container">
           <div class="comment-user">
-            {{comment.created_by.username}}
-            {{comment.create_time | localtime}}
+            <div class="comment-user-container">
+              <p id="username">{{comment.created_by.username}}</p>
+              <p id="create-time">{{comment.create_time | localtime}}</p>
+            </div>
+            <div class="editBtns" v-if="comment.created_by.id === user.id" >
+              <el-button type="primary" size="small" @click="editButton(comment.id)">수정</el-button>
+              <el-button type="primary" size="small" @click="deleteComment(comment.id)">삭제</el-button>
+            </div>
           </div>
           <div class="comment-content">
             {{comment.content}}
-            {{comment.id}}
-          </div>
-          <div v-if="comment.created_by.id === user.id" >
-            <el-button type="primary" size="small" @click="editButton(comment.id)">수정</el-button>
-            <el-button type="primary" size="small" @click="deleteComment(comment.id)">삭제</el-button>
           </div>
         </div>
         <div v-else-if="!isVisible && ClickCommentID === comment.id" >
@@ -43,6 +53,7 @@
         </div>
       </li>
     </ul>
+    </div>
   </div>
 </template>
 
@@ -142,21 +153,87 @@ import { mapGetters } from 'vuex'
 </script>
 
 <style scoped lang="less">
-.board-container {
-  background-color: yellow;
-  padding: 0;
+.ul {
+  list-style:none;
 }
 
 .top-container {
-  background-color: aqua;
+  background-color: rgb(228, 228, 228);
 }
 
 .body-container {
-  height: 500px;
+  min-height: 500px;
+  padding: 1rem;
+  font-size: 1rem;
+  background-color: rgb(248, 247, 247);
+  border-width: 0.2rem;
+  border-style: solid;
+  border-color: rgb(228, 228, 228);
+}
+
+.userInfo-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.user-container {
+  display: flex;
+  width: 80%;
+}
+
+.edit-box {
+  width: 20%;
+  text-align: right;
+  font-size: 1rem;
+}
+
+.default-box {
+  width: 20%;
+}
+
+.font-box {
+  // color: white;
+  padding-right: 1rem; 
 }
 
 .comment-container {
-  background-color: pink;
+  text-align: left;
+  padding: 10px;
+  margin-top: .5rem;
+  background-color: rgb(248, 247, 247);
+  border: 1px solid;
+  border-width: 0.2rem;
+  border-color: rgb(228, 228, 228);
 }
+
+.comment-user {
+  display: flex;
+  justify-content: space-between;
+}
+
+.comment-user-container {
+  display : flex;
+  align-items: center;
+  width: 80%;
+  font-size: 1.2rem;
+  padding-bottom: 1rem;
+}
+
+#username {
+  padding-right: .5rem;
+  font-weight: 400px;
+}
+
+#create-time {
+  font-size: 0.8rem;
+  font-weight: 200px;
+}
+
+.editBtns {
+  width: 20%;
+  text-align: right;
+  padding-right: 1rem;
+}
+
 
 </style>

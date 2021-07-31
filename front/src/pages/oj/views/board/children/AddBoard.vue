@@ -24,7 +24,9 @@
           </FormItem>
           <div class="simditor-box">
           <FormItem required>
-            <Simditor v-model="board.content">{{this.board.content}}</Simditor>
+            <Simditor v-model="board.content">
+              {{this.board.content}}
+              </Simditor>
           </FormItem>
           </div>
           <div v-if="this.mode === 'create'" class="create-box">
@@ -124,14 +126,17 @@
 
 <style lang="less" scoped>
   .flex-container {
+    display: flex;
     justify-content: center;
+    // 글쓰기 중앙 정렬
     text-align: center;
-    background-color: rgb(235, 232, 232);
+    background-color: rgb(248,247,247);
+    border-width: 0.2rem;
+    border-style: solid;
+    border-color: rgb(228, 228, 228);
     padding: 10px;
     .form-container {
-      flex: 1;
-      width: 250px;
-      padding-right: 5%;
+      width: 90%;
     }
   }
 
@@ -142,6 +147,7 @@
   .simditor-box {
     text-align: start;
   }
+
   .create-box {
     display: flex;
     justify-content: space-around;

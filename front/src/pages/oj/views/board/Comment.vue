@@ -6,7 +6,7 @@
       <FormItem prop="board_title">
         <textarea placeholder="댓글을 입력하세요." 
                   v-model="comment.content" 
-                  v-on:keypress.enter="submitComment"  
+                  v-on:keypress.enter="submitComment"
                   type="text"
                   v-bind:disabled="isAuthenticated === false ? true : false"
                   />

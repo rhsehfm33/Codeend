@@ -41,7 +41,6 @@
   import api from '@oj/api'
   import { FormMixin } from '@oj/components/mixins'
   import Simditor from '../../../../admin/components/Simditor.vue'
-  import { mapGetters } from 'vuex'
 
   export default {
     mixins: [FormMixin],
@@ -50,6 +49,7 @@
     },
     data () {
       return {
+        nowUserID: '',
         mode: 'create',
         board: {
           problemID: '',
@@ -67,23 +67,28 @@
       this.init()
     },
     methods: {
-      // ...mapActions(['getProfile']),
-      ...mapGetters(['user']),
       init () {
         if (this.$route.query.mode) {
           this.mode = this.$route.query.mode
         }
-        api.getUserInfo(this.username).then(res => {
-          this.created_by.id = res.data.data.user.id
-        })
-        api.getBoardDetail(this.$route.query.boardID).then(res => {
-          const board = res.data.data
-          this.board.problemID = board.problem._id
-          this.board.id = board.id
-          this.board.title = board.title
-          this.board.category = board.category
-          this.board.content = board.content
-        })
+        if (this.mode === 'edit') {
+          api.getBoardDetail(this.$route.query.boardID).then(res => {
+            const board = res.data.data
+            this.created_by.id = board.created_by.id
+            this.getUserCheck(this.created_by.id)
+            this.board.problemID = board.problem._id
+            this.board.id = board.id
+            this.board.title = board.title
+            this.board.category = board.category
+            this.board.content = board.content
+          })
+        }
+      },
+      getUserCheck (createdByID) {
+        this.nowUserID = this.$store.getters.user.id
+        if (this.nowUserID !== createdByID) {
+          this.$router.push({name: 'home'})
+        }
       },
       submitPost () {
         let data = {

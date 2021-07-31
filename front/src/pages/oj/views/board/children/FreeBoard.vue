@@ -3,7 +3,7 @@
       <div slot="title">{{$t('m.Free')}} {{$t('m.Board')}}</div>
       <div slot="extra">
         <ul class="filter">
-          <li>
+          <!-- <li>
             <Dropdown @on-click="filterByCategory">
               <span>{{$t('m.Category')}}
                 <Icon type="arrow-down-b"></Icon>
@@ -14,7 +14,7 @@
                 <Dropdown-item name="Question" >{{$t('m.Question')}}</Dropdown-item>
               </Dropdown-menu>
             </Dropdown>
-          </li>
+          </li> -->
           <li>
             <Input v-model="query.keyword"
                    @on-enter="filterByKeyword"
@@ -123,8 +123,7 @@
                 },
                 on: {
                   click: () => {
-                    // todo - 그 유저의 홈으로 이동
-                    this.$router.push({name: 'board-detail', params: {boardID: params.row.created_by.username}})
+                    this.$router.push({name: 'user-home', query: {username: params.row.created_by.username}})
                   }
                 },
                 style: {

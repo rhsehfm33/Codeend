@@ -231,6 +231,8 @@ export const m = {
   // Write.vue
   Choose_Category: '게시판을 선택하세요.',
   Post: '등록',
-  Delete: '삭제'
-  // BoardDetail
+  Delete: '삭제',
+  // BoardDetail.vue
+  // Comment.vue
+  InputComment: '댓글을 입력하세요'
 }

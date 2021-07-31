@@ -168,7 +168,7 @@
         </el-form-item>
       </el-form>
     </Panel> -->
-    <!--对话框-->
+    <!--input bux-->
     <el-dialog :title="$t('m.User_Info')" :visible.sync="showUserDialog" :close-on-click-modal="false">
       <el-form :model="user" label-width="120px" label-position="left">
         <el-row :gutter="20">

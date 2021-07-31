@@ -199,7 +199,6 @@
         api.getBoardList(offset, this.limit, this.query).then(res => {
           this.loadings.table = false
           this.boardList = res.data.data.results
-          console.log(this.boardList)
         }, res => {
           this.loadings.table = false
         })

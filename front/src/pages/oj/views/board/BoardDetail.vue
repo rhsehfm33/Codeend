@@ -15,16 +15,34 @@
         <p v-html=board.content></p>
       </Card>
     </Panel>
-      <Comment v-bind:boardID=this.board.id></Comment>
-    <div 
-      v-for="comment in comments"
-      :key="comment.id">
-      <Card :comment="comment">
-        {{comment.content}}
-        {{comment.create_time | localtime}}
-        {{comment.created_by.username}}
+      <Comment></Comment>
+    <ul>
+    <li v-for="comment in comments"
+        v-bind:key="comment.id"
+    >
+      <Card :comment="comment" :user="user" class="comment">
+        <div v-if="isVisible">
+          {{comment.created_by.username}}
+          {{comment.create_time | localtime}}
+        <div class="comment-content" v-if="isVisible">
+          {{comment.content}}
+          {{comment.id}}
+        </div>
+        <div v-if="comment.created_by.id === user.id" >
+          <el-button type="primary" size="small" @click="editButton(comment.id)">수정</el-button>
+          <el-button type="primary" size="small" @click="deleteComment(comment.id)">삭제</el-button>
+        </div>
+        </div>
+        <div v-else>
+          <textarea v-model="comment.content" 
+                    cols="50" rows="3">
+            </textarea>
+          <el-button type="primary" size="small" class="comment-update-btn" @click="editComment(comment.id, comment.content)">수정</el-button>
+          <el-button type="primary" size="small" v-on:click.prevent="goBack">취소</el-button>
+        </div>
       </Card>
-      </div>
+    </li>
+    </ul>
   </div>
 </template>
 
@@ -40,8 +58,9 @@ import { mapGetters } from 'vuex'
     },
     data () {
       return {
+        isVisible: true,
+        user: {},
         mode: 'create',
-        isVisibie: false,
         board: {
           created_by: {
             id: 0,
@@ -52,7 +71,10 @@ import { mapGetters } from 'vuex'
           views: '',
           create_time: ''
         },
-        comments: []
+        comment: {
+          id: 0,
+          content: ""
+        }
       }
     },
     mounted () {
@@ -62,7 +84,7 @@ import { mapGetters } from 'vuex'
       ...mapGetters(['isAuthenticated', 'user']),
       init () {
         const boardID = this.$route.params.boardID
-        this.checkUserID()
+        this.checkUser()
         this.getBoard(boardID)
       },
       getBoard (boardID) {
@@ -73,9 +95,9 @@ import { mapGetters } from 'vuex'
           this.comments = comments
         })
       },
-      checkUserID () {
+      checkUser () {
         api.getUserInfo(this.username).then(res => {
-          this.user.id = res.data.data.user.id
+          this.user = res.data.data.user
         })
       },
       deleteBoard () {
@@ -88,6 +110,30 @@ import { mapGetters } from 'vuex'
       },
       editBoard () {
         this.$router.push({name: 'write-board', query: {mode: 'edit', boardID: this.$route.params.boardID}})
+      },
+      editButton (id) {
+        this.isVisible = false
+        this.comment.id = id
+      },
+      editComment (id, content) {
+        const data = {
+          id: id,
+          content: content
+        }
+        console.log(data)
+        api.editComment(data).then(res => {
+          this.isVisible = true
+        })
+      },
+      deleteComment (id) {
+        this.$confirm("Are you sure?").then(() => {
+          api.deleteComment(id).then(res => {
+            this.$router.go()
+          })
+        });
+      },
+      goBack () {
+        this.isVisible = true
       }
     }
   }
@@ -106,4 +152,5 @@ import { mapGetters } from 'vuex'
 .body-container {
   height: 500px;
 }
+
 </style>

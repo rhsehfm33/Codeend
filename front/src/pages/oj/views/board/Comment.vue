@@ -8,7 +8,7 @@
                   v-model="comment.content" 
                   v-on:keypress.enter="submitComment"  
                   type="text"
-                  disabled=this.isDisabled
+                  v-bind:disabled="isAuthenticated === false ? true : false"
                   />
       </FormItem>
       <div>
@@ -20,12 +20,12 @@
 
 <script>
   import api from '@oj/api'
+  import { mapGetters } from 'vuex'
 
   export default {
     data () {
       return {
         boardID: "",
-        isDisabled: false,
         comment: []
       }
     },
@@ -34,7 +34,6 @@
     },
     methods: {
       init () {
-        console.log(this.$route)
       },
       submitComment () {
         this.boardID = parseInt((this.$route.params.boardID))
@@ -46,10 +45,12 @@
           this.$router.go()
         })
       }
+    },
+    computed: {
+      ...mapGetters(['isAuthenticated', 'isAdminRole'])
     }
   }
 </script>
 
 <style>
-
 </style>

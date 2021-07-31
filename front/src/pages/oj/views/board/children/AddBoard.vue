@@ -83,7 +83,6 @@
           this.board.title = board.title
           this.board.category = board.category
           this.board.content = board.content
-          console.log(board)
         })
       },
       submitPost () {
@@ -94,7 +93,6 @@
           category: this.board.category,
           content: this.board.content
         }
-        console.log(data)
         let funcName = this.mode === 'create' ? 'createBoard' : 'editBoard'
         api[funcName](data).then(res => {
           this.$router.push({name: 'all-board'})

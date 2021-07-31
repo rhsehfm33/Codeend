@@ -186,7 +186,6 @@
         }
         this.query.limit = parseInt(query.limit) || 10
         this.getBoardList()
-        console.log(this.boardList)
       },
       pushRouter () {
         this.$router.push({

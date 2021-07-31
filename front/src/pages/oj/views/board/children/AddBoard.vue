@@ -9,25 +9,29 @@
               {{this.board.title}}
             </Input>
           </FormItem>
+          <div class="category-box">
           <FormItem prop="board_category">
             <Select v-model="board.category" placeholder="게시판을 선택하세요.">
               <Option :label="$t('m.Free')+$t('m.Board')" value="Free"></Option>
               <Option :label="$t('m.Question')+$t('m.Board')" value="Question"></Option>
             </Select>
           </FormItem>
+          </div>
           <FormItem prop="board_problemID">
             <Input placeholder="문제 번호를 입력하세요." v-model="board.problemID" type="text">
             {{this.board.problemID}}
             </Input>
           </FormItem>
+          <div class="simditor-box">
           <FormItem required>
             <Simditor v-model="board.content">{{this.board.content}}</Simditor>
           </FormItem>
-          <div v-if="this.mode === 'create'">
+          </div>
+          <div v-if="this.mode === 'create'" class="create-box">
           <el-button type="primary" @click="submitPost">{{$t('m.Post')}}</el-button>
           <el-button type="primary" @click="goBack">{{$t('m.Back')}}</el-button>
           </div>
-          <div v-else>
+          <div v-else class="edit-box">
           <el-button type="primary" @click="submitPost">{{$t('m.Post')}}</el-button>
           <el-button type="primary" @click="deleteBoard()">{{$t('m.Delete')}}</el-button>
           </div>
@@ -119,14 +123,31 @@
 </script>
 
 <style lang="less" scoped>
-
   .flex-container {
+    justify-content: center;
     text-align: center;
-    background-color: gainsboro;
+    background-color: rgb(235, 232, 232);
+    padding: 10px;
     .form-container {
       flex: 1;
       width: 250px;
       padding-right: 5%;
     }
+  }
+
+  .category-box {
+    text-align: left;
+  }
+
+  .simditor-box {
+    text-align: start;
+  }
+  .create-box {
+    display: flex;
+    justify-content: space-around;
+  }
+  .edit-box {
+    display: flex;
+    justify-content: space-around;
   }
 </style>

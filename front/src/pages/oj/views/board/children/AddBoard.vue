@@ -18,9 +18,13 @@
           </FormItem>
           </div>
           <FormItem prop="board_problemID">
-            <Input placeholder="문제 번호를 입력하세요." v-model="board.problemID" type="text">
-            {{this.board.problemID}}
-            </Input>
+            <Input placeholder="문제 번호를 입력하세요." 
+                  v-model="board.problemID" type="text">
+                  {{this.board.problemID}}</Input>
+            <!-- <Input v-model="query.keyword"
+                   placeholder="문제 번호를 입력하세요."
+                   icon="ios-search-strong">
+                   {{this.board.problemID}}</Input> -->
           </FormItem>
           <div class="simditor-box">
           <FormItem required>
@@ -66,11 +70,19 @@
         },
         created_by: {
           id: -1
+        },
+        query: {
+          keyword: '',
+          difficulty: '',
+          tag: '',
+          page: 1,
+          limit: 10
         }
       }
     },
     mounted () {
       this.init()
+      this.getProblemList()
     },
     methods: {
       init () {
@@ -89,6 +101,15 @@
             this.board.content = board.content
           })
         }
+      },
+      // 문제 검색 관련
+      getProblemList () {
+        let offset = (this.query.page - 1) * this.query.limit
+        api.getProblemList(offset, this.limit, this.query).then(res => {
+          this.total = res.data.data.total
+          this.problemList = res.data.data.results
+          console.log(this.problemList)
+        })
       },
       getUserCheck (createdByID) {
         this.nowUserID = this.$store.getters.user.id

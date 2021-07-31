@@ -17,31 +17,31 @@
     </Panel>
       <Comment></Comment>
     <ul>
-    <li v-for="comment in comments"
-        v-bind:key="comment.id"
-    >
-      <Card :comment="comment" :user="user" class="comment">
-        <div v-if="isVisible">
-          {{comment.created_by.username}}
-          {{comment.create_time | localtime}}
-        <div class="comment-content" v-if="isVisible">
-          {{comment.content}}
-          {{comment.id}}
+      <li v-for="comment in comments"
+          v-bind:key="comment.id"
+      >
+        <div v-if="isVisible || comment.id !== ClickCommentID" class="comment-container">
+          <div class="comment-user">
+            {{comment.created_by.username}}
+            {{comment.create_time | localtime}}
+          </div>
+          <div class="comment-content">
+            {{comment.content}}
+            {{comment.id}}
+          </div>
+          <div v-if="comment.created_by.id === user.id" >
+            <el-button type="primary" size="small" @click="editButton(comment.id)">수정</el-button>
+            <el-button type="primary" size="small" @click="deleteComment(comment.id)">삭제</el-button>
+          </div>
         </div>
-        <div v-if="comment.created_by.id === user.id" >
-          <el-button type="primary" size="small" @click="editButton(comment.id)">수정</el-button>
-          <el-button type="primary" size="small" @click="deleteComment(comment.id)">삭제</el-button>
-        </div>
-        </div>
-        <div v-else>
+        <div v-else-if="!isVisible && ClickCommentID === comment.id" >
           <textarea v-model="comment.content" 
                     cols="50" rows="3">
-            </textarea>
+          </textarea>
           <el-button type="primary" size="small" class="comment-update-btn" @click="editComment(comment.id, comment.content)">수정</el-button>
           <el-button type="primary" size="small" v-on:click.prevent="goBack">취소</el-button>
         </div>
-      </Card>
-    </li>
+      </li>
     </ul>
   </div>
 </template>
@@ -59,6 +59,7 @@ import { mapGetters } from 'vuex'
     data () {
       return {
         isVisible: true,
+        ClickCommentID: 0,
         user: {},
         mode: 'create',
         board: {
@@ -113,6 +114,7 @@ import { mapGetters } from 'vuex'
       },
       editButton (id) {
         this.isVisible = false
+        this.ClickCommentID = id
         this.comment.id = id
       },
       editComment (id, content) {
@@ -151,6 +153,10 @@ import { mapGetters } from 'vuex'
 
 .body-container {
   height: 500px;
+}
+
+.comment-container {
+  background-color: pink;
 }
 
 </style>

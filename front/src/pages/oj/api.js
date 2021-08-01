@@ -271,7 +271,6 @@ export default {
   },
   getBoardList (offset, limit, searchParams) {
     let params = {
-      paging: true,
       offset,
       limit
     }

@@ -64,11 +64,11 @@ export default {
   },
   // 게시글 목록 조회
   getBoardList (offset, limit, keyword) {
-    let params = {paging: true, offset, limit}
+    let params = {offset, limit}
     if (keyword) {
       params.keyword = keyword
     }
-    return ajax('admin/board', 'get', {
+    return ajax('admin/boards', 'get', {
       params: params
     })
   },

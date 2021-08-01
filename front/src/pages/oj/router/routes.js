@@ -203,7 +203,7 @@ export default [
       {
         name: 'write-board',
         path: 'write',
-        meta: {title: 'Add Board'},
+        meta: {requiresAuth: true, title: 'Add Board'},
         component: Board.AddBoard
       },
       {

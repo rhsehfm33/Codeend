@@ -33,8 +33,8 @@
               </Simditor>
           </FormItem>
           </div>
-          <div v-if="this.mode === 'create'" class="create-box">
-          <el-button type="primary" @click="submitPost">{{$t('m.Post')}}</el-button>
+          <div v-if="this.mode === 'create'" class="create-box">      
+          <el-button type="primary" class="createBtn" @click="submitPost">{{$t('m.Post')}}</el-button>
           <el-button type="primary" @click="goBack">{{$t('m.Back')}}</el-button>
           </div>
           <div v-else class="edit-box">
@@ -173,6 +173,7 @@
     display: flex;
     justify-content: space-around;
   }
+
   .edit-box {
     display: flex;
     justify-content: space-around;

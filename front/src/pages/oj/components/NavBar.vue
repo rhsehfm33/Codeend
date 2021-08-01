@@ -26,6 +26,9 @@
       </Submenu>
       <Menu-item name="/boards/all" class="oj-menu-item">
         {{$t('m.Board')}}
+      </Menu-item>
+    <Menu-item name="/study" class="oj-menu-item">
+        {{$t('m.Study')}}
       </Menu-item>      
     </div>      
       <!-- 로그인 인증일 경우 -->
@@ -119,7 +122,7 @@
 
   #header {
     display: inline-block;
-    min-width: 280px;
+    min-width: 500px;
     position: fixed;
     top: 0;
     left: 0;
@@ -128,6 +131,10 @@
     z-index: 1000;
     background-color: white;
     box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.1);
+
+    .category-div {
+      min-width: 500px;
+    }
     .oj-menu {
       text-align: center;
       font-size: @font-size;

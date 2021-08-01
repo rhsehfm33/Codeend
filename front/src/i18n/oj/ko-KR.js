@@ -234,5 +234,7 @@ export const m = {
   Delete: '삭제',
   // BoardDetail.vue
   // Comment.vue
-  InputComment: '댓글을 입력하세요'
+  InputComment: '댓글을 입력하세요',
+  // Study
+  Study: '스터디'
 }

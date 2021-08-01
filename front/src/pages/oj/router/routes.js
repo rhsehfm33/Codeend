@@ -18,8 +18,26 @@ import {
 import * as Contest from '@oj/views/contest'
 import * as Setting from '@oj/views/setting'
 import * as Board from '@oj/views/board'
+import * as Study from '@oj/views/study'
 
 export default [
+  {
+    name: 'study-list',
+    path: '/study',
+    meta: {title: 'Study List'},
+    component: Study.StudyList
+  },
+  {
+    name: 'study-details',
+    path: '/study/:studyID',
+    meta: {title: 'Study Details'},
+    component: Study.Study
+  },
+  {
+    name: 'payment',
+    path: '/payment',
+    component: Study.Payment
+  },
   {
     name: 'home',
     path: '/',

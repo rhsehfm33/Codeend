@@ -22,31 +22,27 @@
         ref="table"
         :data="boardList"
         style="width: 100%">
-        <!-- 체크 항목 -->
-        <el-table-column type="selection" width="55"></el-table-column>
-        <!-- board id -->
-        <el-table-column prop="id" label="ID"></el-table-column>
-        <!-- board title -->
-        <el-table-column prop="board.title" label="제목"></el-table-column>
-        <el-table-column prop="admin_type" label="카테고리">
-          <template slot-scope="scope">
-            {{ scope.row.admin_type }}
-          </template>
+        <el-table-column type="selection" width="50"></el-table-column>
+        <el-table-column prop="id" width="50" label="ID">
         </el-table-column>
-        <el-table-column prop="username" label="글쓴이"></el-table-column>        
-        <el-table-column prop="comment" label="댓글"></el-table-column>
-        <el-table-column prop="views" label="조회수"></el-table-column>
+        <el-table-column prop="title" width="250" label="제목">
+        </el-table-column>
+        <el-table-column prop="category" width="100" label="카테고리">
+        </el-table-column>
+        <el-table-column prop="created_by.username" width="60" label="글쓴이"></el-table-column>   
+        <el-table-column prop="total_comments" width="50" label="댓글"></el-table-column>
+        <el-table-column prop="views" width="60" label="조회수"></el-table-column>
         <el-table-column prop="create_time" label="생성일">
           <template slot-scope="scope">
             {{scope.row.create_time | localtime }}
           </template>
         </el-table-column>
-        <el-table-column prop="last_login" label="마지막 작성일">
+        <el-table-column prop="last_update_time" label="마지막 작성일">
           <template slot-scope="scope">
-            {{scope.row.last_login | localtime }}
+            {{scope.row.last_update_time | localtime }}
           </template>
         </el-table-column>
-        <el-table-column fixed="right" label="삭제" width="200">
+        <el-table-column fixed="right" label="삭제" width="100">
           <template slot-scope="{row}">
             <icon-btn name="Delete" icon="trash" 
                       @click.native="deleteBoard([row.id])">
@@ -136,15 +132,15 @@
       handleSelectionChange (val) {
         this.selectedBoard = val
       },
-      // 게시글 초기화
-      handleResetData () {
-        this.uploadBoardList = []
+      goToBoard (id) {
+        this.$router.push({name: 'board-details', params: {boardID: id}})
       }
     },
     computed: {
       selectedBoardIDs () {
         let ids = []
         for (let board of this.selectedBoard) {
+          console.log(board.id)
           ids.push(board.id)
         }
         return ids

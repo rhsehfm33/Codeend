@@ -79,10 +79,10 @@ class StudyAPI(APIView):
     
     @login_required
     def delete(self, request):
-        id = request.GET.get("id")
-        if not id:
+        if not request.GET.get("id"):
             return self.error("\"id\" param is required!")
 
+        id = request.GET.get("id")
         try:
             study = Study.objects.get(id=id)
         except Study.DoesNotExist:
@@ -95,8 +95,10 @@ class StudyAPI(APIView):
         return self.success("Study has successfully deleted")
 
 class StudyListAPI(APIView):
-    @validate_serializer(GetStudyListSerializer)
     def get(self, request):
+        if not request.GET.get("limit"):
+            return self.error("\"limit\" field is required!")
+
         keyword = request.GET.get("keyword")
         tag = request.GET.get("tag")
         status = request.GET.get("status")

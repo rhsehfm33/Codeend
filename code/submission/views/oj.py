@@ -128,7 +128,7 @@ class SubmissionAPI(APIView):
 class SubmissionListAPI(APIView):
     def get(self, request):
         if not request.GET.get("limit"):
-            return self.error("Limit is needed")
+            return self.error("Limit is required!")
         if request.GET.get("contest_id"):
             return self.error("Parameter error")
 
@@ -158,7 +158,7 @@ class ContestSubmissionListAPI(APIView):
     @check_contest_permission(check_type="submissions")
     def get(self, request):
         if not request.GET.get("limit"):
-            return self.error("Limit is needed")
+            return self.error("Limit is required!")
 
         contest = self.contest
         submissions = Submission.objects.filter(contest_id=contest.id).select_related("problem__created_by")

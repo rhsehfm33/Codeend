@@ -18,6 +18,7 @@ class TeacherStudySerializer(serializers.ModelSerializer):
 class StudentStudySerializer(serializers.ModelSerializer):
     created_by = UsernameSerializer()
     tags = serializers.SlugRelatedField(many=True, slug_field="name", read_only=True)
+
     class Meta:
         model = Study
         exclude = ("students",)
@@ -31,11 +32,8 @@ class CreateStudySerializer(serializers.ModelSerializer):
         model = Study
         exclude = ("students", "created_by")
 
-class GetStudySerializers(serializers.Serializer):
-    id = serializers.IntegerField()
-    teacher = serializers.BooleanField()
-        
 class EditStudySerializers(serializers.ModelSerializer):
+    id = serializers.IntegerField()
     subject = serializers.CharField(max_length=64)
     status = serializers.ChoiceField(choices=(StudyStatusCategory.Recruiting, StudyStatusCategory.Recruited))
     tags = serializers.ListField(child=serializers.CharField(max_length=32), allow_empty=False)
@@ -43,9 +41,6 @@ class EditStudySerializers(serializers.ModelSerializer):
     class Meta:
         model = Study
         exclude = ("students", "created_by")
-
-class DeleteStudySerializers(serializers.Serializer):
-    id = serializers.IntegerField()
 
 class GetStudyListSerializer(serializers.Serializer):
     limit = serializers.IntegerField()

@@ -4,9 +4,8 @@ from django.db.models import Q
 
 from ..models import Study, StudyTag, StudyStatusCategory
 from account.decorators import login_required
-from ..serializers import (CreateStudySerializer, GetStudySerializers,
-                            StudentStudySerializer, EditStudySerializers,
-                            DeleteStudySerializers, GetStudyListSerializer,
+from ..serializers import (CreateStudySerializer, StudentStudySerializer,
+                            EditStudySerializers, GetStudyListSerializer,
                             StudyListSerializer, TeacherStudySerializer, StudentStudySerializer)
 from utils.api import validate_serializer
 
@@ -29,15 +28,20 @@ class StudyAPI(APIView):
         
         return self.success(TeacherStudySerializer(study).data)
         
-    @validate_serializer(GetStudySerializers)
     def get(self, request):
-        data = request.data
+        id = request.GET.get("id")
+        teacher = request.GET.get("teacher")
+        if not id:
+            return self.error("\"id\" param is required!")
+        if not teacher:
+            return self.error("\"teacher\" param is required!")
+
         try:
-            study = Study.objects.get(id=data["id"])
+            study = Study.objects.get(id=id)
         except Study.DoesNotExist:
             return self.error("Study does not exist")
 
-        if data["teacher"]:
+        if teacher:
             if request.user != study.created_by:
                 return self.error("You are not the teacher of this study")
             else:
@@ -54,11 +58,10 @@ class StudyAPI(APIView):
         except Study.DoesNotExist:
             return self.error("Study does not exist")
         
-        if data["teacher"] and request.user != study.created_by:
+        if request.user != study.created_by:
             return self.error("You are not the teacher of this study")
 
         tags = data.pop("tags")
-        study = Study.objects.create(**data)
         
         for k, v in data.items():
             setattr(study, k, v)
@@ -74,12 +77,14 @@ class StudyAPI(APIView):
         
         return self.success(TeacherStudySerializer(study).data)
     
-    @validate_serializer(DeleteStudySerializers)
     @login_required
     def delete(self, request):
-        data = request.data
+        id = request.GET.get("id")
+        if not id:
+            return self.error("\"id\" param is required!")
+
         try:
-            study = Study.objects.get(id=data["id"])
+            study = Study.objects.get(id=id)
         except Study.DoesNotExist:
             return self.error("Study does not exist")
 

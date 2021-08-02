@@ -50,6 +50,7 @@ LOCAL_APPS = [
     'problem',
     'contest',
     'utils',
+    'study',
     'submission',
     'options',
     'judge',

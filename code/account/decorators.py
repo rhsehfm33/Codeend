@@ -113,7 +113,7 @@ def check_contest_permission(check_type="details"):
             if not user.is_authenticated:
                 return self.error("Please login first.")
 
-            # creator or owner
+            # creator or teacher
             if user.is_contest_admin(self.contest):
                 return func(*args, **kwargs)
 

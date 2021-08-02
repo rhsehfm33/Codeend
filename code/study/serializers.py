@@ -8,12 +8,15 @@ class StudyTagSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 class TeacherStudySerializer(serializers.ModelSerializer):
+    created_by = UsernameSerializer()
     tags = serializers.SlugRelatedField(many=True, slug_field="name", read_only=True)
+
     class Meta:
         model = Study
         fields = "__all__"
 
 class StudentStudySerializer(serializers.ModelSerializer):
+    created_by = UsernameSerializer()
     tags = serializers.SlugRelatedField(many=True, slug_field="name", read_only=True)
     class Meta:
         model = Study
@@ -44,17 +47,17 @@ class EditStudySerializers(serializers.ModelSerializer):
 class DeleteStudySerializers(serializers.Serializer):
     id = serializers.IntegerField()
 
-class GetStudyListSerializer(serializers.ModelSerializer):
+class GetStudyListSerializer(serializers.Serializer):
     limit = serializers.IntegerField()
 
 class StudyListSerializer(serializers.ModelSerializer):
     created_by = UsernameSerializer()
     total_students = serializers.SerializerMethodField()
-    tags = serializers.ListField(child=serializers.CharField(max_length=32), allow_empty=False)
+    tags = serializers.SlugRelatedField(many=True, slug_field="name", read_only=True)
     
     class Meta:
         model = Study
-        fields = ("id", "title", "price", "tags", "status", "subject", "max_students")
+        fields = ("id", "title", "price", "tags", "status", "subject", "max_students", "created_by", "total_students")
 
     def get_total_students(self, obj):
         return obj.students.count()

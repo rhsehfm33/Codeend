@@ -101,6 +101,7 @@ class BoardListAPI(APIView):
         boards = Board.objects.all().select_related("created_by")
         if keyword:
             boards = boards.filter(Q(title__contains=keyword) |
+                                   Q(created_by__username__exact=keyword) |
                                    Q(problem___id__exact=keyword))
         if category:
             boards = boards.filter(category=category)

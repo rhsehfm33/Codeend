@@ -27,7 +27,7 @@
       <Menu-item name="/boards/all" class="oj-menu-item">
         {{$t('m.Board')}}
       </Menu-item>
-    <Menu-item name="/study" class="oj-menu-item">
+    <Menu-item name="/studies/all" class="oj-menu-item">
         {{$t('m.Study')}}
       </Menu-item>      
     </div>      

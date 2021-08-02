@@ -180,7 +180,6 @@
       init () {
         this.routeName = this.$route.name
         let query = this.$route.query
-        this.query.difficulty = query.difficulty || ''
         this.query.category = "Free"
         this.query.keyword = query.keyword || ''
         this.query.page = parseInt(query.page) || 1

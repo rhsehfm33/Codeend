@@ -97,3 +97,12 @@ class StudyListAPITest(APITestCase):
         self.study_data.students.add(self.user)
         resp = self.client.get(self.url + "?limit=10&offset=0&keyword=setup")
         self.assertContains(resp, "\"total_students\": 1")    
+
+class StudyTagListAPITest(APITestCase):
+    def setUp(self):
+        DefaultStudyAPISetting.set_up_self(self)
+        self.url = self.reverse("study_tag_list_api")
+
+    def test_get_tag_list(self):
+        resp = self.client.get(self.url)
+        self.assertSuccess(resp)

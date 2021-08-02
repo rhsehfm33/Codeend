@@ -1,13 +1,23 @@
 from utils.api import APIView
 
-from django.db.models import Q
+from django.db.models import Q, Count
 
 from ..models import Study, StudyTag, StudyStatusCategory
 from account.decorators import login_required
 from ..serializers import (CreateStudySerializer, StudentStudySerializer,
-                            EditStudySerializers, GetStudyListSerializer,
-                            StudyListSerializer, TeacherStudySerializer, StudentStudySerializer)
+                            EditStudySerializers, StudyListSerializer,
+                            TeacherStudySerializer, StudentStudySerializer,
+                            StudyTagSerializer)
 from utils.api import validate_serializer
+
+class StudyTagAPI(APIView):
+    def get(self, request):
+        qs = StudyTag.objects
+        keyword = request.GET.get("keyword")
+        if keyword:
+            qs = StudyTag.objects.filter(name__icontains=keyword)
+        tags = qs.annotate(study_count=Count("study")).filter(study_count__gt=0)
+        return self.success(StudyTagSerializer(tags, many=True).data)
 
 class StudyAPI(APIView):
     @validate_serializer(CreateStudySerializer)

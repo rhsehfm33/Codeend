@@ -103,7 +103,7 @@ class StudyListAPI(APIView):
 
         studys = Study.objects.all()
         if keyword:
-            studys = studys.filter(Q(title__contains=keyword) | Q(created_by__exact=keyword))
+            studys = studys.filter(Q(title__contains=keyword) | Q(created_by__username__exact=keyword))
         if tag:
             studys = studys.filter(tags__name=tag)
         if status:

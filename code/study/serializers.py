@@ -1,13 +1,20 @@
 from django.db.models import fields
-from .models import Study, StudyStatusCategory
+from .models import Study, StudyTag, StudyStatusCategory
 from utils.api import UsernameSerializer, serializers
 
+class StudyTagSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = StudyTag
+        fields = "__all__"
+
 class TeacherStudySerializer(serializers.ModelSerializer):
+    tags = serializers.SlugRelatedField(many=True, slug_field="name", read_only=True)
     class Meta:
         model = Study
         fields = "__all__"
 
 class StudentStudySerializer(serializers.ModelSerializer):
+    tags = serializers.SlugRelatedField(many=True, slug_field="name", read_only=True)
     class Meta:
         model = Study
         exclude = ("students",)

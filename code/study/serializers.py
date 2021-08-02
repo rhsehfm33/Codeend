@@ -50,6 +50,7 @@ class GetStudyListSerializer(serializers.ModelSerializer):
 class StudyListSerializer(serializers.ModelSerializer):
     created_by = UsernameSerializer()
     total_students = serializers.SerializerMethodField()
+    tags = serializers.ListField(child=serializers.CharField(max_length=32), allow_empty=False)
     
     class Meta:
         model = Study

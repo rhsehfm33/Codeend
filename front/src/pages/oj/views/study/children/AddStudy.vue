@@ -147,7 +147,7 @@
           reason: '',
           notice: '',
           tags: [],
-          status: '',
+          status: 'Recruiting',
           price: 0,
           students: ''
         },
@@ -181,7 +181,6 @@
           api.getStudyDetail(this.$route.query.studyID, this.created_by.username).then(res => {
             const study = res.data.data
             console.log("edit:")
-            console.log(study)
             this.created_by.id = study.created_by.id
             this.getUserCheck(this.created_by.id)
             this.study.title = study.title

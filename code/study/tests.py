@@ -18,20 +18,25 @@ TEST_STUDY_DATA = {"title": "test", "content": "<p>test's content</p>", "subject
 STUDY_URL = "/api/study"
 STUDIES_URL = "/api/studies"
 
-class StudyAPITest(APITestCase):
-    def setUp(self):
+class DefaultStudyAPISetting(APITestCase):
+    @staticmethod
+    def set_up_self(obj):
         data = copy.deepcopy(SETUP_STUDY_DATA)
-        self.user = self.create_user("test_user_username", "test_user_password")
+        obj.user = obj.create_user("test_user_username", "test_user_password")
         tags = data.pop("tags")
-        self.study_data = Study.objects.create(created_by=self.user, **data)
+        obj.study_data = Study.objects.create(created_by=obj.user, **data)
 
         for tag in tags:
             try:
                 tag = StudyTag.objects.get(name=tag)
             except StudyTag.DoesNotExist:
                 tag = StudyTag.objects.create(name=tag)
-            self.study_data.tags.add(tag)
+            obj.study_data.tags.add(tag)
 
+
+class StudyAPITest(APITestCase):
+    def setUp(self):
+        DefaultStudyAPISetting.set_up_self(self)
         self.url = self.reverse("study_api")
 
     def test_create_study(self):
@@ -67,18 +72,7 @@ class StudyAPITest(APITestCase):
 
 class StudyListAPITest(APITestCase):
     def setUp(self):
-        data = copy.deepcopy(SETUP_STUDY_DATA)
-        self.user = self.create_user("test_user_username", "test_user_password")
-        tags = data.pop("tags")
-        self.study_data = Study.objects.create(created_by=self.user, **data)
-
-        for tag in tags:
-            try:
-                tag = StudyTag.objects.get(name=tag)
-            except StudyTag.DoesNotExist:
-                tag = StudyTag.objects.create(name=tag)
-            self.study_data.tags.add(tag)
-
+        DefaultStudyAPISetting.set_up_self(self)
         self.url = self.reverse("study_list_api")
         
     def test_get_studies_search_keyword_title(self):

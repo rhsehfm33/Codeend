@@ -1,12 +1,10 @@
 from django.db.models import fields
 from .models import Study, StudyStatusCategory
-from comment.serializers import CommentSerializer
-from problem.serializers import ProblemSerializer
 from utils.api import UsernameSerializer, serializers
 
 class TeacherStudySerializer(serializers.ModelSerializer):
     class Meta:
-        modle = Study
+        model = Study
         fields = "__all__"
 
 class StudentStudySerializer(serializers.ModelSerializer):
@@ -21,7 +19,7 @@ class CreateStudySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Study
-        exclude = ("students",)
+        exclude = ("students", "created_by")
 
 class GetStudySerializers(serializers.Serializer):
     id = serializers.IntegerField()
@@ -34,7 +32,7 @@ class EditStudySerializers(serializers.ModelSerializer):
 
     class Meta:
         model = Study
-        exclude = ("students",)
+        exclude = ("students", "created_by")
 
 class DeleteStudySerializers(serializers.Serializer):
     id = serializers.IntegerField()

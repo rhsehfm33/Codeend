@@ -2,28 +2,31 @@ from utils.api import APIView
 
 from django.db.models import Q
 from board.models import Board
-from ..serializers import (GetBoardListSerializer, GetBoardSerializer, DeleteBoardSerializer,
-                            BoardSerializer, BoardListSerializer)
+from ..serializers import BoardSerializer, BoardListSerializer
 from account.decorators import super_admin_required
-from utils.api import validate_serializer
 
 class BoardAPI(APIView):
-    @validate_serializer(GetBoardSerializer)
     @super_admin_required
     def get(self, request):
-        board_id = request.GET.get("id")
-        if board_id:
+        if not request.GET.get("id"):
+            return self.error("\"id\" param is required!")
+
+        id = request.GET.get("id")
+
+        if id:
             try:
-                board = Board.objects.get(id=board_id)
+                board = Board.objects.get(id=id)
             except Board.DoesNotExist:
                 return self.error("Board does not exist")
             return self.success(BoardSerializer(board).data)
         else:
             self.error("\"id\" field is needed!")
     
-    @validate_serializer(DeleteBoardSerializer)
     @super_admin_required
     def delete(self, request):
+        if not request.GET.get("id"):
+            return self.error("\"id\" param is required!")
+
         id = request.GET.get("id")
         try:
             board = Board.objects.get(id=id)
@@ -33,11 +36,10 @@ class BoardAPI(APIView):
         board.delete()
 
 class BoardListAPI(APIView):
-    @validate_serializer(GetBoardListSerializer)
     @super_admin_required
     def get(self, request):
         if not request.GET.get("limit"):
-            return self.error("Limit is needed")
+            return self.error("\"limit\" field is required!")
 
         keyword = request.GET.get("keyword")
         category = request.GET.get("category")
@@ -49,5 +51,6 @@ class BoardListAPI(APIView):
                                    Q(problem___id__exact=keyword))
         if category:
             boards = boards.filter(category=category)
+            
         return self.success(self.paginate_data(request, boards, BoardListSerializer))
         

@@ -3,16 +3,6 @@ from comment.serializers import CommentSerializer
 from problem.serializers import ProblemSerializer
 from utils.api import UsernameSerializer, serializers
 
-
-class GetBoardSerializer(serializers.Serializer):
-    id = serializers.IntegerField()
-
-class GetBoardListSerializer(serializers.Serializer):
-    limit = serializers.IntegerField()
-
-class DeleteBoardSerializer(serializers.Serializer):
-    id = serializers.IntegerField()
-
 class CreateBoardSerializer(serializers.Serializer):
     problem_id = serializers.CharField(max_length=32, allow_blank=True, allow_null=True)
     title = serializers.CharField(max_length=255)

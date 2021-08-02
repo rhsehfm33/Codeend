@@ -2,31 +2,17 @@ from utils.api import APIView
 
 from django.db.models import Q
 
-from board.models import Board, BoardCategory
+from board.models import Board
 from problem.models import Problem
-from ..serializers import (GetBoardSerializer, DeleteBoardSerializer,
-                            CreateBoardSerializer, BoardSerializer,
-                            EditBoardSerializer, BoardListSerializer,
-                            GetBoardListSerializer)
+from ..serializers import (CreateBoardSerializer, BoardSerializer,
+                            EditBoardSerializer, BoardListSerializer)
 from account.decorators import login_required
 from utils.api import validate_serializer
 
-class BoardBase(APIView):
-    def common_checks(self, request):
-        data = request.data
-        if data["category"] not in BoardCategory.choices():
-            return "Invalid category"
-        if not data["content"]:
-            return "Empty content"
-
-class BoardAPI(BoardBase):
+class BoardAPI(APIView):
     @validate_serializer(CreateBoardSerializer)
     @login_required
     def post(self, request):
-        error_info = self.common_checks(request)
-        if error_info:
-            return self.error(error_info)
-
         data = request.data
         if data["problem_id"]:
             try:
@@ -38,13 +24,16 @@ class BoardAPI(BoardBase):
         data["created_by"] = request.user
         data["problem"] = problem
         board = Board.objects.create(**data)
+        
         return self.success(BoardSerializer(board).data)
         
-    @validate_serializer(GetBoardSerializer)
     def get(self, request):
-        board_id = request.GET.get("id")
+        if not request.GET.get("id"):
+            return self.error("\"id\" param is required!")
+
+        id = request.GET.get("id")
         try:
-            board = Board.objects.get(id=board_id)
+            board = Board.objects.get(id=id)
         except Board.DoesNotExist:
             return self.error("Board does not exist")
         board.views += 1
@@ -73,9 +62,11 @@ class BoardAPI(BoardBase):
         board.save()
         return self.success(BoardSerializer(board).data)
     
-    @validate_serializer(DeleteBoardSerializer)
     @login_required
     def delete(self, request):
+        if not request.GET.get("id"):
+            return self.error("\"id\" param is required!")
+
         user = request.user
         id = request.GET.get("id")
         try:
@@ -90,10 +81,9 @@ class BoardAPI(BoardBase):
             return self.error("You are not the writer of this board")
 
 class BoardListAPI(APIView):
-    @validate_serializer(GetBoardListSerializer)
     def get(self, request):
         if not request.GET.get("limit"):
-            return self.error("Limit is needed")
+            return self.error("\"limit\" field is required!")
 
         keyword = request.GET.get("keyword")
         category = request.GET.get("category")

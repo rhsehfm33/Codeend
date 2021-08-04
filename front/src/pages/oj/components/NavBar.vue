@@ -27,9 +27,9 @@
       <Menu-item name="/boards/all" class="oj-menu-item">
         {{$t('m.Board')}}
       </Menu-item>
-    <Menu-item name="/studies/all" class="oj-menu-item">
+    <!-- <Menu-item name="/studies/all" class="oj-menu-item">
         {{$t('m.Study')}}
-      </Menu-item>      
+      </Menu-item>       -->
     </div>      
       <!-- 로그인 인증일 경우 -->
       <template v-if="!isAuthenticated">

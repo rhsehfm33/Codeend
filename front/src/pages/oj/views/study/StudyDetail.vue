@@ -1,8 +1,11 @@
 <template>
   <div>
-    <Panel class="container">
+    <Panel shadow style="width:100%; margin-top:1rem;">
         <div slot="title" >
-          {{study.title}} <Button>{{study.status}}</Button>
+          <div class="title-container">
+          <div>{{study.title}}</div>
+          <div><Button type="primary">{{study.status}}</Button></div>
+          </div>
           <div class="userInfo-container">
             <div class="user-container">
               <div class="font-box">
@@ -10,7 +13,7 @@
               </div>
               <div class="font-box">
                 <!-- study.last_update_time -->
-               <h5 style="font-weight:350;">{{study.create_time | localtime }}</h5>
+               <span class="time">{{study.create_time | localtime }}</span>
               </div>
             </div>
             <div class="edit-box" v-if="this.user.id === this.study.created_by.id">
@@ -21,40 +24,35 @@
           </div>
         </div>
       <div class="body-container">
-        <div class="flex-container">
-        <h4>스터디 가격</h4> : {{study.price}}원
-        </div>
-        <div class="flex-container">
-        <h4>스터디 주제</h4> : {{study.subject}}
-        </div>   
-        <div class="flex-container">
-        <h4>스터디 목표</h4> : {{study.purpose}}
-        </div>
-        <div class="flex-container">
-        <h4>스터디 일정</h4> : {{study.schedule}}
-        </div>  
-        <div class="flex-container">
-        <h4>스터디 이유</h4> : {{study.reason}}
-        </div>
-        <div class="flex-container">
-        <h4>스터디 알림</h4> : {{study.notice}}
+        <ul class="content-list">
+          <li>
+            <b>스터디 주제 :</b> {{study.subject}} 
+          </li>
+          <li>
+            <b>스터디 목표 :</b> {{study.purpose}}
+          </li>
+          <li>
+            <b>스터디 가격 :</b> {{study.price}}원
+          </li>
+          <li>
+            <b>스터디 모집 인원 :</b> {{study.total_students}} / {{study.max_student}}
+          </li>
+          <li>
+            <b>예상 스터디 일정(횟수) :</b> {{study.schedule}}
+          </li>
+          <li>
+            <b>예상 커리큘럼 :</b> {{study.curriculum}}
+          </li>
+          <li>
+            <b>스터디 주의 사항 :</b> {{study.notice}}
+          </li>
+          <li>
+            <b>스터디 기타 소개 :</b> <p v-html=study.content></p>
+          </li>
+        </ul>
+        <div class="tag-container">
+          연관 태그 <Button style="padding:0 0.5rem 0 0.5rem; border:0; outline: 0;" v-for="tag in study.tags" :key="tag">#{{tag}}</Button>
         </div> 
-        <div class="flex-container">
-        <h4>스터디 커리큘럼</h4> : {{study.curriculum}}
-        </div>   
-        <div class="flex-container">
-        <h4>스터디 일정</h4> : {{study.schedule}}
-        </div>   
-        <div class="flex-container">
-        <h4>스터디 모집 인원</h4> : {{study.max_student}}
-        <h4>현재 신청 인원</h4> : {{study.total_students}}
-        </div>
-        <div class="flex-container">
-        <h4>태그 : </h4><Button v-for="tag in study.tags" :key="tag">{{tag}}</Button>
-        </div>
-        <div> 내용!
-        <p v-html=study.content></p>
-        </div>
       </div>
     </Panel>
   </div>
@@ -65,7 +63,7 @@
   import { mapGetters } from 'vuex'
 
   export default {
-    name: 'StudyDetail',
+    name: 'study-details',
     data () {
       return {
         isVisible: true,
@@ -73,18 +71,27 @@
         user: {},
         mode: 'create',
         study: {
+          content: '',
+          create_time: '',
           created_by: {
             id: 0,
             username: ''
           },
-          title: '',
+          curriculum: '',
           category: '',
-          views: '',
-          create_time: ''
-        },
-        comment: {
-          id: 0,
-          content: ""
+          id: '',
+          last_update_time: '',
+          max_students: '',
+          notice: '',
+          price: '',
+          purpose: '',
+          reason: '',
+          schedule: '',
+          status: '',
+          subject: '',
+          tags: [],
+          title: '',
+          students: []
         }
       }
     },
@@ -94,11 +101,10 @@
     methods: {
       ...mapGetters(['isAuthenticated', 'user']),
       init () {
-        console.log(this.$route.params)
-        const studyID = this.$route.params.studyID
-        const teacher = this.$route.params.teacher
+        this.study.id = this.$route.query.studyID
+        this.study.created_by.username = this.$route.query.teacher
         this.checkUser()
-        this.getStudy(studyID, teacher)
+        this.getStudy(this.study.id, this.study.created_by.username)
       },
       getStudy (studyID, teacher) {
         api.getStudyDetail(studyID, teacher).then(res => {
@@ -121,31 +127,20 @@
         });
       },
       editStudy () {
-        this.$router.push({name: 'add-study', query: {mode: 'edit', studyID: this.$route.params.studyID, teacher: this.study.created_by.username}})
+        this.$router.push({name: 'add-study', query: {mode: 'edit', studyID: this.study.id, teacher: this.study.created_by.username}})
       },
       editButton (id) {
         this.isVisible = false
         this.ClickCommentID = id
         this.comment.id = id
       },
-      editComment (id, content) {
-        const data = {
-          id: id,
-          content: content
-        }
-        api.editComment(data).then(res => {
-          this.isVisible = true
-        })
-      },
-      deleteComment (id) {
-        this.$confirm("Are you sure?").then(() => {
-          api.deleteComment(id).then(res => {
-            this.$router.go()
-          })
-        });
-      },
       goBack () {
         this.isVisible = true
+      }
+    },
+    watch: {
+      '$route' () {
+        this.init()
       }
     }
   }
@@ -158,15 +153,38 @@
   margin: auto;  
 }
 
-.ul {
-  list-style:none;
+.title-container {
+  display: flex;
+  justify-content: space-between;
 }
+
+span.time {
+  font-size: 1rem;
+  color: rgb(172, 172, 172);
+}
+
+ul.content-list li {
+  list-style: none;
+  min-width: 50rem;
+  padding: 5px 0px 5px 5px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid rgb(228, 228, 228);
+}
+
+ul.content-list li:last-child {
+    border-bottom: 0px;
+}
+
 
 .top-container {
   background-color: rgb(228, 228, 228);
 }
 
 .body-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   min-height: 500px;
   padding: 1rem;
   font-size: 1rem;
@@ -186,11 +204,6 @@
   width: 80%;
 }
 
-.flex-container {
-  display: flex;
-  justify-content: left;
-}
-
 .edit-box {
   width: 20%;
   text-align: right;
@@ -202,31 +215,14 @@
 }
 
 .font-box {
-  // color: white;
   padding-right: 1rem; 
 }
 
-.comment-container {
-  text-align: left;
-  padding: 10px;
-  margin-top: .5rem;
-  background-color: rgb(248, 247, 247);
-  border: 1px solid;
-  border-width: 0.2rem;
-  border-color: rgb(228, 228, 228);
-}
-
-.comment-user {
-  display: flex;
-  justify-content: space-between;
-}
-
-.comment-user-container {
-  display : flex;
-  align-items: center;
-  width: 80%;
-  font-size: 1.2rem;
-  padding-bottom: 1rem;
+.tag-container {
+  width: 50%;
+  background-color: rgb(219, 219, 219);
+  border-radius: 0.3rem;
+  padding: 0.3rem;
 }
 
 #username {

@@ -369,11 +369,8 @@ export default {
       }
     })
   },
-  getStudyTagList (searchParams) {
+  getStudyTagList () {
     return ajax('study/tags', 'get', {
-      params: {
-        searchParams
-      }
     })
   }
 }

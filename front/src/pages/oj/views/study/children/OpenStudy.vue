@@ -1,51 +1,58 @@
-<template>  
+<template> 
 <Row type="flex" :gutter="18">
   <Col :span=19>
-  <Panel shadow style="width: 100%">
+  <Panel shadow style="width:100%; margin-top:1rem;">
     <div slot="title">{{$t('m.Study_Title')}}</div>
+    <div slot="extra">
+      <ul class="filter">
+        <li>
+          <Input v-model="query.keyword" @on-enter="filterByKeyword"
+                @on-click="filterByKeyword"
+                placeholder="keyword"
+                icon="ios-search-strong"/>
+        </li>
+      </ul>
+    </div>
         <div class="grid-item">
         <Card v-for="(study, i) in studyList" :key="i" class="card-item">
-          <router-link class="router-link" :to="{ name: 'study-details', params: { studyID: study.id, teacher: study.created_by.username }}">
+          <router-link class="router-link" :to="{ name: 'study-details', query: { studyID: study.id, teacher: study.created_by.username }}">
           <div class="card-header">
-            <span># 주제</span>
-            <div class="status">
-              <Button class="statusBtn">{{study.status}}</Button>
+            <div>{{study.total_students}}/{{study.max_students}}</div>
+            <div>
+              <Button type="primary" class="statusBtn">{{study.status}}</Button>
             </div>
           </div>
             <div class="title-container margin-bottom">
-              제목 : <h3>{{ study.title }}</h3>
+              <h3>{{ study.title }}</h3>
             </div>
             <div class="margin-bottom">
-              주제 : 
               {{study.subject}}
             </div>
             <div class="margin-bottom">
-              작성자 : 
               {{ study.created_by.username}}
             </div>
             <div class="margin-bottom">
               {{ study.price}}원
             </div>
-            <div> 태그 
-               <Button v-for="(tag, i) in study.tags" :key="i">
-                 {{tag}}</Button>
+            <div>
+               <Button class="tagBtn" v-for="(tag, i) in study.tags" :key="i" type="text" >
+                # {{tag}}</Button>
             </div>
-            <div>신청 인원/모집인원 : {{study.total_students}}/{{study.max_students}}</div>
             </router-link> 
         </Card> 
       </div>
   </Panel>
-    </Col>
-    <Col :span="4" style="width: 20%">
-    <Panel shadow>
+  </Col>
+    <Col :span="4" style="width: 20%; padding: 0; margin: 0;">
+    <Panel shadow style="padding:1rem; margin-top:1rem;">
       <div slot="title" class="taglist-title">{{$t('m.Tags')}}</div>
-      <!-- <Button v-for="(tag, i) in study.tags" :key="i"
+      <Button v-for="(tag, i) in tagList" :key="i"
               @click="filterByTag(tag.name)"
               type="ghost"
               :disabled="query.tag === tag"
               shape="circle"
-              class="tag-btn">{{tag}}
-      </Button> -->
+              class="tag-btn">{{tag.name}}
+      </Button>
     </Panel>
     <Spin v-if="loadings.tag" fix size="large"></Spin>
     </Col>
@@ -65,6 +72,7 @@
     data () {
       return {
         // 스터디 리스트 목록
+        tagList: [],
         studyList: [],
         mode: 'create',
         limit: 20,
@@ -89,9 +97,9 @@
       init (simulate = false) {
         this.routeName = this.$route.name
         let query = this.$route.query
-        this.query.status = "Recruiting"
         this.query.keyword = query.keyword || ''
         this.query.tag = query.tag || ''
+        this.query.status = "Recruiting"
         this.query.page = parseInt(query.page) || 1
         if (this.query.page < 1) {
           this.query.page = 1
@@ -109,12 +117,13 @@
           this.table = false
           this.studyList = res.data.data.results
           console.log(this.studyList)
+          console.log(this.studyList)
         }, res => {
           this.loadings.table = false
         })
       },
       getTagList () {
-        api.getProblemTagList().then(res => {
+        api.getStudyTagList().then(res => {
           this.tagList = res.data.data
           this.loadings.tag = false
         }, res => {
@@ -132,7 +141,7 @@
       },
       pushRouter () {
         this.$router.push({
-          name: 'study-list',
+          name: 'recruiting',
           query: utils.filterEmptyValue(this.query)
         })
       }
@@ -147,7 +156,7 @@ span {
   display: block;
 }
   .card-header {
-    height: 2em;
+    margin-bottom: 0.1rem;
     display: flex;
     justify-content: space-between;
   }
@@ -169,8 +178,8 @@ span {
 
 .card-item {
   margin: 1rem;
-  width: 16rem;
-  height: 14rem;
+  width: 13rem;
+  height: 13rem;
   min-height: 15rem;
   min-width: 10rem;
   box-shadow: 2px 1px 2px;
@@ -182,8 +191,8 @@ span {
 }
 
 .card-item:hover {
-  width: 17rem;
-  height: 16rem;
+  width: 14rem;
+  height: 14rem;
 }
 
 .grid-item {
@@ -198,9 +207,19 @@ span {
 }
 
 .status {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .statusBtn {
   font-weight: bold;
+  padding: 0.2rem;
+}
+
+.tagBtn {
+  padding: 0;
+  margin-right: 0.3rem;
+  font-size: 1rem;
 }
 </style>

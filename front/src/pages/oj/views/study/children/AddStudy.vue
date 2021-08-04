@@ -3,63 +3,63 @@
         <div class="section-title">{{$t('m.Write')}}</div>
         <div class="form-container">
         <Form class="setting-content" ref="study" :model="study">
-          <FormItem prop="study_title">
+          <FormItem prop="study_title" label="제목">
             <Input placeholder="스터디 제목" v-model="study.title" type="text">
               {{this.study.title}}
             </Input>
           </FormItem>
           <div class="category-box">
-          <FormItem prop="study_subject">
+          <FormItem prop="study_subject" label="주제">
             <Input placeholder="스터지 주제" v-model="study.subject" type="text">
-              {{this.study.title}}
+              {{this.study.subject}}
             </Input>
           </FormItem>
           </div>
           <div class="category-box">
-          <FormItem prop="study_purpose">
+          <FormItem prop="study_purpose" label="목표">
             <Input placeholder="스터디 목표" v-model="study.purpose" type="text">
-              {{this.study.title}}
+              {{this.study.purpose}}
             </Input>
           </FormItem>
           </div>
           <div class="category-box">
-          <FormItem prop="study_schedule">
+          <FormItem prop="study_schedule" label="일정 (ex. 주 2회)">
             <Input placeholder="스터디 일정" v-model="study.schedule" type="text">
-              {{this.study.title}}
+              {{this.study.schedule}}
             </Input>
           </FormItem>
           </div>
           <div class="category-box">
-          <FormItem prop="study_curriculum">
+          <FormItem prop="study_curriculum" label="커리큘럼">
             <Input placeholder="스터디 커리큘럼" v-model="study.curriculum" type="text">
-              {{this.study.title}}
+              {{this.study.curriculum}}
             </Input>
           </FormItem>
           </div>
           <div class="category-box">
-          <FormItem prop="study_students">
+          <FormItem prop="study_students" label="최대 모집 인원">
             <Input placeholder="모집 인원" v-model="study.max_students" type="text">
-              {{this.study.title}}
+              {{this.study.max_students}}
             </Input>
           </FormItem>
           </div>
           <div class="category-box">
-          <FormItem prop="study_reason">
+          <FormItem prop="study_reason" label="모집 이유">
             <Input placeholder="스터디 모집 이유" v-model="study.reason" type="text">
-              {{this.study.title}}
+              {{this.study.reason}}
             </Input>
           </FormItem>
           </div>
           <div class="category-box">
-          <FormItem prop="study_notice">
-            <Input placeholder="스터디 알림" v-model="study.notice" type="text">
-              {{this.study.title}}
+          <FormItem prop="study_notice" label="주의사항">
+            <Input placeholder="스터디 주의사항" v-model="study.notice" type="text">
+              {{this.study.notice}}
             </Input>
           </FormItem>
           </div>
           <div>
-          <FormItem prop="study_price">
-            <Input placeholder="스터디 가격" 
+          <FormItem prop="study_price" label="가격">
+            <Input placeholder="스터디 가격"  
                   v-model="study.price" type="text">
                   {{this.study.price}}</Input>
           </FormItem>
@@ -89,7 +89,7 @@
             </el-form-item>
           </div>
           <div class="category-box" v-if="this.mode=='edit'">
-          <FormItem prop="study_status">
+          <FormItem prop="study_status" label="모집 상태">
             <Select v-model="study.status" placeholder="게시판을 선택하세요.">
               <Option selected :label="모집중" value="Recruiting">모집중</Option>
               <Option :label="모집완료" value="Recruited">모집완료</Option>
@@ -143,12 +143,12 @@
           purpose: '',
           schedule: '',
           curriculum: '',
-          max_students: 0,
+          max_students: '',
           reason: '',
           notice: '',
           tags: [],
           status: 'Recruiting',
-          price: 0,
+          price: '',
           students: ''
         },
         tagInput: '',
@@ -168,6 +168,7 @@
     },
     methods: {
       init () {
+        console.log(this.$route.query)
         if (this.$route.query.studyID) {
           this.studyID = this.$route.query.studyID
         }
@@ -189,12 +190,12 @@
             this.study.purpose = study.purpose
             this.study.schedule = study.schedule
             this.study.curriculum = study.curriculum
-            this.study.max_students = study.max_students
+            this.study.max_students = parseInt(study.max_students)
             this.study.reason = study.reason
             this.study.notice = study.notice
             this.study.tags = study.tags
             this.study.status = study.status
-            this.study.price = study.price
+            this.study.price = parseInt(study.price)
             this.study.students = study.students
           })
         }

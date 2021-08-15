@@ -13,8 +13,7 @@ Install nodejs **v8.12.0**
 
 ```bash
 # 패키지 설치
-cd front 
-npm ci 
+npm install
 
 # 패키지 설치 후 한번만 실행
 export NODE_ENV=development 
@@ -31,8 +30,7 @@ npm run dev
 
 ```bash
 # 패키지 설치
-cd front 
-npm ci 
+npm install
 
 # 패키지 설치 후 한번만 실행
 $env:NODE_ENV="development"

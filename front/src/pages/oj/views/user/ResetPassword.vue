@@ -4,12 +4,12 @@
     <template v-if="!resetSuccess">
     <Form :model=formResetPassword ref="formResetPassword" :rules="ruleResetPassword">
       <Form-item prop="password">
-        <Input type="password" v-model="formResetPassword.password" :placeholder="$t('m.RPassword')" size="large">
+        <Input type="password" v-model="formResetPassword.password" :placeholder="$t('m.RegisterPassword')" size="large">
         <Icon type="ios-locked-outline" slot="prepend"></Icon>
         </Input>
       </Form-item>
       <Form-item prop="passwordAgain">
-        <Input type="password" v-model="formResetPassword.passwordAgain" :placeholder="$t('m.RPassword_Again')" size="large">
+        <Input type="password" v-model="formResetPassword.passwordAgain" :placeholder="$t('m.Password_Again')" size="large">
         <Icon type="ios-locked-outline" slot="prepend"></Icon>
         </Input>
       </Form-item>

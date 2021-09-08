@@ -236,8 +236,5 @@ export const m = {
   // Comment.vue
   InputComment: '댓글을 입력하세요',
   // Study
-  Study: '스터디',
-  Study_Title: '스터디 공고',
-  Open: '모집중',
-  Completed: '모집완료'
+  Study: '스터디'
 }

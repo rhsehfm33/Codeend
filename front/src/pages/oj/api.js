@@ -328,50 +328,6 @@ export default {
         id: commentID
       }
     })
-  },
-  getStudyList (offset, limit, searchParams) {
-    let params = {
-      offset,
-      limit
-    }
-    Object.keys(searchParams).forEach((element) => {
-      if (searchParams[element]) {
-        params[element] = searchParams[element]
-      }
-    })
-    return ajax('studies', 'get', {
-      params
-    })
-  },
-  getStudyDetail (id, teacher) {
-    return ajax('study', 'get', {
-      params: {
-        id,
-        teacher
-      }
-    })
-  },
-  createStudy (data) {
-    return ajax('study', 'post', {
-      data
-    })
-  },
-  editStudy (data) {
-    return ajax('study', 'put', {
-      data
-    })
-  },
-  deleteStudy (id) {
-    return ajax('study', 'delete', {
-      params: {
-        // only id parameter
-        id
-      }
-    })
-  },
-  getStudyTagList () {
-    return ajax('study/tags', 'get', {
-    })
   }
 }
 

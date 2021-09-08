@@ -22,6 +22,23 @@ import * as Study from '@oj/views/study'
 
 export default [
   {
+    name: 'study-list',
+    path: '/study',
+    meta: {title: 'Study List'},
+    component: Study.StudyList
+  },
+  {
+    name: 'study-details',
+    path: '/study/:studyID',
+    meta: {title: 'Study Details'},
+    component: Study.Study
+  },
+  {
+    name: 'payment',
+    path: '/payment',
+    component: Study.Payment
+  },
+  {
     name: 'home',
     path: '/',
     meta: {title: 'Home'},
@@ -194,42 +211,6 @@ export default [
         path: 'view/:boardID',
         meta: {title: 'Board Detail'},
         component: Board.BoardDetail
-      }
-    ]
-  },
-  {
-    path: '/studies',
-    component: Study.StudyList,
-    children: [
-      {
-        name: 'study-list',
-        path: 'all',
-        meta: {title: 'All Study'},
-        component: Study.AllStudy
-      },
-      {
-        name: 'add-study',
-        path: 'write',
-        meta: {requiresAuth: true, title: 'Add Study'},
-        component: Study.AddStudy
-      },
-      {
-        name: 'recruiting',
-        path: 'recruiting',
-        meta: {title: 'Recruiting'},
-        component: Study.Recruiting
-      },
-      {
-        name: 'recruited',
-        path: 'recruited',
-        meta: {title: 'Recruited'},
-        component: Study.Recruited
-      },
-      {
-        name: 'study-details',
-        path: 'view/:studyID',
-        meta: {title: 'Study Detail'},
-        component: Study.Study
       }
     ]
   },

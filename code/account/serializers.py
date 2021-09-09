@@ -116,7 +116,7 @@ class ApplyResetPasswordSerializer(serializers.Serializer):
 class ResetPasswordSerializer(serializers.Serializer):
     token = serializers.CharField()
     password = serializers.CharField(min_length=6)
-    # captcha = serializers.CharField()
+    captcha = serializers.CharField()
 
 
 class SSOSerializer(serializers.Serializer):

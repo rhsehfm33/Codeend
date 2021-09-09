@@ -15,6 +15,7 @@ from problem.models import Problem
 from utils.constants import ContestRuleType
 from options.options import SysOptions
 from utils.api import APIView, validate_serializer, CSRFExemptAPIView
+from utils.captcha import Captcha
 from utils.shortcuts import rand_str, img2base64, datetime2str
 from ..decorators import login_required
 from ..models import User, UserProfile, AdminType
@@ -312,9 +313,9 @@ class ResetPasswordAPI(APIView):
     @validate_serializer(ResetPasswordSerializer)
     def post(self, request):
         data = request.data
-        # captcha = Captcha(request)
-        # if not captcha.check(data["captcha"]):
-        #     return self.error("Invalid captcha")
+        captcha = Captcha(request)
+        if not captcha.check(data["captcha"]):
+            return self.error("Invalid captcha")
         try:
             user = User.objects.get(reset_password_token=data["token"])
         except User.DoesNotExist:

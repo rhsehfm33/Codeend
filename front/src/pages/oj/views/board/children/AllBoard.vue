@@ -32,10 +32,10 @@
              disabled-hover>
       </Table>
       <Pagination :total="total" 
-    :page-size.sync="query.limit" 
-    @on-change="pushRouter" 
-    @on-page-size-change="pushRouter" 
-    :current.sync="query.page" 
+    :page-size.sync="limit" 
+    @on-change="changeRoute" 
+    @on-page-size-change="changeRoute" 
+    :current.sync="page" 
     :show-sizer="true">
     </Pagination>
     </Panel>
@@ -47,6 +47,8 @@
   import api from '@oj/api'
   import utils from '@/utils/utils'
   import Pagination from '@oj/components/Pagination'
+
+  const limit = 10
 
   export default {
     name: 'all-board',
@@ -171,48 +173,71 @@
           }
         ],
         boardList: [],
-        limit: 20,
+        limit: limit,
+        total: 0,
+        page: 1,
+        query: {
+          keyword: '',
+          category: ''
+        },
         loadings: {
           table: true
         },
-        comment: '',
-        routeName: '',
-        query: {
-          keyword: '',
-          category: '',
-          page: 1,
-          limit: 10
-        }
+        comment: ''
       }
     },
     mounted () {
       this.init()
     },
+    beforeRouteEnter (to, from, next) {
+      api.getBoardList(0, limit).then((res) => {
+        next((vm) => {
+          vm.contests = res.data.data.results
+          vm.total = res.data.data.total
+        })
+      }, (res) => {
+        next()
+      })
+    },
     methods: {
       init () {
-        this.routeName = this.$route.name
-        let query = this.$route.query
-        this.query.difficulty = query.difficulty || ''
-        this.query.keyword = query.keyword || ''
-        this.query.page = parseInt(query.page) || 1
+        let route = this.$route.query
+        this.query.difficulty = route.difficulty || ''
+        this.query.keyword = route.keyword || ''
+        this.page = parseInt(route.page) || 1
         if (this.query.page < 1) {
           this.query.page = 1
         }
-        this.query.limit = parseInt(query.limit) || 10
-        this.getBoardList()
+        this.limit = parseInt(route.limit) || 10
+        this.getBoardList(this.page)
       },
-      pushRouter () {
+      // pushRouter () {
+      //   this.$router.push({
+      //     name: 'all-board',
+      //     query: utils.filterEmptyValue(this.query)
+      //   })
+      // },
+      changeRoute () {
+        let query = Object.assign({}, this.query)
+        query.page = this.page
+        query.limit = this.limit
+
         this.$router.push({
           name: 'all-board',
-          query: utils.filterEmptyValue(this.query)
+          query: utils.filterEmptyValue(query)
         })
       },
-      getBoardList () {
-        let offset = (this.query.page - 1) * this.query.limit
+      getBoardList (page = 1) {
+        let offset = (page - 1) * this.limit
+        console.log(offset)
+        console.log(page)
+        console.log(this.limit)
+        // let offset = (this.query.page - 1) * this.query.limit
         this.loadings.table = true
         api.getBoardList(offset, this.limit, this.query).then(res => {
           this.loadings.table = false
           this.boardList = res.data.data.results
+          this.total = res.data.data.total
         }, res => {
           this.loadings.table = false
         })
@@ -220,11 +245,13 @@
       filterByCategory (category) {
         this.query.category = category
         this.query.page = 1
-        this.pushRouter()
+        // this.pushRouter()
+        this.changeRoute()
       },
       filterByKeyword () {
         this.query.page = 1
-        this.pushRouter()
+        // this.pushRouter()
+        this.changeRoute()
       }
     },
     computed: {

@@ -73,7 +73,13 @@
         </li>
       </ol>
     </Panel>
-    <Pagination :total="total" :page-size.sync="limit" @on-change="changeRoute" :current.sync="page" :show-sizer="true" @on-page-size-change="changeRoute"></Pagination>
+    <Pagination :total="total" 
+    :page-size.sync="limit" 
+    @on-change="changeRoute" 
+    :current.sync="page" 
+    :show-sizer="true" 
+    @on-page-size-change="changeRoute">
+    </Pagination>
     </Col>
   </Row>
 

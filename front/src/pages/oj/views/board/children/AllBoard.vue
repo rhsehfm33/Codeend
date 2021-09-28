@@ -189,39 +189,18 @@
     mounted () {
       this.init()
     },
-    beforeRouteEnter (to, from, next) {
-      api.getBoardList(0, limit).then((res) => {
-        next((vm) => {
-          vm.contests = res.data.data.results
-          vm.total = res.data.data.total
-        })
-      }, (res) => {
-        next()
-      })
-    },
     methods: {
       init () {
         let route = this.$route.query
-        this.query.difficulty = route.difficulty || ''
         this.query.keyword = route.keyword || ''
         this.page = parseInt(route.page) || 1
-        if (this.query.page < 1) {
-          this.query.page = 1
-        }
         this.limit = parseInt(route.limit) || 10
         this.getBoardList(this.page)
       },
-      // pushRouter () {
-      //   this.$router.push({
-      //     name: 'all-board',
-      //     query: utils.filterEmptyValue(this.query)
-      //   })
-      // },
       changeRoute () {
         let query = Object.assign({}, this.query)
         query.page = this.page
         query.limit = this.limit
-
         this.$router.push({
           name: 'all-board',
           query: utils.filterEmptyValue(query)
@@ -229,10 +208,6 @@
       },
       getBoardList (page = 1) {
         let offset = (page - 1) * this.limit
-        console.log(offset)
-        console.log(page)
-        console.log(this.limit)
-        // let offset = (this.query.page - 1) * this.query.limit
         this.loadings.table = true
         api.getBoardList(offset, this.limit, this.query).then(res => {
           this.loadings.table = false

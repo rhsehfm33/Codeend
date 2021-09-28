@@ -108,7 +108,6 @@
         api.getProblemList(offset, this.limit, this.query).then(res => {
           this.total = res.data.data.total
           this.problemList = res.data.data.results
-          console.log(this.problemList)
         })
       },
       getUserCheck (createdByID) {

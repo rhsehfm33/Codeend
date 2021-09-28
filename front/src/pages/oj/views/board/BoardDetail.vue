@@ -133,7 +133,6 @@ import { mapGetters } from 'vuex'
           id: id,
           content: content
         }
-        console.log(data)
         api.editComment(data).then(res => {
           this.isVisible = true
         })

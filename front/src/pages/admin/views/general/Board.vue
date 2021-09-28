@@ -140,7 +140,6 @@
       selectedBoardIDs () {
         let ids = []
         for (let board of this.selectedBoard) {
-          console.log(board.id)
           ids.push(board.id)
         }
         return ids

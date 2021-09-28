@@ -13,8 +13,8 @@
               </div>
             </div>
             <div class="edit-box" v-if="this.user.id === this.board.created_by.id">
-              <el-button type="primary" size="small" @click="editBoard()">수정</el-button>
-              <el-button type="primary" size="small" @click="deleteBoard()">삭제</el-button>
+              <el-button type="primary" size="small" @click="editBoard()">{{$t('m.Edit')}}</el-button>
+              <el-button type="primary" size="small" @click="deleteBoard()">{{$t('m.Delete')}}</el-button>
             </div>
             <div v-else class="default-box"/>
           </div>
@@ -26,7 +26,7 @@
     <div>
     <Comment/>
     <ul class="ul">
-      <li v-for="comment in comments"
+      <li style="background-color: #ffffff;" v-for="comment in comments"
           v-bind:key="comment.id"
       >
         <div v-if="isVisible || comment.id !== ClickCommentID" class="comment-container">
@@ -36,8 +36,8 @@
               <p id="create-time">{{comment.create_time | localtime}}</p>
             </div>
             <div class="editBtns" v-if="comment.created_by.id === user.id" >
-              <el-button type="primary" size="small" @click="editButton(comment.id)">수정</el-button>
-              <el-button type="primary" size="small" @click="deleteComment(comment.id)">삭제</el-button>
+              <el-button type="primary" size="small" @click="editButton(comment.id)">{{$t('m.Edit')}}</el-button>
+              <el-button type="primary" size="small" @click="deleteComment(comment.id)">{{$t('m.Delete')}}</el-button>
             </div>
           </div>
           <div class="comment-content">
@@ -46,10 +46,10 @@
         </div>
         <div v-else-if="!isVisible && ClickCommentID === comment.id" >
           <textarea v-model="comment.content" 
-                    cols="50" rows="3">
+                    style="width:90%; margin: 1rem;" rows="3">
           </textarea>
-          <el-button type="primary" size="small" class="comment-update-btn" @click="editComment(comment.id, comment.content)">수정</el-button>
-          <el-button type="primary" size="small" v-on:click.prevent="goBack">취소</el-button>
+          <el-button type="primary" size="small" class="comment-update-btn" @click="editComment(comment.id, comment.content)">{{$t('m.Edit')}}</el-button>
+          <el-button type="primary" size="small" v-on:click.prevent="goBack">{{$t('m.Cancel')}}</el-button>
         </div>
       </li>
     </ul>
@@ -156,18 +156,24 @@ import { mapGetters } from 'vuex'
   list-style:none;
 }
 
+.list-container {
+  background-color: #ffffff;
+  background-color: rgba( 255, 255, 255, 0.5 );
+}
+
+
 .top-container {
   background-color: rgb(228, 228, 228);
 }
 
 .body-container {
   min-height: 500px;
+  margin: 1rem;
   padding: 1rem;
   font-size: 1rem;
   background-color: rgb(248, 247, 247);
   border-width: 0.2rem;
-  border-style: solid;
-  border-color: rgb(228, 228, 228);
+
 }
 
 .userInfo-container {
@@ -198,11 +204,9 @@ import { mapGetters } from 'vuex'
 .comment-container {
   text-align: left;
   padding: 10px;
-  margin-top: .5rem;
-  background-color: rgb(248, 247, 247);
-  border: 1px solid;
-  border-width: 0.2rem;
-  border-color: rgb(228, 228, 228);
+  margin: 1rem;
+  margin-top: 1rem;
+  background-color: rgb(248, 247, 247, 0.2);
 }
 
 .comment-user {

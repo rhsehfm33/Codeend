@@ -224,5 +224,15 @@ export const m = {
   Created_By: 'Created_By',
   Views: 'Views',
   Comment: 'Comment',
-  Date: 'Date'
+  Date: 'Date',
+  Edit: 'Edit',
+  // Write.vue
+  Choose_Category: 'Choose Category',
+  Post: 'Post',
+  Delete: 'Delete',
+  // BoardDetail.vue
+  // Comment.vue
+  Comment_Title: 'Comment',
+  InputComment: 'Please enter a commen',
+  Comments: 'post a comment'
 }

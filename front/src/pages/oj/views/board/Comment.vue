@@ -1,6 +1,6 @@
 <template>
   <Panel style="padding:0">
-    <div slot="title" style="font-size:1rem;">댓글</div>
+    <div slot="title" style="font-size:1rem;">{{$t('m.Comment_Title')}}</div>
     <div class="comment-container">
     <Form class="setting-content" ref="comment" :model="comment">
       <FormItem prop="board_title">
@@ -12,7 +12,7 @@
                   />
       </FormItem>
       <div class="addBtn">
-      <el-button type="primary" @click="submitComment">댓글 등록</el-button>
+      <el-button type="primary" @click="submitComment">{{$t('m.Comments')}}</el-button>
       </div>
     </Form>
     </div>

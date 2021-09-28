@@ -228,13 +228,16 @@ export const m = {
   Date: '작성일',
   Write: '글쓰기',
   ProblemNumber: '문제 번호',
+  Edit: '수정',
   // Write.vue
   Choose_Category: '게시판을 선택하세요.',
   Post: '등록',
   Delete: '삭제',
   // BoardDetail.vue
   // Comment.vue
+  Comment_Title: '댓글',
   InputComment: '댓글을 입력하세요',
+  Comments: '댓글 등록',
   // Study
   Study: '스터디'
 }

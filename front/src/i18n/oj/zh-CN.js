@@ -221,8 +221,18 @@ export const m = {
   Free: '论坛',
   Question: '问题',
   Category: '类别',
-  Created_By: 'Created_By',
+  Created_By: '作家',
   Views: 'Views',
-  Comment: 'Comment',
-  Date: 'Date'
+  Comment: '评论',
+  Date: '日期',
+  Edit: '更正',
+  // Write.vue
+  Choose_Category: '选择一个公告板',
+  Post: '注册',
+  Delete: '删除',
+  // BoardDetail.vue
+  // Comment.vue
+  Comment_Title: '评论',
+  InputComment: '输入评论',
+  Comments: '注册评论'
 }

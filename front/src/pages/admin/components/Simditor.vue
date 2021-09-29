@@ -14,7 +14,7 @@
     props: {
       toolbar: {
         type: Array,
-        default: () => ['title', 'bold', 'italic', 'underline', 'strikethrough', 'fontScale', 'color', 'ol', 'ul', 'blockquote', 'code', 'table', 'link', 'image', 'hr', 'indent', 'outdent', 'alignment']
+        default: () => ['title', 'bold', 'italic', 'underline', 'strikethrough', 'fontScale', 'color', 'ol', 'ul', 'blockquote', 'code', 'table', 'link', 'uploadfile', 'image', 'hr', 'indent', 'outdent', 'alignment']
       },
       value: {
         type: String,

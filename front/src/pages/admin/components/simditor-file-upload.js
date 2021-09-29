@@ -1,6 +1,7 @@
 /* eslint-disable */
 
 import Simditor from 'tar-simditor'
+// import 'simditor-i18n'
 import * as $ from 'jquery'
 
 Simditor.locale = 'en-US';
@@ -30,8 +31,9 @@ UploadFile = (function (_super) {
     'ko-KR': {
       uploadfile: '파일 업로드'
     },
+    // 번역 대체
     'zh-CN': {
-      uploadfile: '上传文件'
+      uploadfile: 'upload file'
     },
     'en-US': {
       uploadfile: 'upload file'

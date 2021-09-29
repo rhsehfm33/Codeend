@@ -215,17 +215,21 @@ export const m = {
   UserHomeserSubmissions: 'Submissions',
   UserHomeScore: 'Score',
   List_Solved_Problems: 'List of solved problems',
-  UserHomeIntro: 'The guy is so lazy that has not solved any problem yet.',
+  UserHomeIntro: 'No problem solved yet.',
   // Board.vue
+  ProblemNumber: 'Number',
   All_Board: 'All',
   Free: 'Free',
   Question: 'Question',
   Category: 'Category',
-  Created_By: 'Created_By',
+  Created_By: 'Created by',
   Views: 'Views',
   Comment: 'Comment',
   Date: 'Date',
   Edit: 'Edit',
+  EnterTitle: 'Title',
+  ChooseCategory: 'Category',
+  EnterNumber: 'Problem Number',
   // Write.vue
   Choose_Category: 'Choose Category',
   Post: 'Post',
@@ -234,5 +238,6 @@ export const m = {
   // Comment.vue
   Comment_Title: 'Comment',
   InputComment: 'Please enter a commen',
-  Comments: 'post a comment'
+  Comments: 'post a comment',
+  Write: 'Write'
 }

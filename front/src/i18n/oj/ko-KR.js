@@ -229,6 +229,9 @@ export const m = {
   Write: '글쓰기',
   ProblemNumber: '문제 번호',
   Edit: '수정',
+  EnterTitle: '제목',
+  ChooseCategory: '카테고리',
+  EnterNumber: '문제 번호',
   // Write.vue
   Choose_Category: '게시판을 선택하세요.',
   Post: '등록',

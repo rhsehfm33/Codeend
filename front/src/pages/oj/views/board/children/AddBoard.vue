@@ -4,28 +4,37 @@
       <div class="form-container">
         <p class="section-title">{{$t('m.Write')}}</p>
         <Form class="setting-content" ref="board" :model="board">
+          <div class="input-box">
           <FormItem prop="board_title">
-            <Input placeholder="제목을 입력하세요." v-model="board.title" type="text">
+            <p style="display:inline-block; color:red;">*</p>
+            <label for="board.title">{{$t('m.EnterTitle')}}</label>
+            <Input v-model="board.title" type="text">
               {{this.board.title}}
             </Input>
           </FormItem>
-          <div class="category-box">
+          </div>
+          <div class="input-box">
           <FormItem prop="board_category">
-            <Select v-model="board.category" placeholder="게시판을 선택하세요.">
+            <p style="display:inline-block; color:red;">*</p>
+            <label fro="board.category">{{$t('m.ChooseCategory')}}</label>
+            <Select v-model="board.category">
               <Option :label="$t('m.Free')+$t('m.Board')" value="Free"></Option>
               <Option :label="$t('m.Question')+$t('m.Board')" value="Question"></Option>
             </Select>
           </FormItem>
           </div>
+          <div class="input-box">
           <FormItem prop="board_problemID">
-            <Input placeholder="문제 번호를 입력하세요." 
-                  v-model="board.problemID" type="text">
+            <p style="display:inline-block; color:red;">*</p>
+            <label for="board.problemID">{{$t('m.EnterNumber')}}</label>
+            <Input v-model="board.problemID" type="text">
                   {{this.board.problemID}}</Input>
             <!-- <Input v-model="query.keyword"
                    placeholder="문제 번호를 입력하세요."
                    icon="ios-search-strong">
                    {{this.board.problemID}}</Input> -->
           </FormItem>
+          </div>
           <div class="simditor-box">
           <FormItem required>
             <Simditor v-model="board.content">
@@ -38,7 +47,7 @@
           <el-button type="primary" @click="goBack">{{$t('m.Back')}}</el-button>
           </div>
           <div v-else class="edit-box">
-          <el-button type="primary" @click="submitPost">{{$t('m.Post')}}</el-button>
+          <el-button el-bg-green type="primary" @click="submitPost">{{$t('m.Post')}}</el-button>
           <el-button type="primary" @click="deleteBoard()">{{$t('m.Delete')}}</el-button>
           </div>
         </Form>
@@ -150,17 +159,17 @@
     justify-content: center;
     // 글쓰기 중앙 정렬
     text-align: center;
-    background-color: rgb(248,247,247);
+    background-color: rgba(255, 255, 255, 0);
     border-width: 0.2rem;
     border-style: solid;
     border-color: rgb(228, 228, 228);
     padding: 10px;
     .form-container {
-      width: 90%;
+      width: 80%;
     }
   }
 
-  .category-box {
+  .input-box {
     text-align: left;
   }
 

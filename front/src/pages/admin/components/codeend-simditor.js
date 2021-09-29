@@ -56,6 +56,6 @@ Simditor.i18n['ko-KR'] = {
   'fontScaleNormal': 'Normal Size',
   'fontScaleSmall': 'Small Size',
   'fontScaleXSmall': 'X Small Size'
-}
+};
 
 export default Simditor;

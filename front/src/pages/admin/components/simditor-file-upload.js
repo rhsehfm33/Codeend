@@ -1,10 +1,8 @@
 /* eslint-disable */
 
-import Simditor from 'tar-simditor'
+import Simditor from './codeend-simditor'
 // import 'simditor-i18n'
 import * as $ from 'jquery'
-
-Simditor.locale = 'en-US';
 
 var UploadFile,
   __hasProp = {}.hasOwnProperty,
@@ -43,6 +41,8 @@ UploadFile = (function (_super) {
   UploadFile.prototype.name = 'uploadfile';
 
   UploadFile.prototype.icon = 'upload';
+
+  UploadFile.locale = "ko-KR";
 
   function UploadFile() {
     var args;

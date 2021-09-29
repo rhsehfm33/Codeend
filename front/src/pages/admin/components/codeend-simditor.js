@@ -1,0 +1,61 @@
+/* eslint-disable */
+
+import Simditor from 'tar-simditor';
+
+Simditor.locale = 'ko-KR';
+
+Simditor.i18n['ko-KR'] = {
+  'blockquote': '큰 따옴표',
+  'bold': '글씨 굵게',
+  'code': '코드 글씨체',
+  'color': '글씨 색깔',
+  'coloredText': '글씨 바탕 색깔',
+  'hr': '수평선',
+  'image': '이미지 삽입',
+  'externalImage': '외부 이미지',
+  'uploadImage': '이미지 업로드',
+  'uploadFailed': '업로드 실패',
+  'uploadError': '이미지 업로드를 실패했습니다',
+  'imageUrl': 'Url',
+  'imageSize': 'Size',
+  'imageAlt': 'Alt',
+  'restoreImageSize': 'Restore Origin Size',
+  'uploading': '업로드 중',
+  'indent': '왼쪽 여백 추가',
+  'outdent': '오른쪽 여백 추가',
+  'italic': '이태릭 체',
+  'link': '링크 삽입',
+  'linkText': 'Text',
+  'linkUrl': 'Url',
+  'linkTarget': 'Target',
+  'openLinkInCurrentWindow': '현재 탭에서 링크를 엽니다',
+  'openLinkInNewWindow': '새로운 탭에서 링크를 엽니다',
+  'removeLink': '링크 삭제',
+  'ol': 'Ordered List',
+  'ul': 'Unordered List',
+  'strikethrough': '취소선',
+  'table': '표',
+  'deleteRow': '행 삭제',
+  'insertRowAbove': '위에 형 삽입',
+  'insertRowBelow': '아래에 행 삽입',
+  'deleteColumn': '열 삭제',
+  'insertColumnLeft': '열을 왼쪽에 삽입',
+  'insertColumnRight': '열을 오른쪽엡 삽입',
+  'deleteTable': '행 삭제',
+  'title': '제목',
+  'normalText': 'Text',
+  'underline': '밑줄',
+  'alignment': '왼쪽 정렬',
+  'alignCenter': '가운데 정렬',
+  'alignLeft': '왼쪽 정렬',
+  'alignRight': '오른쪽 정렬',
+  'selectLanguage': '언어 선택',
+  'fontScale': '폰트 사이즈',
+  'fontScaleXLarge': 'X Large Size',
+  'fontScaleLarge': 'Large Size',
+  'fontScaleNormal': 'Normal Size',
+  'fontScaleSmall': 'Small Size',
+  'fontScaleXSmall': 'X Small Size'
+}
+
+export default Simditor;

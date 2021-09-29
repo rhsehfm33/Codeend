@@ -51,11 +51,11 @@ Simditor.i18n['ko-KR'] = {
   'alignRight': '오른쪽 정렬',
   'selectLanguage': '언어 선택',
   'fontScale': '폰트 사이즈',
-  'fontScaleXLarge': 'X Large Size',
-  'fontScaleLarge': 'Large Size',
-  'fontScaleNormal': 'Normal Size',
-  'fontScaleSmall': 'Small Size',
-  'fontScaleXSmall': 'X Small Size'
+  'fontScaleXLarge': '매우 크게',
+  'fontScaleLarge': '크게',
+  'fontScaleNormal': '보통',
+  'fontScaleSmall': '작게',
+  'fontScaleXSmall': '매우 작게'
 };
 
 export default Simditor;
